@@ -9,7 +9,18 @@
 /* Begin PBXBuildFile section */
 		141C2F7B22FD60E10020473B /* QiPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2F7A22FD60E10020473B /* QiPieChartView.swift */; };
 		141C2F8422FD66DB0020473B /* QiCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A007CA22F923F90028C7DF /* QiCharts.framework */; };
-		141C2F8B22FD8EA20020473B /* QiBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2F8A22FD8EA20020473B /* QiBaseView.swift */; };
+		141C2F8B22FD8EA20020473B /* QiChartBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2F8A22FD8EA20020473B /* QiChartBaseView.swift */; };
+		141C2FE7230268430020473B /* QiChartDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FE6230268430020473B /* QiChartDataBase.swift */; };
+		141C2FE9230268B40020473B /* QiPieChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FE8230268B40020473B /* QiPieChartData.swift */; };
+		141C2FEB230268E00020473B /* QiBarChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FEA230268E00020473B /* QiBarChartData.swift */; };
+		141C2FF4230269D30020473B /* ViewPortHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FEC230269D30020473B /* ViewPortHandler.swift */; };
+		141C2FF5230269D30020473B /* QiChartColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FED230269D30020473B /* QiChartColorUtils.swift */; };
+		141C2FF6230269D30020473B /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FEE230269D30020473B /* Transformer.swift */; };
+		141C2FF7230269D30020473B /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FEF230269D30020473B /* Platform.swift */; };
+		141C2FF8230269D30020473B /* QiChartUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FF0230269D30020473B /* QiChartUtils.swift */; };
+		141C2FF9230269D30020473B /* Platform+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FF1230269D30020473B /* Platform+Accessibility.swift */; };
+		141C2FFA230269D30020473B /* TransformerHorizontalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FF2230269D30020473B /* TransformerHorizontalBarChart.swift */; };
+		141C2FFB230269D30020473B /* QiFillUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C2FF3230269D30020473B /* QiFillUtils.swift */; };
 		14A007B422F923A80028C7DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A007B322F923A80028C7DF /* AppDelegate.swift */; };
 		14A007B622F923A80028C7DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A007B522F923A80028C7DF /* ViewController.swift */; };
 		14A007BB22F923AF0028C7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14A007BA22F923AF0028C7DF /* Assets.xcassets */; };
@@ -20,7 +31,18 @@
 
 /* Begin PBXFileReference section */
 		141C2F7A22FD60E10020473B /* QiPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiPieChartView.swift; sourceTree = "<group>"; };
-		141C2F8A22FD8EA20020473B /* QiBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiBaseView.swift; sourceTree = "<group>"; };
+		141C2F8A22FD8EA20020473B /* QiChartBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiChartBaseView.swift; sourceTree = "<group>"; };
+		141C2FE6230268430020473B /* QiChartDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiChartDataBase.swift; sourceTree = "<group>"; };
+		141C2FE8230268B40020473B /* QiPieChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiPieChartData.swift; sourceTree = "<group>"; };
+		141C2FEA230268E00020473B /* QiBarChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiBarChartData.swift; sourceTree = "<group>"; };
+		141C2FEC230269D30020473B /* ViewPortHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPortHandler.swift; sourceTree = "<group>"; };
+		141C2FED230269D30020473B /* QiChartColorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiChartColorUtils.swift; sourceTree = "<group>"; };
+		141C2FEE230269D30020473B /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
+		141C2FEF230269D30020473B /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		141C2FF0230269D30020473B /* QiChartUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiChartUtils.swift; sourceTree = "<group>"; };
+		141C2FF1230269D30020473B /* Platform+Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Platform+Accessibility.swift"; sourceTree = "<group>"; };
+		141C2FF2230269D30020473B /* TransformerHorizontalBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformerHorizontalBarChart.swift; sourceTree = "<group>"; };
+		141C2FF3230269D30020473B /* QiFillUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiFillUtils.swift; sourceTree = "<group>"; };
 		14A007B022F923A80028C7DF /* QiChartsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiChartsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A007B322F923A80028C7DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14A007B522F923A80028C7DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +105,7 @@
 		141C2F8922FD87FC0020473B /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				141C2F8A22FD8EA20020473B /* QiBaseView.swift */,
+				141C2F8A22FD8EA20020473B /* QiChartBaseView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -91,6 +113,9 @@
 		141C2FE4230260740020473B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				141C2FE6230268430020473B /* QiChartDataBase.swift */,
+				141C2FE8230268B40020473B /* QiPieChartData.swift */,
+				141C2FEA230268E00020473B /* QiBarChartData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -98,6 +123,14 @@
 		141C2FE52302662E0020473B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				141C2FED230269D30020473B /* QiChartColorUtils.swift */,
+				141C2FF0230269D30020473B /* QiChartUtils.swift */,
+				141C2FF3230269D30020473B /* QiFillUtils.swift */,
+				141C2FEF230269D30020473B /* Platform.swift */,
+				141C2FF1230269D30020473B /* Platform+Accessibility.swift */,
+				141C2FEE230269D30020473B /* Transformer.swift */,
+				141C2FF2230269D30020473B /* TransformerHorizontalBarChart.swift */,
+				141C2FEC230269D30020473B /* ViewPortHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -279,8 +312,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141C2FF8230269D30020473B /* QiChartUtils.swift in Sources */,
+				141C2FF7230269D30020473B /* Platform.swift in Sources */,
+				141C2FFA230269D30020473B /* TransformerHorizontalBarChart.swift in Sources */,
+				141C2FF9230269D30020473B /* Platform+Accessibility.swift in Sources */,
+				141C2FE7230268430020473B /* QiChartDataBase.swift in Sources */,
+				141C2FF5230269D30020473B /* QiChartColorUtils.swift in Sources */,
+				141C2FEB230268E00020473B /* QiBarChartData.swift in Sources */,
+				141C2FF4230269D30020473B /* ViewPortHandler.swift in Sources */,
 				141C2F7B22FD60E10020473B /* QiPieChartView.swift in Sources */,
-				141C2F8B22FD8EA20020473B /* QiBaseView.swift in Sources */,
+				141C2F8B22FD8EA20020473B /* QiChartBaseView.swift in Sources */,
+				141C2FE9230268B40020473B /* QiPieChartData.swift in Sources */,
+				141C2FF6230269D30020473B /* Transformer.swift in Sources */,
+				141C2FFB230269D30020473B /* QiFillUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

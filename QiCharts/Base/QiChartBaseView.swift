@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QiBaseView: UIView {
+open class QiChartBaseView: UIView {
 
 //    required public init?(coder aDecoder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
