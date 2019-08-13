@@ -59,25 +59,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		141C2F8522FD70350020473B /* Animations */ = {
+		141C2F8522FD70350020473B /* Animation */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Animations;
+			path = Animation;
 			sourceTree = "<group>";
 		};
-		141C2F8622FD70470020473B /* Components */ = {
+		141C2F8622FD70470020473B /* Component */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Components;
+			path = Component;
 			sourceTree = "<group>";
 		};
-		141C2F8722FD70600020473B /* Renderers */ = {
+		141C2F8722FD70600020473B /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Renderers;
+			path = Renderer;
 			sourceTree = "<group>";
 		};
 		141C2F8922FD87FC0020473B /* Base */ = {
@@ -86,6 +86,13 @@
 				141C2F8A22FD8EA20020473B /* QiBaseView.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		141C2FE4230260740020473B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		14A007A722F923A80028C7DF = {
@@ -124,9 +131,10 @@
 			isa = PBXGroup;
 			children = (
 				141C2F8922FD87FC0020473B /* Base */,
-				141C2F8722FD70600020473B /* Renderers */,
-				141C2F8622FD70470020473B /* Components */,
-				141C2F8522FD70350020473B /* Animations */,
+				141C2FE4230260740020473B /* Data */,
+				141C2F8722FD70600020473B /* Renderer */,
+				141C2F8522FD70350020473B /* Animation */,
+				141C2F8622FD70470020473B /* Component */,
 				14A007CC22F923F90028C7DF /* QiCharts.h */,
 				141C2F7A22FD60E10020473B /* QiPieChartView.swift */,
 				14A007CD22F923F90028C7DF /* Info.plist */,
