@@ -95,6 +95,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		141C2FE52302662E0020473B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		14A007A722F923A80028C7DF = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +137,7 @@
 		14A007CB22F923F90028C7DF /* QiCharts */ = {
 			isa = PBXGroup;
 			children = (
+				141C2FE52302662E0020473B /* Utils */,
 				141C2F8922FD87FC0020473B /* Base */,
 				141C2FE4230260740020473B /* Data */,
 				141C2F8722FD70600020473B /* Renderer */,
