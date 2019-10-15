@@ -2,11 +2,11 @@
 //  QiCharts.h
 //  QiCharts
 //
-//  Created by wangdacheng on 2019/8/6.
+//  Created by wangdacheng on 2019/10/14.
 //  Copyright © 2019 qishare. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for QiCharts.
 FOUNDATION_EXPORT double QiChartsVersionNumber;
