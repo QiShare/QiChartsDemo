@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1422F3F3235423AB0084B501 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422F3F2235423AB0084B501 /* AppDelegate.swift */; };
-		1422F3F5235423AB0084B501 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422F3F4235423AB0084B501 /* SceneDelegate.swift */; };
 		1422F3F7235423AB0084B501 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422F3F6235423AB0084B501 /* ChartViewController.swift */; };
 		1422F3FC235423AC0084B501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1422F3FB235423AC0084B501 /* Assets.xcassets */; };
 		1422F3FF235423AC0084B501 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1422F3FD235423AC0084B501 /* LaunchScreen.storyboard */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		1422F3EF235423AB0084B501 /* QiChartsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiChartsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1422F3F2235423AB0084B501 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1422F3F4235423AB0084B501 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1422F3F6235423AB0084B501 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		1422F3FB235423AC0084B501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1422F3FE235423AC0084B501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,9 +79,7 @@
 		1422F3F1235423AB0084B501 /* QiChartsDemo */ = {
 			isa = PBXGroup;
 			children = (
-				1434C1F42355B6A000C665E5 /* New Group */,
 				1422F3F2235423AB0084B501 /* AppDelegate.swift */,
-				1422F3F4235423AB0084B501 /* SceneDelegate.swift */,
 				1422F3F6235423AB0084B501 /* ChartViewController.swift */,
 				1434C1F22355B4C800C665E5 /* BarViewController.swift */,
 				1422F3FB235423AC0084B501 /* Assets.xcassets */,
@@ -100,13 +96,6 @@
 				1422F41023546B7E0084B501 /* Info.plist */,
 			);
 			path = QiCharts;
-			sourceTree = "<group>";
-		};
-		1434C1F42355B6A000C665E5 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,7 +212,6 @@
 				1422F3F7235423AB0084B501 /* ChartViewController.swift in Sources */,
 				1422F3F3235423AB0084B501 /* AppDelegate.swift in Sources */,
 				1434C1F32355B4C800C665E5 /* BarViewController.swift in Sources */,
-				1422F3F5235423AB0084B501 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +369,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.qishare.QiChartsDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = net.qihoo.iot.smartlink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -399,7 +387,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.qishare.QiChartsDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = net.qihoo.iot.smartlink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
