@@ -11,12 +11,13 @@ import UIKit
 enum ChartType:Int {
     case ChartType_Bar = 0
     case ChartType_Pie = 1
-    case ChartType_Line = 2
+    case ChartType_Radar = 2
     case ChartType_KLine = 3
+    case ChartType_Line = 4
 }
 
 
-class ChartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ChartViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     private var tableView: UITableView!
     private var titleArr: NSArray!
@@ -24,9 +25,8 @@ class ChartViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "QiChartsDemo"
-        self.view.backgroundColor = .white
         
-        titleArr = NSArray.init(array: ["柱状图", "饼图", "折线图", "K线图"])
+        titleArr = NSArray.init(array: ["柱状图", "饼图", "雷达图", "K线图", "折线图"])
         
         tableView = .init(frame: self.view.bounds, style: .grouped)
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -57,27 +57,37 @@ class ChartViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.deselectRow(at: indexPath, animated: true)
         
         let chartType = ChartType(rawValue: indexPath.row)
+        var chartController:BaseViewController = BaseViewController()
+        let title: NSString = titleArr![chartType!.rawValue] as! NSString
         
         switch chartType {
             
-        case .ChartType_Bar:
+            case .ChartType_Bar:
+                chartController = BarViewController()
+                break
             
-            let barController = BarViewController()
-            self.navigationController?.pushViewController(barController, animated: true)
-            break
+            case .ChartType_Pie:
+                chartController = PieViewController()
+                break
             
-        case .ChartType_Pie:
-            break
+            case .ChartType_Radar:
+                chartController = RadarViewController()
+                break
             
-        case .ChartType_Line:
-            break
+            case .ChartType_KLine:
+                chartController = KLineViewController()
+                break
             
-        case .ChartType_KLine:
-            break
+            case .ChartType_Line:
+                chartController = LineViewController()
+                break
             
-        default:
-            break;
+            default:
+                break;
         }
+        
+        chartController.title = title as String
+        self.navigationController?.pushViewController(chartController, animated: true)
     }
 }
 

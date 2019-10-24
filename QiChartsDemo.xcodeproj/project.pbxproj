@@ -150,6 +150,12 @@
 		149282D823604EC400C58EF4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492825123604EC400C58EF4 /* Renderer.swift */; };
 		149282D923604EC400C58EF4 /* LineScatterCandleRadarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492825223604EC400C58EF4 /* LineScatterCandleRadarRenderer.swift */; };
 		149282DF236081EF00C58EF4 /* ZHFColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282DE236081EF00C58EF4 /* ZHFColor.swift */; };
+		149282E12361479F00C58EF4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282E02361479F00C58EF4 /* BaseViewController.swift */; };
+		149282E32361854200C58EF4 /* PieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282E22361854200C58EF4 /* PieViewController.swift */; };
+		149282E5236197A800C58EF4 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282E4236197A800C58EF4 /* LineViewController.swift */; };
+		149282E72361A13600C58EF4 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282E62361A13600C58EF4 /* BalloonMarker.swift */; };
+		149282E92361A3F900C58EF4 /* RadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282E82361A3F900C58EF4 /* RadarViewController.swift */; };
+		149282EB2361A40A00C58EF4 /* KLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282EA2361A40A00C58EF4 /* KLineViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -309,6 +315,12 @@
 		1492825123604EC400C58EF4 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		1492825223604EC400C58EF4 /* LineScatterCandleRadarRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineScatterCandleRadarRenderer.swift; sourceTree = "<group>"; };
 		149282DE236081EF00C58EF4 /* ZHFColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZHFColor.swift; sourceTree = "<group>"; };
+		149282E02361479F00C58EF4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		149282E22361854200C58EF4 /* PieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieViewController.swift; sourceTree = "<group>"; };
+		149282E4236197A800C58EF4 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
+		149282E62361A13600C58EF4 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		149282E82361A3F900C58EF4 /* RadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarViewController.swift; sourceTree = "<group>"; };
+		149282EA2361A40A00C58EF4 /* KLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLineViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,8 +364,14 @@
 			isa = PBXGroup;
 			children = (
 				1422F3F2235423AB0084B501 /* AppDelegate.swift */,
+				149282E02361479F00C58EF4 /* BaseViewController.swift */,
 				1422F3F6235423AB0084B501 /* ChartViewController.swift */,
 				1434C1F22355B4C800C665E5 /* BarViewController.swift */,
+				149282E22361854200C58EF4 /* PieViewController.swift */,
+				149282E82361A3F900C58EF4 /* RadarViewController.swift */,
+				149282EA2361A40A00C58EF4 /* KLineViewController.swift */,
+				149282E4236197A800C58EF4 /* LineViewController.swift */,
+				149282E62361A13600C58EF4 /* BalloonMarker.swift */,
 				149282DE236081EF00C58EF4 /* ZHFColor.swift */,
 				1422F3FB235423AC0084B501 /* Assets.xcassets */,
 				1422F3FD235423AC0084B501 /* LaunchScreen.storyboard */,
@@ -737,10 +755,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149282E12361479F00C58EF4 /* BaseViewController.swift in Sources */,
 				149282DF236081EF00C58EF4 /* ZHFColor.swift in Sources */,
+				149282EB2361A40A00C58EF4 /* KLineViewController.swift in Sources */,
+				149282E92361A3F900C58EF4 /* RadarViewController.swift in Sources */,
 				1422F3F7235423AB0084B501 /* ChartViewController.swift in Sources */,
+				149282E32361854200C58EF4 /* PieViewController.swift in Sources */,
 				1422F3F3235423AB0084B501 /* AppDelegate.swift in Sources */,
+				149282E5236197A800C58EF4 /* LineViewController.swift in Sources */,
 				1434C1F32355B4C800C665E5 /* BarViewController.swift in Sources */,
+				149282E72361A13600C58EF4 /* BalloonMarker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,7 +982,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1012,7 +1036,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1027,6 +1051,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8ZX24TX624;
 				INFOPLIST_FILE = QiChartsDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1045,6 +1070,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8ZX24TX624;
 				INFOPLIST_FILE = QiChartsDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

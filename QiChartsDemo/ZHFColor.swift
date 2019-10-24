@@ -1,14 +1,11 @@
 //
 //  ZHFColor.swift
-//  AmazedBox
+//  QiChartsDemo
 //
-//  Created by lantian on 2018/5/9.
-//  Copyright © 2018年 张海峰. All rights reserved.
+//  Created by wangdacheng on 2019/10/24.
+//  Copyright © 2019 qishare. All rights reserved.
 //
-//Charts框架地址
-//https://github.com/danielgindi/Charts.git
-//该demo地址
-//https://github.com/FighterLightning/ChartsUnderstandAndUsage.git
+
 import UIKit
 
 class ZHFColor: UIColor {

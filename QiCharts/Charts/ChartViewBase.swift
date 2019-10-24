@@ -323,7 +323,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
                 text: noDataText,
                 point: CGPoint(x: frame.width / 2.0, y: frame.height / 2.0),
                 attributes:
-                [.font: noDataFont,
+                [.font: noDataFont!,
                  .foregroundColor: noDataTextColor,
                  .paragraphStyle: paragraphStyle],
                 constrainedToSize: self.bounds.size,
