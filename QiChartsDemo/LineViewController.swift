@@ -228,7 +228,7 @@ extension LineViewController: ChartViewDelegate{
         var chartDataSet = LineChartDataSet()
         chartDataSet = (chartView.data?.dataSets[0] as? LineChartDataSet)!
         let values = chartDataSet.values
-        let index = values.index(where: {$0.x == highlight.x})  //获取索引
+        let index = values.firstIndex(where: {$0.x == highlight.x})  //获取索引
         chartDataSet.circleColors = circleColors //还原
         chartDataSet.circleColors[index!] = .orange
         
