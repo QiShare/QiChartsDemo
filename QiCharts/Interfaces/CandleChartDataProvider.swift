@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 @objc
-public protocol CandleChartDataProvider: BarLineScatterCandleBubbleChartDataProvider
+public protocol CandleChartDataProvider: BarLineScatterCandleChartDataProvider
 {
     var candleData: CandleChartData? { get }
 }

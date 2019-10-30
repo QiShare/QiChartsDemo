@@ -12,8 +12,8 @@
 import Foundation
 import CoreGraphics
 
-@objc(BarLineScatterCandleBubbleChartRenderer)
-open class BarLineScatterCandleBubbleRenderer: DataRenderer
+@objc(BarLineScatterCandleChartRenderer)
+open class BarLineScatterCandleRenderer: DataRenderer
 {
     internal var _xBounds = XBounds() // Reusable XBounds object
     
@@ -31,7 +31,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
 
     /// Calculates and returns the x-bounds for the given DataSet in terms of index in their values array.
     /// This includes minimum and maximum visible x, as well as range.
-    internal func xBounds(chart: BarLineScatterCandleBubbleChartDataProvider,
+    internal func xBounds(chart: BarLineScatterCandleChartDataProvider,
                           dataSet: IBarLineScatterCandleChartDataSet,
                           animator: Animator?) -> XBounds
     {
@@ -61,7 +61,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
             
         }
         
-        public init(chart: BarLineScatterCandleBubbleChartDataProvider,
+        public init(chart: BarLineScatterCandleChartDataProvider,
                     dataSet: IBarLineScatterCandleChartDataSet,
                     animator: Animator?)
         {
@@ -69,7 +69,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
         }
         
         /// Calculates the minimum and maximum x values as well as the range between them.
-        open func set(chart: BarLineScatterCandleBubbleChartDataProvider,
+        open func set(chart: BarLineScatterCandleChartDataProvider,
                       dataSet: IBarLineScatterCandleChartDataSet,
                       animator: Animator?)
         {

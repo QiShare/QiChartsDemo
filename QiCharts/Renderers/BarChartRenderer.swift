@@ -16,7 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
+open class BarChartRenderer: BarLineScatterCandleRenderer
 {
     private class Buffer
     {

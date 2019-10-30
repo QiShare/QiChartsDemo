@@ -60,7 +60,7 @@ open class BarHighlighter: ChartHighlighter
                                   yValue: Double) -> Highlight?
     {
         guard
-            let chart = self.chart as? BarLineScatterCandleBubbleChartDataProvider,
+            let chart = self.chart as? BarLineScatterCandleChartDataProvider,
             let entry = set.entryForXValue(xValue, closestToY: yValue) as? BarChartDataEntry
             else { return nil }
         

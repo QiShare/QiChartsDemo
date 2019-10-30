@@ -12,7 +12,7 @@
 import Foundation
 import CoreGraphics
 
-open class ScatterChartData: BarLineScatterCandleBubbleChartData
+open class ScatterChartData: BarLineScatterCandleChartData
 {
     public override init()
     {
