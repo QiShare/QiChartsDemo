@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 
-open class BarLineScatterCandleBubbleChartDataSet: ChartDataSet, IBarLineScatterCandleBubbleChartDataSet
+open class BarLineScatterCandleChartDataSet: ChartDataSet, IBarLineScatterCandleChartDataSet
 {
     // MARK: - Data functions and accessors
     
@@ -28,7 +28,7 @@ open class BarLineScatterCandleBubbleChartDataSet: ChartDataSet, IBarLineScatter
     
     open override func copyWithZone(_ zone: NSZone?) -> AnyObject
     {
-        let copy = super.copyWithZone(zone) as! BarLineScatterCandleBubbleChartDataSet
+        let copy = super.copyWithZone(zone) as! BarLineScatterCandleChartDataSet
         copy.highlightColor = highlightColor
         copy.highlightLineWidth = highlightLineWidth
         copy.highlightLineDashPhase = highlightLineDashPhase

@@ -23,7 +23,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
     }
     
     /// Checks if the provided entry object is in bounds for drawing considering the current animation phase.
-    internal func isInBoundsX(entry e: ChartDataEntry, dataSet: IBarLineScatterCandleBubbleChartDataSet) -> Bool
+    internal func isInBoundsX(entry e: ChartDataEntry, dataSet: IBarLineScatterCandleChartDataSet) -> Bool
     {
         let entryIndex = dataSet.entryIndex(entry: e)
         return Double(entryIndex) < Double(dataSet.entryCount) * animator.phaseX
@@ -32,7 +32,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
     /// Calculates and returns the x-bounds for the given DataSet in terms of index in their values array.
     /// This includes minimum and maximum visible x, as well as range.
     internal func xBounds(chart: BarLineScatterCandleBubbleChartDataProvider,
-                          dataSet: IBarLineScatterCandleBubbleChartDataSet,
+                          dataSet: IBarLineScatterCandleChartDataSet,
                           animator: Animator?) -> XBounds
     {
         return XBounds(chart: chart, dataSet: dataSet, animator: animator)
@@ -62,7 +62,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
         }
         
         public init(chart: BarLineScatterCandleBubbleChartDataProvider,
-                    dataSet: IBarLineScatterCandleBubbleChartDataSet,
+                    dataSet: IBarLineScatterCandleChartDataSet,
                     animator: Animator?)
         {
             self.set(chart: chart, dataSet: dataSet, animator: animator)
@@ -70,7 +70,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
         
         /// Calculates the minimum and maximum x values as well as the range between them.
         open func set(chart: BarLineScatterCandleBubbleChartDataProvider,
-                      dataSet: IBarLineScatterCandleBubbleChartDataSet,
+                      dataSet: IBarLineScatterCandleChartDataSet,
                       animator: Animator?)
         {
             let phaseX = Swift.max(0.0, Swift.min(1.0, animator?.phaseX ?? 1.0))
