@@ -11,7 +11,7 @@
 
 import Foundation
 
-open class CandleChartData: BarLineScatterCandleChartData
+open class CandleChartData: ChartData
 {
     public override init()
     {
