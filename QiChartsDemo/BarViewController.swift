@@ -33,6 +33,9 @@ class BarViewController: BaseViewController {
         barChartView.center = self.view.center
         barChartView.delegate = self
         self.view.addSubview(barChartView)
+        
+        barChartView.layer.borderWidth = 1.0
+        barChartView.layer.borderColor = UIColor.red.cgColor
     }
     func setBarChartViewBaseStyle(){
         //基本样式

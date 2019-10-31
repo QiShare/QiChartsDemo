@@ -523,17 +523,17 @@
 		1492821823604EC300C58EF4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1492822323604EC300C58EF4 /* ComponentBase.swift */,
+				1492822123604EC300C58EF4 /* ChartLimitLine.swift */,
 				1492821923604EC300C58EF4 /* Description.swift */,
-				1492821A23604EC300C58EF4 /* IMarker.swift */,
-				1492821B23604EC300C58EF4 /* MarkerImage.swift */,
 				1492821C23604EC300C58EF4 /* Legend.swift */,
-				1492821D23604EC300C58EF4 /* LegendEntry.swift */,
-				1492821E23604EC300C58EF4 /* YAxis.swift */,
 				1492821F23604EC300C58EF4 /* AxisBase.swift */,
 				1492822023604EC300C58EF4 /* XAxis.swift */,
-				1492822123604EC300C58EF4 /* ChartLimitLine.swift */,
+				1492821E23604EC300C58EF4 /* YAxis.swift */,
+				1492821A23604EC300C58EF4 /* IMarker.swift */,
 				1492822223604EC300C58EF4 /* MarkerView.swift */,
-				1492822323604EC300C58EF4 /* ComponentBase.swift */,
+				1492821B23604EC300C58EF4 /* MarkerImage.swift */,
+				1492821D23604EC300C58EF4 /* LegendEntry.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
