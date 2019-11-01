@@ -161,6 +161,7 @@ class BarViewController: BaseViewController {
         let forma :DefaultValueFormatter = DefaultValueFormatter.init(formatter: formatter)
         data.setValueFormatter(forma)
         barChartView.data = data
+        
         barChartView.animate(yAxisDuration: 1)//展示方式xAxisDuration 和 yAxisDuration两种
        //  barChartView.animate(xAxisDuration: 2, yAxisDuration: 2)//展示方式xAxisDuration 和 yAxisDuration两种
     }
