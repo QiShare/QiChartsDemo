@@ -372,15 +372,15 @@
 		149281BD23604EC300C58EF4 /* Highlight */ = {
 			isa = PBXGroup;
 			children = (
+				149281C623604EC300C58EF4 /* IHighlighter.swift */,
+				149281C523604EC300C58EF4 /* ChartHighlighter.swift */,
 				149281BE23604EC300C58EF4 /* BarHighlighter.swift */,
-				149281BF23604EC300C58EF4 /* RadarHighlighter.swift */,
-				149281C023604EC300C58EF4 /* Highlight.swift */,
-				149281C123604EC300C58EF4 /* PieHighlighter.swift */,
 				149281C223604EC300C58EF4 /* HorizontalBarHighlighter.swift */,
 				149281C323604EC300C58EF4 /* PieRadarHighlighter.swift */,
+				149281C123604EC300C58EF4 /* PieHighlighter.swift */,
+				149281BF23604EC300C58EF4 /* RadarHighlighter.swift */,
+				149281C023604EC300C58EF4 /* Highlight.swift */,
 				149281C423604EC300C58EF4 /* Range.swift */,
-				149281C523604EC300C58EF4 /* ChartHighlighter.swift */,
-				149281C623604EC300C58EF4 /* IHighlighter.swift */,
 			);
 			path = Highlight;
 			sourceTree = "<group>";
@@ -439,11 +439,11 @@
 		149281FF23604EC300C58EF4 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				1492820023604EC300C58EF4 /* BarChartDataProvider.swift */,
 				1492820123604EC300C58EF4 /* ChartDataProvider.swift */,
+				1492820523604EC300C58EF4 /* BarLineScatterCandleChartDataProvider.swift */,
+				1492820023604EC300C58EF4 /* BarChartDataProvider.swift */,
 				1492820223604EC300C58EF4 /* CandleChartDataProvider.swift */,
 				1492820423604EC300C58EF4 /* LineChartDataProvider.swift */,
-				1492820523604EC300C58EF4 /* BarLineScatterCandleChartDataProvider.swift */,
 				1492820623604EC300C58EF4 /* ScatterChartDataProvider.swift */,
 			);
 			path = Interfaces;
@@ -487,12 +487,12 @@
 		1492822423604EC300C58EF4 /* Jobs */ = {
 			isa = PBXGroup;
 			children = (
-				1492822523604EC300C58EF4 /* AnimatedZoomViewJob.swift */,
 				1492822623604EC300C58EF4 /* ViewPortJob.swift */,
+				1492822923604EC300C58EF4 /* AnimatedViewPortJob.swift */,
+				1492822523604EC300C58EF4 /* AnimatedZoomViewJob.swift */,
+				1492822A23604EC300C58EF4 /* AnimatedMoveViewJob.swift */,
 				1492822723604EC300C58EF4 /* MoveViewJob.swift */,
 				1492822823604EC300C58EF4 /* ZoomViewJob.swift */,
-				1492822923604EC300C58EF4 /* AnimatedViewPortJob.swift */,
-				1492822A23604EC300C58EF4 /* AnimatedMoveViewJob.swift */,
 			);
 			path = Jobs;
 			sourceTree = "<group>";
@@ -500,13 +500,13 @@
 		1492822B23604EC300C58EF4 /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
-				1492822C23604EC300C58EF4 /* IAxisValueFormatter.swift */,
-				1492822D23604EC300C58EF4 /* DefaultFillFormatter.swift */,
+				1492823223604EC300C58EF4 /* IValueFormatter.swift */,
 				1492822E23604EC300C58EF4 /* DefaultValueFormatter.swift */,
+				1492822C23604EC300C58EF4 /* IAxisValueFormatter.swift */,
 				1492822F23604EC300C58EF4 /* DefaultAxisValueFormatter.swift */,
 				1492823023604EC300C58EF4 /* IndexAxisValueFormatter.swift */,
 				1492823123604EC300C58EF4 /* IFillFormatter.swift */,
-				1492823223604EC300C58EF4 /* IValueFormatter.swift */,
+				1492822D23604EC300C58EF4 /* DefaultFillFormatter.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -514,27 +514,27 @@
 		1492823323604EC300C58EF4 /* Renderers */ = {
 			isa = PBXGroup;
 			children = (
-				1492823423604EC300C58EF4 /* RadarChartRenderer.swift */,
-				1492823523604EC300C58EF4 /* LegendRenderer.swift */,
-				1492823623604EC300C58EF4 /* YAxisRendererHorizontalBarChart.swift */,
-				1492823823604EC300C58EF4 /* LineChartRenderer.swift */,
-				1492823923604EC300C58EF4 /* AxisRendererBase.swift */,
-				1492823A23604EC300C58EF4 /* ChartDataRendererBase.swift */,
-				1492823B23604EC300C58EF4 /* YAxisRenderer.swift */,
-				1492823C23604EC300C58EF4 /* ScatterChartRenderer.swift */,
-				1492823E23604EC300C58EF4 /* CandleStickChartRenderer.swift */,
-				1492823F23604EC300C58EF4 /* BarChartRenderer.swift */,
-				1492824023604EC300C58EF4 /* XAxisRenderer.swift */,
-				1492824123604EC300C58EF4 /* LineRadarRenderer.swift */,
-				1492824223604EC300C58EF4 /* BarLineScatterCandleRenderer.swift */,
 				1492824323604EC300C58EF4 /* Scatter */,
-				1492824C23604EC300C58EF4 /* XAxisRendererHorizontalBarChart.swift */,
-				1492824D23604EC300C58EF4 /* HorizontalBarChartRenderer.swift */,
-				1492824E23604EC300C58EF4 /* XAxisRendererRadarChart.swift */,
-				1492824F23604EC300C58EF4 /* YAxisRendererRadarChart.swift */,
-				1492825023604EC300C58EF4 /* PieChartRenderer.swift */,
 				1492825123604EC400C58EF4 /* Renderer.swift */,
+				1492823923604EC300C58EF4 /* AxisRendererBase.swift */,
+				1492824023604EC300C58EF4 /* XAxisRenderer.swift */,
+				1492824E23604EC300C58EF4 /* XAxisRendererRadarChart.swift */,
+				1492824C23604EC300C58EF4 /* XAxisRendererHorizontalBarChart.swift */,
+				1492823B23604EC300C58EF4 /* YAxisRenderer.swift */,
+				1492824F23604EC300C58EF4 /* YAxisRendererRadarChart.swift */,
+				1492823623604EC300C58EF4 /* YAxisRendererHorizontalBarChart.swift */,
+				1492823523604EC300C58EF4 /* LegendRenderer.swift */,
+				1492823A23604EC300C58EF4 /* ChartDataRendererBase.swift */,
+				1492824223604EC300C58EF4 /* BarLineScatterCandleRenderer.swift */,
+				1492823F23604EC300C58EF4 /* BarChartRenderer.swift */,
+				1492824D23604EC300C58EF4 /* HorizontalBarChartRenderer.swift */,
 				1492825223604EC400C58EF4 /* LineScatterCandleRadarRenderer.swift */,
+				1492824123604EC300C58EF4 /* LineRadarRenderer.swift */,
+				1492823423604EC300C58EF4 /* RadarChartRenderer.swift */,
+				1492823823604EC300C58EF4 /* LineChartRenderer.swift */,
+				1492823E23604EC300C58EF4 /* CandleStickChartRenderer.swift */,
+				1492823C23604EC300C58EF4 /* ScatterChartRenderer.swift */,
+				1492825023604EC300C58EF4 /* PieChartRenderer.swift */,
 			);
 			path = Renderers;
 			sourceTree = "<group>";
