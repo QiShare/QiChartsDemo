@@ -11,7 +11,6 @@ import QiCharts
 
 class BarViewController: BaseViewController {
     
-    //默认是垂直方向 把下面这一行的 BarChartView 改为 HorizontalBarChartView 即为水平方向
     var barChartView: BarChartView = BarChartView()
     lazy var xVals: NSMutableArray = NSMutableArray.init()
     var data: BarChartData = BarChartData()
@@ -26,7 +25,6 @@ class BarViewController: BaseViewController {
         updataData()
     }
     
-    //添加柱状图
     func addBarChartView(){
         barChartView.backgroundColor = UIColor.white
         barChartView.frame.size = CGSize.init(width: ScreenWidth - 20, height: 300)
@@ -37,10 +35,11 @@ class BarViewController: BaseViewController {
         barChartView.layer.borderWidth = 1.0
         barChartView.layer.borderColor = UIColor.red.cgColor
     }
+    
     func setBarChartViewBaseStyle(){
         //基本样式
         barChartView.noDataText = "暂无数据"//没有数据时的显示
-        barChartView.drawValueAboveBarEnabled = true//数值显示是否在条柱上面
+        //barChartView.drawValueAboveBarEnabled = true//数值显示是否在条柱上面
         barChartView.drawBarShadowEnabled = false//是否绘制阴影背景
         
         //交互设置 (把煮食逐个取消试试)
@@ -52,6 +51,7 @@ class BarViewController: BaseViewController {
         barChartView.dragDecelerationEnabled = true //拖拽后是否有惯性效果
         barChartView.dragDecelerationFrictionCoef = 0.9 //拖拽后惯性效果的摩擦系数(0~1)，数值越小，惯性越不明显
     }
+    
     func setBarChartViewXY(){
         //1.X轴样式设置（对应界面显示的--->0月到7月）
         let xAxis: XAxis = barChartView.xAxis
@@ -115,7 +115,7 @@ class BarViewController: BaseViewController {
         legend.textColor = UIColor.orange
         legend.font = UIFont.systemFont(ofSize: 11.0)
     }
-    //设置数据
+    
     @objc func updataData(){
         
         //对应x轴上面需要显示的数据

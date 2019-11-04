@@ -15,8 +15,7 @@ import CoreGraphics
 /// Chart that draws bars.
 open class BarChartView: BarLineChartViewBase, BarChartDataProvider
 {
-    /// if set to true, all values are drawn above their bars, instead of below their top
-    private var _drawValueAboveBarEnabled = true
+    
 
     /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
     private var _drawBarShadowEnabled = false
@@ -138,17 +137,6 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
 
     // MARK: Accessors
     
-    /// if set to true, all values are drawn above their bars, instead of below their top
-    @objc open var drawValueAboveBarEnabled: Bool
-    {
-        get { return _drawValueAboveBarEnabled }
-        set
-        {
-            _drawValueAboveBarEnabled = newValue
-            setNeedsDisplay()
-        }
-    }
-    
     /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
     @objc open var drawBarShadowEnabled: Bool
     {
@@ -174,9 +162,6 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     // MARK: - BarChartDataProvider
     
     open var barData: BarChartData? { return _data as? BarChartData }
-    
-    /// - returns: `true` if drawing values above bars is enabled, `false` ifnot
-    open var isDrawValueAboveBarEnabled: Bool { return drawValueAboveBarEnabled }
     
     /// - returns: `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
     open var isDrawBarShadowEnabled: Bool { return drawBarShadowEnabled }
