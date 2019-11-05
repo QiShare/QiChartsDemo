@@ -14,6 +14,7 @@ enum ChartType:Int {
     case ChartType_Radar = 2
     case ChartType_KLine = 3
     case ChartType_Line = 4
+    case ChartType_GroupBar = 5
 }
 
 
@@ -26,7 +27,7 @@ class ChartViewController: BaseViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         self.title = "QiChartsDemo"
         
-        titleArr = NSArray.init(array: ["柱状图", "饼图", "雷达图", "K线图", "折线图"])
+        titleArr = NSArray.init(array: ["柱状图", "饼图", "雷达图", "K线图", "折线图", "组柱状图"])
         
         tableView = .init(frame: self.view.bounds, style: .grouped)
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -80,6 +81,10 @@ class ChartViewController: BaseViewController, UITableViewDataSource, UITableVie
             
             case .ChartType_Line:
                 chartController = LineViewController()
+                break
+            
+            case .ChartType_GroupBar:
+                chartController = GroupBarViewController()
                 break
             
             default:

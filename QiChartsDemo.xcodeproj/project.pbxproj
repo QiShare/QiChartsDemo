@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141500292371847E0046C37C /* GroupBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141500282371847E0046C37C /* GroupBarViewController.swift */; };
 		1422F3F3235423AB0084B501 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422F3F2235423AB0084B501 /* AppDelegate.swift */; };
 		1422F3F7235423AB0084B501 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422F3F6235423AB0084B501 /* ChartViewController.swift */; };
 		1422F3FC235423AC0084B501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1422F3FB235423AC0084B501 /* Assets.xcassets */; };
@@ -154,6 +155,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		141500282371847E0046C37C /* GroupBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBarViewController.swift; sourceTree = "<group>"; };
 		1422F3EF235423AB0084B501 /* QiChartsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiChartsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1422F3F2235423AB0084B501 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1422F3F6235423AB0084B501 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				149282E02361479F00C58EF4 /* BaseViewController.swift */,
 				1422F3F6235423AB0084B501 /* ChartViewController.swift */,
 				1434C1F22355B4C800C665E5 /* BarViewController.swift */,
+				141500282371847E0046C37C /* GroupBarViewController.swift */,
 				149282E22361854200C58EF4 /* PieViewController.swift */,
 				149282E82361A3F900C58EF4 /* RadarViewController.swift */,
 				149282EA2361A40A00C58EF4 /* KLineViewController.swift */,
@@ -718,6 +721,7 @@
 				149282E32361854200C58EF4 /* PieViewController.swift in Sources */,
 				1422F3F3235423AB0084B501 /* AppDelegate.swift in Sources */,
 				149282E5236197A800C58EF4 /* LineViewController.swift in Sources */,
+				141500292371847E0046C37C /* GroupBarViewController.swift in Sources */,
 				1434C1F32355B4C800C665E5 /* BarViewController.swift in Sources */,
 				149282E72361A13600C58EF4 /* BalloonMarker.swift in Sources */,
 			);

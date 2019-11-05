@@ -1,15 +1,15 @@
 //
-//  BarViewController.swift
+//  GroupBarViewController.swift
 //  QiChartsDemo
 //
-//  Created by wangdacheng on 2019/10/15.
+//  Created by wangdacheng on 2019/11/5.
 //  Copyright © 2019 qishare. All rights reserved.
 //
 
 import UIKit
 import QiCharts
 
-class BarViewController: BaseViewController {
+class GroupBarViewController: BaseViewController {
     
     var barChartView: BarChartView = BarChartView()
     lazy var xVals: NSMutableArray = NSMutableArray.init()
@@ -62,6 +62,7 @@ class BarViewController: BaseViewController {
         xAxis.labelWidth = 4 //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
         xAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
         xAxis.labelTextColor = UIColor.brown//数值字体颜色
+        xAxis.centerAxisLabelsEnabled = true//标签局中
     
         //2.Y轴左样式设置（对应界面显示的--->0 到 100）
         let leftAxisFormatter = NumberFormatter()
@@ -118,52 +119,46 @@ class BarViewController: BaseViewController {
     
     @objc func updataData(){
         
-        //对应x轴上面需要显示的数据
-        let count = 8
-        let x1Vals: NSMutableArray  = NSMutableArray.init()
-        for i in 0 ..< count {
-            //x轴字体展示
-            x1Vals.add("\(i)月")
-            self.xVals = x1Vals
+        let years = ["2012", "2013", "2014", "2015", "2016" , "2017" , "2018" , "2019"]
+        let groups = 3
+        
+        let datasets :NSMutableArray = NSMutableArray.init()
+        for i in 0..<groups {
+            var dataEntries = [BarChartDataEntry]()
+            for j in 0..<years.count {
+                let y = arc4random()%UInt32(floor(axisMaximum))
+                let entry = BarChartDataEntry(x: Double(j), y: Double(y))
+                dataEntries.append(entry)
+            }
+            let chartDataSet = BarChartDataSet(values: dataEntries, label: "图例\(i)")
+            chartDataSet.colors = [ZHFColor.zhf_randomColor()]
+            datasets.add(chartDataSet)
         }
         
+        //目前柱状图包括2组立柱
+        let chartData = BarChartData(dataSets: datasets as? [IChartDataSet])
         
-         //对应Y轴上面需要显示的数据
-        let yVals: NSMutableArray  = NSMutableArray.init()
-        for i in 0 ..< count {
-            let val: Double = Double(arc4random_uniform(UInt32(axisMaximum)))
-            let entry:BarChartDataEntry  = BarChartDataEntry.init(x:  Double(i), y: Double(val))
-            yVals.add(entry)
-        }
-         //创建BarChartDataSet对象，其中包含有Y轴数据信息，以及可以设置柱形样式
-        let set1: BarChartDataSet = BarChartDataSet.init(values: yVals as? [ChartDataEntry], label: "信息")
-        set1.barBorderWidth = 0.2 //边线宽
-        set1.drawValuesEnabled = true //是否在柱形图上面显示数值
-        set1.highlightEnabled = true //点击选中柱形图是否有高亮效果，（单击空白处取消选中）
-        set1.setColors(UIColor.gray,ZHFColor.green,ZHFColor.yellow,ZHFColor.zhf_randomColor(),ZHFColor.zhf_randomColor())//设置柱形图颜色(是一个循环，例如：你设置5个颜色，你设置8个柱形，后三个对应的颜色是该设置中的前三个，依次类推)
-      //  set1.setColors(ChartColorTemplates.material(), alpha: 1)
-      //  set1.setColor(ZHFColor.gray)//颜色一致
+        //柱子宽度（ (0.2 + 0.03) * 3 + 0.31 = 1.00 -> interval per "group"）
+        let groupSpace = 0.31
+        let barSpace = 0.03
+        let barWidth = 0.2
         
+        //设置柱子宽度
+        chartData.barWidth = barWidth
+         
+        //对数据进行分组（不重叠显示）
+        chartData.groupBars(fromX: Double(0), groupSpace: groupSpace, barSpace: barSpace)
+         
+        //设置X轴范围
+        barChartView.xAxis.axisMinimum = Double(0)
+        barChartView.xAxis.axisMaximum = Double(0) + chartData.groupWidth(groupSpace: groupSpace, barSpace: barSpace) * Double(years.count)
+        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: years)
         
-        
-        let dataSets: NSMutableArray  = NSMutableArray.init()
-        dataSets.add(set1)
-        
-        
-        
-        //创建BarChartData对象, 此对象就是barChartView需要最终数据对象
-        let data: BarChartData = BarChartData.init(dataSets: dataSets as? [IChartDataSet])
-        data.barWidth = 0.7  //默认是0.85  （介于0-1之间）
-        data.setValueFont(UIFont.systemFont(ofSize: 10))
-        data.setValueTextColor(UIColor.orange)
-        let formatter: NumberFormatter = NumberFormatter.init()
-        formatter.numberStyle = NumberFormatter.Style.currency//自定义数据显示格式  小数点形式(可以尝试不同看效果)
-        let forma :DefaultValueFormatter = DefaultValueFormatter.init(formatter: formatter)
-        data.setValueFormatter(forma)
-        barChartView.data = data
+        //设置柱状图数据
+        barChartView.data = chartData
         
         barChartView.animate(yAxisDuration: 1)//展示方式xAxisDuration 和 yAxisDuration两种
-       //  barChartView.animate(xAxisDuration: 2, yAxisDuration: 2)//展示方式xAxisDuration 和 yAxisDuration两种
+        //barChartView.animate(xAxisDuration: 2, yAxisDuration: 2)//展示方式xAxisDuration 和 yAxisDuration两种
     }
     
     override func rightBarBtnClicked() {
@@ -174,7 +169,8 @@ class BarViewController: BaseViewController {
 
 
 //MARK:-   <ChartViewDelegate代理方法实现>
-extension BarViewController :ChartViewDelegate,IAxisValueFormatter {
+extension GroupBarViewController :ChartViewDelegate,IAxisValueFormatter {
+    
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return self.xVals[Int(value)] as! String
     }
