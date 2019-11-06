@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 
-open class ChartBaseDataSet: NSObject
+open class ChartDataSetBase: NSObject
 {
     public required override init()
     {

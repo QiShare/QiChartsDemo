@@ -22,7 +22,7 @@ public enum ChartDataSetRounding: Int
 
 /// The DataSet class represents one group or type of entries (Entry) in the Chart that belong together.
 /// It is designed to logically separate different groups of values inside the Chart (e.g. the values for a specific line in the LineChart, or the values of a specific group of bars in the BarChart).
-open class ChartDataSet: ChartBaseDataSet
+open class ChartDataSet: ChartDataSetBase
 {
     public required init()
     {
