@@ -515,7 +515,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleChartDataPro
     private var _isDragging = false
     private var _isScaling = false
     private var _gestureScaleAxis = GestureScaleAxis.both
-    private var _closestDataSetToTouch: IChartDataSet!
+    private var _closestDataSetToTouch: ChartDataSet!
     private var _panGestureReachedEdge: Bool = false
     private weak var _outerScrollView: NSUIScrollView?
     
@@ -1691,12 +1691,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleChartDataPro
     }
     
     /// - returns: The DataSet object displayed at the touched position of the chart
-    @objc open func getDataSetByTouchPoint(point pt: CGPoint) -> IBarLineScatterCandleChartDataSet?
+    @objc open func getDataSetByTouchPoint(point pt: CGPoint) -> BarLineScatterCandleChartDataSet?
     {
         let h = getHighlightByTouchPoint(pt)
         if h !== nil
         {
-            return _data?.getDataSetByIndex(h!.dataSetIndex) as? IBarLineScatterCandleChartDataSet
+            return _data?.getDataSetByIndex(h!.dataSetIndex) as? BarLineScatterCandleChartDataSet
         }
         return nil
     }

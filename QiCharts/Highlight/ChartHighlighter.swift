@@ -91,7 +91,7 @@ open class ChartHighlighter : NSObject, IHighlighter
     
     /// - returns: An array of `Highlight` objects corresponding to the selected xValue and dataSetIndex.
     internal func buildHighlights(
-        dataSet set: IChartDataSet,
+        dataSet set: ChartDataSet,
         dataSetIndex: Int,
         xValue: Double,
         rounding: ChartDataSetRounding) -> [Highlight]

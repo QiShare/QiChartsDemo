@@ -250,7 +250,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
             
             for i in 0 ..< dataSets.count
             {
-                guard let dataSet = dataSets[i] as? IBarLineScatterCandleChartDataSet
+                guard let dataSet = dataSets[i] as? BarLineScatterCandleChartDataSet
                     else { continue }
                 
                 if !shouldDrawValues(forDataSet: dataSet)

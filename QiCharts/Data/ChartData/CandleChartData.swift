@@ -18,7 +18,7 @@ open class CandleChartData: ChartData
         super.init()
     }
     
-    public override init(dataSets: [IChartDataSet]?)
+    public override init(dataSets: [ChartDataSet]?)
     {
         super.init(dataSets: dataSets)
     }

@@ -137,7 +137,7 @@ class GroupBarViewController: BaseViewController {
         }
         
         //目前柱状图包括2组立柱
-        let chartData = BarChartData(dataSets: datasets as? [IChartDataSet])
+        let chartData = BarChartData(dataSets: datasets as? [ChartDataSet])
         
         //柱子宽度（ (0.2 + 0.03) * 3 + 0.31 = 1.00 -> interval per "group"）
         let groupSpace = 0.31

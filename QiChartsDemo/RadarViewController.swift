@@ -109,7 +109,7 @@ class RadarViewController: BaseViewController {
         let dataSets: NSMutableArray  = NSMutableArray.init()
         dataSets.add(set1)
         //创建RadarChartData对象, 此对象就是radarChartView需要最终数据对象
-        let data:  RadarChartData = RadarChartData.init(dataSets: dataSets as? [IChartDataSet])
+        let data:  RadarChartData = RadarChartData.init(dataSets: dataSets as? [ChartDataSet])
         return data
     }
     @objc func updataData(){

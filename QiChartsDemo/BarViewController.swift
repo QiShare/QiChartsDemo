@@ -153,7 +153,7 @@ class BarViewController: BaseViewController {
         
         
         //创建BarChartData对象, 此对象就是barChartView需要最终数据对象
-        let data: BarChartData = BarChartData.init(dataSets: dataSets as? [IChartDataSet])
+        let data: BarChartData = BarChartData.init(dataSets: dataSets as? [ChartDataSet])
         data.barWidth = 0.7  //默认是0.85  （介于0-1之间）
         data.setValueFont(UIFont.systemFont(ofSize: 10))
         data.setValueTextColor(UIColor.orange)

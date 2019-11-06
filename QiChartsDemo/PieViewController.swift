@@ -116,7 +116,7 @@ class PieViewController: BaseViewController {
         let dataSets: NSMutableArray  = NSMutableArray.init()
         dataSets.add(set1)
         //创建BarChartData对象, 此对象就是barChartView需要最终数据对象
-        let data:  PieChartData = PieChartData.init(dataSets: dataSets as? [IChartDataSet])
+        let data:  PieChartData = PieChartData.init(dataSets: dataSets as? [ChartDataSet])
         let formatter: NumberFormatter = NumberFormatter.init()
         //formatter.numberStyle = NumberFormatter.Style.currency//自定义数据显示格式  小数点形式(可以尝试不同看效果)
         formatter.numberStyle = NumberFormatter.Style.percent //自定义数据显示格式  小数点形式(可以尝试不同看效果)

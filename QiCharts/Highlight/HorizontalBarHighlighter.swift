@@ -35,7 +35,7 @@ open class HorizontalBarHighlighter: BarHighlighter
     }
     
     internal override func buildHighlights(
-        dataSet set: IChartDataSet,
+        dataSet set: ChartDataSet,
         dataSetIndex: Int,
         xValue: Double,
         rounding: ChartDataSetRounding) -> [Highlight]
