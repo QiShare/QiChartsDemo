@@ -15,7 +15,7 @@ open class ChevronUpShapeRenderer : NSObject, IShapeRenderer
 {
     open func renderShape(
         context: CGContext,
-                dataSet: IScatterChartDataSet,
+                dataSet: ScatterChartDataSet,
                 viewPortHandler: ViewPortHandler,
                 point: CGPoint,
                 color: NSUIColor)

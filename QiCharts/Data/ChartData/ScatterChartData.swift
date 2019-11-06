@@ -31,7 +31,7 @@ open class ScatterChartData: ChartData
         
         for set in _dataSets
         {
-            let scatterDataSet = set as? IScatterChartDataSet
+            let scatterDataSet = set as? ScatterChartDataSet
             
             if scatterDataSet == nil
             {
