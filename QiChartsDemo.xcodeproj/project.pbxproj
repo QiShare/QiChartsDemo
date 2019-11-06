@@ -23,7 +23,6 @@
 		1492825823604EC400C58EF4 /* PieRadarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281C323604EC300C58EF4 /* PieRadarHighlighter.swift */; };
 		1492825923604EC400C58EF4 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281C423604EC300C58EF4 /* Range.swift */; };
 		1492825A23604EC400C58EF4 /* ChartHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281C523604EC300C58EF4 /* ChartHighlighter.swift */; };
-		1492825B23604EC400C58EF4 /* IHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281C623604EC300C58EF4 /* IHighlighter.swift */; };
 		1492825D23604EC400C58EF4 /* ChartAnimationEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281C923604EC300C58EF4 /* ChartAnimationEasing.swift */; };
 		1492825E23604EC400C58EF4 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281CA23604EC300C58EF4 /* Animator.swift */; };
 		1492825F23604EC400C58EF4 /* Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281CC23604EC300C58EF4 /* Fill.swift */; };
@@ -164,7 +163,6 @@
 		149281C323604EC300C58EF4 /* PieRadarHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieRadarHighlighter.swift; sourceTree = "<group>"; };
 		149281C423604EC300C58EF4 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		149281C523604EC300C58EF4 /* ChartHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartHighlighter.swift; sourceTree = "<group>"; };
-		149281C623604EC300C58EF4 /* IHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IHighlighter.swift; sourceTree = "<group>"; };
 		149281C923604EC300C58EF4 /* ChartAnimationEasing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartAnimationEasing.swift; sourceTree = "<group>"; };
 		149281CA23604EC300C58EF4 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		149281CC23604EC300C58EF4 /* Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fill.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 		149281BD23604EC300C58EF4 /* Highlight */ = {
 			isa = PBXGroup;
 			children = (
-				149281C623604EC300C58EF4 /* IHighlighter.swift */,
 				149281C523604EC300C58EF4 /* ChartHighlighter.swift */,
 				149281BE23604EC300C58EF4 /* BarHighlighter.swift */,
 				149281C223604EC300C58EF4 /* HorizontalBarHighlighter.swift */,
@@ -713,7 +710,6 @@
 				1492825A23604EC400C58EF4 /* ChartHighlighter.swift in Sources */,
 				1492827C23604EC400C58EF4 /* CandleChartData.swift in Sources */,
 				1492826A23604EC400C58EF4 /* BarLineScatterCandleChartDataSet.swift in Sources */,
-				1492825B23604EC400C58EF4 /* IHighlighter.swift in Sources */,
 				1492827A23604EC400C58EF4 /* ScatterChartData.swift in Sources */,
 				149282D823604EC400C58EF4 /* Renderer.swift in Sources */,
 				1492826623604EC400C58EF4 /* ChartData.swift in Sources */,
