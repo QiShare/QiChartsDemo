@@ -59,16 +59,17 @@ class GroupBarViewController: BaseViewController {
         xAxis.axisLineWidth = 1 //设置X轴线宽
         xAxis.labelPosition = XAxis.LabelPosition.bottom //X轴（5种位置显示，根据需求进行设置）
         xAxis.drawGridLinesEnabled = false//不绘制网格
-        xAxis.labelWidth = 4 //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
+        
         xAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
         xAxis.labelTextColor = UIColor.brown//数值字体颜色
         xAxis.centerAxisLabelsEnabled = true//标签局中
+        xAxis.granularity = 1//x轴标签间距
     
         //2.Y轴左样式设置（对应界面显示的--->0 到 100）
         let leftAxisFormatter = NumberFormatter()
         leftAxisFormatter.minimumFractionDigits = 0
         leftAxisFormatter.maximumFractionDigits = 1
-        leftAxisFormatter.positiveSuffix = " $"  //数字前缀positivePrefix、 后缀positiveSuffix
+        leftAxisFormatter.positivePrefix = "$"  //数字前缀positivePrefix、 后缀positiveSuffix
         let leftAxis: YAxis = barChartView.leftAxis
         leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: leftAxisFormatter)
         leftAxis.axisMinimum = 0     //最小值
@@ -119,7 +120,7 @@ class GroupBarViewController: BaseViewController {
     
     @objc func updataData(){
         
-        let years = ["2012", "2013", "2014", "2015", "2016" , "2017" , "2018" , "2019"]
+        let years = ["2015", "2016" , "2017" , "2018" , "2019"]
         let groups = 3
         
         let datasets :NSMutableArray = NSMutableArray.init()

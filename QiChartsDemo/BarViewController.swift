@@ -56,18 +56,19 @@ class BarViewController: BaseViewController {
         //1.X轴样式设置（对应界面显示的--->0月到7月）
         let xAxis: XAxis = barChartView.xAxis
         xAxis.valueFormatter = self //重写代理方法  设置x轴数据
-        xAxis.axisLineWidth = 1 //设置X轴线宽
+        xAxis.axisLineWidth = 0.5 //设置X轴线宽
         xAxis.labelPosition = XAxis.LabelPosition.bottom //X轴（5种位置显示，根据需求进行设置）
         xAxis.drawGridLinesEnabled = false//不绘制网格
-        xAxis.labelWidth = 4 //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
+        xAxis.labelWidth = 1 //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
         xAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
         xAxis.labelTextColor = UIColor.brown//数值字体颜色
+        xAxis.granularity = 1//x轴标签间距
     
         //2.Y轴左样式设置（对应界面显示的--->0 到 100）
         let leftAxisFormatter = NumberFormatter()
         leftAxisFormatter.minimumFractionDigits = 0
         leftAxisFormatter.maximumFractionDigits = 1
-        leftAxisFormatter.positiveSuffix = " $"  //数字前缀positivePrefix、 后缀positiveSuffix
+        leftAxisFormatter.positivePrefix = "$"  //数字前缀positivePrefix、 后缀positiveSuffix
         let leftAxis: YAxis = barChartView.leftAxis
         leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: leftAxisFormatter)
         leftAxis.axisMinimum = 0     //最小值
