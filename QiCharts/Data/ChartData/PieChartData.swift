@@ -37,11 +37,11 @@ open class PieChartData: ChartData
         }
     }
 
-    @objc var dataSet: IPieChartDataSet?
+    @objc var dataSet: PieChartDataSet?
     {
         get
         {
-            return dataSets.count > 0 ? dataSets[0] as? IPieChartDataSet : nil
+            return dataSets.count > 0 ? dataSets[0] as? PieChartDataSet : nil
         }
         set
         {

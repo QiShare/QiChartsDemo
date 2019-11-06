@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 
-open class BarChartDataSet: BarLineScatterCandleChartDataSet, IBarChartDataSet
+open class BarChartDataSet: BarLineScatterCandleChartDataSet
 {
     private func initialize()
     {

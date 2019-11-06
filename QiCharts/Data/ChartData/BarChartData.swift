@@ -61,7 +61,7 @@ open class BarChartData: ChartData
             let start = fromX
             fromX += groupSpaceWidthHalf
             
-            (_dataSets as? [IBarChartDataSet])?.forEach { set in
+            (_dataSets as? [BarChartDataSet])?.forEach { set in
                 fromX += barSpaceHalf
                 fromX += barWidthHalf
                 
