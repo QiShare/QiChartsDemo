@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 
-open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
+open class LineChartDataSet: LineRadarChartDataSet
 {
     @objc(LineChartMode)
     public enum Mode: Int
