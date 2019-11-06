@@ -48,7 +48,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     }
     
     /// The default IValueFormatter that has been determined by the chart considering the provided minimum and maximum values.
-    internal var _defaultValueFormatter: IValueFormatter? = DefaultValueFormatter(decimals: 0)
+    internal var _defaultValueFormatter: DefaultValueFormatter? = DefaultValueFormatter(decimals: 0)
     
     /// object that holds all data that was originally set for the chart, before it was modified or any filtering algorithms had been applied
     internal var _data: ChartData?
@@ -291,13 +291,12 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         }
         
     
-        if _defaultValueFormatter is DefaultValueFormatter
+        if _defaultValueFormatter != nil
         {
             // setup the formatter with a new number of digits
             let digits = reference.decimalPlaces
             
-            (_defaultValueFormatter as? DefaultValueFormatter)?.decimals
-             = digits
+            (_defaultValueFormatter)?.decimals = digits
         }
     }
     

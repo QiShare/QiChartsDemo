@@ -634,7 +634,7 @@ open class ChartData: NSObject
     }
     
     /// Sets a custom IValueFormatter for all DataSets this data object contains.
-    @objc open func setValueFormatter(_ formatter: IValueFormatter?)
+    @objc open func setValueFormatter(_ formatter: DefaultValueFormatter?)
     {
         guard let formatter = formatter
             else { return }

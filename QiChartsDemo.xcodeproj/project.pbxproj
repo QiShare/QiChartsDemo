@@ -95,7 +95,6 @@
 		149282B823604EC400C58EF4 /* DefaultAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822F23604EC300C58EF4 /* DefaultAxisValueFormatter.swift */; };
 		149282B923604EC400C58EF4 /* IndexAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492823023604EC300C58EF4 /* IndexAxisValueFormatter.swift */; };
 		149282BA23604EC400C58EF4 /* IFillFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492823123604EC300C58EF4 /* IFillFormatter.swift */; };
-		149282BB23604EC400C58EF4 /* IValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492823223604EC300C58EF4 /* IValueFormatter.swift */; };
 		149282BC23604EC400C58EF4 /* RadarChartRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492823423604EC300C58EF4 /* RadarChartRenderer.swift */; };
 		149282BD23604EC400C58EF4 /* LegendRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492823523604EC300C58EF4 /* LegendRenderer.swift */; };
 		149282BE23604EC400C58EF4 /* YAxisRendererHorizontalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492823623604EC300C58EF4 /* YAxisRendererHorizontalBarChart.swift */; };
@@ -235,7 +234,6 @@
 		1492822F23604EC300C58EF4 /* DefaultAxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAxisValueFormatter.swift; sourceTree = "<group>"; };
 		1492823023604EC300C58EF4 /* IndexAxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexAxisValueFormatter.swift; sourceTree = "<group>"; };
 		1492823123604EC300C58EF4 /* IFillFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFillFormatter.swift; sourceTree = "<group>"; };
-		1492823223604EC300C58EF4 /* IValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IValueFormatter.swift; sourceTree = "<group>"; };
 		1492823423604EC300C58EF4 /* RadarChartRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarChartRenderer.swift; sourceTree = "<group>"; };
 		1492823523604EC300C58EF4 /* LegendRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegendRenderer.swift; sourceTree = "<group>"; };
 		1492823623604EC300C58EF4 /* YAxisRendererHorizontalBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YAxisRendererHorizontalBarChart.swift; sourceTree = "<group>"; };
@@ -462,7 +460,6 @@
 		1492822B23604EC300C58EF4 /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
-				1492823223604EC300C58EF4 /* IValueFormatter.swift */,
 				1492822E23604EC300C58EF4 /* DefaultValueFormatter.swift */,
 				1492822C23604EC300C58EF4 /* IAxisValueFormatter.swift */,
 				1492822F23604EC300C58EF4 /* DefaultAxisValueFormatter.swift */,
@@ -782,7 +779,6 @@
 				149282CA23604EC400C58EF4 /* BarLineScatterCandleRenderer.swift in Sources */,
 				149282AE23604EC400C58EF4 /* ComponentBase.swift in Sources */,
 				1492826223604EC400C58EF4 /* Platform.swift in Sources */,
-				149282BB23604EC400C58EF4 /* IValueFormatter.swift in Sources */,
 				1492829223604EC400C58EF4 /* LineChartDataProvider.swift in Sources */,
 				1492827D23604EC400C58EF4 /* LineChartDataSet.swift in Sources */,
 				149282B023604EC400C58EF4 /* ViewPortJob.swift in Sources */,
