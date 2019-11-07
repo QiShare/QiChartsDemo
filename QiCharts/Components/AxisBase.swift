@@ -12,17 +12,29 @@
 import Foundation
 import CoreGraphics
 
+@objc(ChartAxisValueFormatter)
+public protocol AxisValueFormatterDelegate: class
+{
+    
+    /// - 为X轴专用（需设置delegate）
+    /// - parameter value:  the value that is currently being drawn
+    /// - parameter axis:   the axis that the value belongs to
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String
+}
+
 /// Base class for all axes
 @objc(ChartAxisBase)
 open class AxisBase: ComponentBase
 {
+    @objc open weak var delegate: AxisValueFormatterDelegate?
+    
     public override init()
     {
         super.init()
     }
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    private var _axisValueFormatter: IAxisValueFormatter?
+    private var _axisValueFormatter: DefaultAxisValueFormatter?
     
     @objc open var labelFont = NSUIFont.systemFont(ofSize: 10.0)
     @objc open var labelTextColor = NSUIColor.black
@@ -151,28 +163,29 @@ open class AxisBase: ComponentBase
             return ""
         }
         
-        return valueFormatter?.stringForValue(entries[index], axis: self) ?? ""
+        if let delegate = delegate
+        {
+            return delegate.stringForValue(entries[index], axis: self)
+        }
+        else {
+            return valueFormatter?.stringForValue(entries[index], axis: self) ?? ""
+        }
     }
     
     /// Sets the formatter to be used for formatting the axis labels.
     /// If no formatter is set, the chart will automatically determine a reasonable formatting (concerning decimals) for all the values that are drawn inside the chart.
     /// Use `nil` to use the formatter calculated by the chart.
-    @objc open var valueFormatter: IAxisValueFormatter?
+    @objc open var valueFormatter: DefaultAxisValueFormatter?
     {
-        get
-        {
-            if _axisValueFormatter == nil ||
-                (_axisValueFormatter is DefaultAxisValueFormatter &&
-                    (_axisValueFormatter as! DefaultAxisValueFormatter).hasAutoDecimals &&
-                    (_axisValueFormatter as! DefaultAxisValueFormatter).decimals != decimals)
-            {
+        get {
+            if _axisValueFormatter == nil || (_axisValueFormatter != nil && _axisValueFormatter!.hasAutoDecimals && _axisValueFormatter!.decimals != decimals) {
+                
                 _axisValueFormatter = DefaultAxisValueFormatter(decimals: decimals)
             }
             
             return _axisValueFormatter
         }
-        set
-        {
+        set {
             _axisValueFormatter = newValue ?? DefaultAxisValueFormatter(decimals: decimals)
         }
     }

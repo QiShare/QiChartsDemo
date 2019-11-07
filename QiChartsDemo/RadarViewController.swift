@@ -44,7 +44,7 @@ class RadarViewController: BaseViewController {
         radarChartView.webAlpha = 1 //透明度
         //设置 xAx
         let xAxis: XAxis = radarChartView.xAxis
-        xAxis.valueFormatter = self //重写代理方法  设置y轴数据
+        xAxis.delegate = self //重写代理方法  设置y轴数据
         xAxis.labelPosition = XAxis.LabelPosition.topInside //X轴（5种位置显示，根据需求进行设置）
         xAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
         xAxis.labelTextColor = ZHFColor.brown//数值字体颜色
@@ -123,7 +123,7 @@ class RadarViewController: BaseViewController {
     }
 }
 //MARK:-   <ChartViewDelegate代理方法实现>
-extension RadarViewController :ChartViewDelegate,IAxisValueFormatter {
+extension RadarViewController :ChartViewDelegate, AxisValueFormatterDelegate {
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         if Int(value) > self.xVals.count - 1 {

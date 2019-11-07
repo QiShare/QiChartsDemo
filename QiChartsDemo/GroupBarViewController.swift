@@ -16,6 +16,11 @@ class GroupBarViewController: BaseViewController {
     var data: BarChartData = BarChartData()
     let axisMaximum :Double = 100
     
+    var xAxis: XAxis!
+    var leftAxis: YAxis!
+    
+    var years: NSMutableArray = NSMutableArray.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +59,8 @@ class GroupBarViewController: BaseViewController {
     
     func setBarChartViewXY(){
         //1.X轴样式设置（对应界面显示的--->0月到7月）
-        let xAxis: XAxis = barChartView.xAxis
-        xAxis.valueFormatter = self //重写代理方法  设置x轴数据
+        xAxis = barChartView.xAxis
+        xAxis.delegate = self//重写代理方法  设置x轴数据
         xAxis.axisLineWidth = 1 //设置X轴线宽
         xAxis.labelPosition = XAxis.LabelPosition.bottom //X轴（5种位置显示，根据需求进行设置）
         xAxis.drawGridLinesEnabled = false//不绘制网格
@@ -70,7 +75,7 @@ class GroupBarViewController: BaseViewController {
         leftAxisFormatter.minimumFractionDigits = 0
         leftAxisFormatter.maximumFractionDigits = 1
         leftAxisFormatter.positivePrefix = "$"  //数字前缀positivePrefix、 后缀positiveSuffix
-        let leftAxis: YAxis = barChartView.leftAxis
+        leftAxis = barChartView.leftAxis
         leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: leftAxisFormatter)
         leftAxis.axisMinimum = 0     //最小值
         leftAxis.axisMaximum = axisMaximum   //最大值
@@ -120,7 +125,7 @@ class GroupBarViewController: BaseViewController {
     
     @objc func updataData(){
         
-        let years = ["2015", "2016" , "2017" , "2018" , "2019"]
+        years = ["2015", "2016" , "2017" , "2018" , "2019"]
         let groups = 3
         
         let datasets :NSMutableArray = NSMutableArray.init()
@@ -153,7 +158,7 @@ class GroupBarViewController: BaseViewController {
         //设置X轴范围
         barChartView.xAxis.axisMinimum = Double(0)
         barChartView.xAxis.axisMaximum = Double(0) + chartData.groupWidth(groupSpace: groupSpace, barSpace: barSpace) * Double(years.count)
-        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: years)
+//        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: years as! [String])
         
         //设置柱状图数据
         barChartView.data = chartData
@@ -170,11 +175,18 @@ class GroupBarViewController: BaseViewController {
 
 
 //MARK:-   <ChartViewDelegate代理方法实现>
-extension GroupBarViewController :ChartViewDelegate,IAxisValueFormatter {
+extension GroupBarViewController :ChartViewDelegate, AxisValueFormatterDelegate {
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return self.xVals[Int(value)] as! String
+        
+        if axis is XAxis {
+            if Int(value)>=0 && Int(value)<years.count {
+                return self.years[Int(value)] as! String
+            }
+        }
+        return ""
     }
+    
     //1.点击选中
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         ZHFLog(message: "点击选中")

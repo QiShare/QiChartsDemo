@@ -89,7 +89,6 @@
 		149282B223604EC400C58EF4 /* ZoomViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822823604EC300C58EF4 /* ZoomViewJob.swift */; };
 		149282B323604EC400C58EF4 /* AnimatedViewPortJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822923604EC300C58EF4 /* AnimatedViewPortJob.swift */; };
 		149282B423604EC400C58EF4 /* AnimatedMoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822A23604EC300C58EF4 /* AnimatedMoveViewJob.swift */; };
-		149282B523604EC400C58EF4 /* IAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822C23604EC300C58EF4 /* IAxisValueFormatter.swift */; };
 		149282B623604EC400C58EF4 /* DefaultFillFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822D23604EC300C58EF4 /* DefaultFillFormatter.swift */; };
 		149282B723604EC400C58EF4 /* DefaultValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822E23604EC300C58EF4 /* DefaultValueFormatter.swift */; };
 		149282B823604EC400C58EF4 /* DefaultAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822F23604EC300C58EF4 /* DefaultAxisValueFormatter.swift */; };
@@ -228,7 +227,6 @@
 		1492822823604EC300C58EF4 /* ZoomViewJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomViewJob.swift; sourceTree = "<group>"; };
 		1492822923604EC300C58EF4 /* AnimatedViewPortJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedViewPortJob.swift; sourceTree = "<group>"; };
 		1492822A23604EC300C58EF4 /* AnimatedMoveViewJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedMoveViewJob.swift; sourceTree = "<group>"; };
-		1492822C23604EC300C58EF4 /* IAxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAxisValueFormatter.swift; sourceTree = "<group>"; };
 		1492822D23604EC300C58EF4 /* DefaultFillFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultFillFormatter.swift; sourceTree = "<group>"; };
 		1492822E23604EC300C58EF4 /* DefaultValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultValueFormatter.swift; sourceTree = "<group>"; };
 		1492822F23604EC300C58EF4 /* DefaultAxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAxisValueFormatter.swift; sourceTree = "<group>"; };
@@ -461,7 +459,6 @@
 			isa = PBXGroup;
 			children = (
 				1492822E23604EC300C58EF4 /* DefaultValueFormatter.swift */,
-				1492822C23604EC300C58EF4 /* IAxisValueFormatter.swift */,
 				1492822F23604EC300C58EF4 /* DefaultAxisValueFormatter.swift */,
 				1492823023604EC300C58EF4 /* IndexAxisValueFormatter.swift */,
 				1492823123604EC300C58EF4 /* IFillFormatter.swift */,
@@ -749,7 +746,6 @@
 				149282CF23604EC400C58EF4 /* CircleShapeRenderer.swift in Sources */,
 				149282CB23604EC400C58EF4 /* XShapeRenderer.swift in Sources */,
 				149282B823604EC400C58EF4 /* DefaultAxisValueFormatter.swift in Sources */,
-				149282B523604EC400C58EF4 /* IAxisValueFormatter.swift in Sources */,
 				1492827423604EC400C58EF4 /* ChartDataEntryBase.swift in Sources */,
 				149282B123604EC400C58EF4 /* MoveViewJob.swift in Sources */,
 				1492826C23604EC400C58EF4 /* CandleChartDataEntry.swift in Sources */,

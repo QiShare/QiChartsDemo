@@ -16,6 +16,9 @@ class BarViewController: BaseViewController {
     var data: BarChartData = BarChartData()
     let axisMaximum :Double = 100
     
+    var xAxis: XAxis!
+    var leftAxis: YAxis!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +57,8 @@ class BarViewController: BaseViewController {
     
     func setBarChartViewXY(){
         //1.X轴样式设置（对应界面显示的--->0月到7月）
-        let xAxis: XAxis = barChartView.xAxis
-        xAxis.valueFormatter = self //重写代理方法  设置x轴数据
+        xAxis = barChartView.xAxis
+        xAxis.delegate = self //重写代理方法  设置x轴数据
         xAxis.axisLineWidth = 0.5 //设置X轴线宽
         xAxis.labelPosition = XAxis.LabelPosition.bottom //X轴（5种位置显示，根据需求进行设置）
         xAxis.drawGridLinesEnabled = false//不绘制网格
@@ -69,7 +72,7 @@ class BarViewController: BaseViewController {
         leftAxisFormatter.minimumFractionDigits = 0
         leftAxisFormatter.maximumFractionDigits = 1
         leftAxisFormatter.positivePrefix = "$"  //数字前缀positivePrefix、 后缀positiveSuffix
-        let leftAxis: YAxis = barChartView.leftAxis
+        leftAxis = barChartView.leftAxis
         leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: leftAxisFormatter)
         leftAxis.axisMinimum = 0     //最小值
         leftAxis.axisMaximum = axisMaximum   //最大值
@@ -87,6 +90,9 @@ class BarViewController: BaseViewController {
         leftAxis.gridColor = UIColor.gray //网格线颜色
         leftAxis.gridAntialiasEnabled = true//开启抗锯齿
         leftAxis.spaceTop = 0.15//最大值到顶部的范围比
+        
+        
+        
         //设置限制线
         let limitLine : ChartLimitLine = ChartLimitLine.init(limit: Double(axisMaximum * 0.85), label: "限制线")
         limitLine.lineWidth = 1.0
@@ -175,8 +181,10 @@ class BarViewController: BaseViewController {
 
 
 //MARK:-   <ChartViewDelegate代理方法实现>
-extension BarViewController :ChartViewDelegate,IAxisValueFormatter {
+extension BarViewController :ChartViewDelegate, AxisValueFormatterDelegate {
+    
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        
         return self.xVals[Int(value)] as! String
     }
     //1.点击选中
