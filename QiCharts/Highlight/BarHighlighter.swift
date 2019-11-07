@@ -18,7 +18,7 @@ open class BarHighlighter: ChartHighlighter
     open override func getHighlight(x: CGFloat, y: CGFloat) -> Highlight?
     {
         guard
-            let barData = (self.chart as? BarChartDataProvider)?.barData,
+            let barData = (self.chart as? BarChartView)?.barData,
             let high = super.getHighlight(x: x, y: y)
             else { return nil }
         
@@ -45,7 +45,7 @@ open class BarHighlighter: ChartHighlighter
     
     internal override var data: ChartData?
     {
-        return (chart as? BarChartDataProvider)?.barData
+        return (chart as? BarChartView)?.barData
     }
     
     /// This method creates the Highlight object that also indicates which value of a stacked BarEntry has been selected.

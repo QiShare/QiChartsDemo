@@ -23,9 +23,9 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
         var rects = [CGRect]()
     }
     
-    @objc open weak var dataProvider: BarChartDataProvider?
+    @objc open weak var dataProvider: BarChartView?
     
-    @objc public init(dataProvider: BarChartDataProvider, animator: Animator, viewPortHandler: ViewPortHandler)
+    @objc public init(dataProvider: BarChartView, animator: Animator, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         

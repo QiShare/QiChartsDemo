@@ -15,9 +15,9 @@ import CoreGraphics
 open class ChartHighlighter : NSObject
 {
     /// instance of the data-provider
-    @objc open weak var chart: ChartDataProvider?
+    @objc open weak var chart: ChartViewBase?
     
-    @objc public init(chart: ChartDataProvider)
+    @objc public init(chart: ChartViewBase)
     {
         self.chart = chart
     }
