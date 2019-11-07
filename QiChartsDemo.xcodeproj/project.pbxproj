@@ -441,7 +441,7 @@
 		1492823323604EC300C58EF4 /* Renderers */ = {
 			isa = PBXGroup;
 			children = (
-				1492824323604EC300C58EF4 /* Scatter */,
+				1492824323604EC300C58EF4 /* ShapeRenderer */,
 				1492825123604EC400C58EF4 /* Renderer.swift */,
 				1492823923604EC300C58EF4 /* AxisRendererBase.swift */,
 				1492824023604EC300C58EF4 /* XAxisRenderer.swift */,
@@ -466,7 +466,7 @@
 			path = Renderers;
 			sourceTree = "<group>";
 		};
-		1492824323604EC300C58EF4 /* Scatter */ = {
+		1492824323604EC300C58EF4 /* ShapeRenderer */ = {
 			isa = PBXGroup;
 			children = (
 				1492824423604EC300C58EF4 /* XShapeRenderer.swift */,
@@ -478,7 +478,7 @@
 				1492824A23604EC300C58EF4 /* TriangleShapeRenderer.swift */,
 				1492824B23604EC300C58EF4 /* ChevronUpShapeRenderer.swift */,
 			);
-			path = Scatter;
+			path = ShapeRenderer;
 			sourceTree = "<group>";
 		};
 		14BC1020236BDFDB00A51BD2 /* ChartData */ = {
