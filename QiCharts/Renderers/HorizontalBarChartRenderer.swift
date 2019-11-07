@@ -194,44 +194,6 @@ open class HorizontalBarChartRenderer: BarChartRenderer
         
         context.saveGState()
         
-        // draw the bar shadow before the values
-        if dataProvider.isDrawBarShadowEnabled
-        {
-            guard let barData = dataProvider.barData else { return }
-            
-            let barWidth = barData.barWidth
-            let barWidthHalf = barWidth / 2.0
-            var x: Double = 0.0
-            
-            for i in stride(from: 0, to: min(Int(ceil(Double(dataSet.entryCount) * animator.phaseX)), dataSet.entryCount), by: 1)
-            {
-                guard let e = dataSet.entryForIndex(i) as? BarChartDataEntry else { continue }
-                
-                x = e.x
-                
-                _barShadowRectBuffer.origin.y = CGFloat(x - barWidthHalf)
-                _barShadowRectBuffer.size.height = CGFloat(barWidth)
-                
-                trans.rectValueToPixel(&_barShadowRectBuffer)
-                
-                if !viewPortHandler.isInBoundsTop(_barShadowRectBuffer.origin.y + _barShadowRectBuffer.size.height)
-                {
-                    break
-                }
-                
-                if !viewPortHandler.isInBoundsBottom(_barShadowRectBuffer.origin.y)
-                {
-                    continue
-                }
-                
-                _barShadowRectBuffer.origin.x = viewPortHandler.contentLeft
-                _barShadowRectBuffer.size.width = viewPortHandler.contentWidth
-                
-                context.setFillColor(dataSet.barShadowColor.cgColor)
-                context.fill(_barShadowRectBuffer)
-            }
-        }
-        
         let buffer = _buffers[index]
         
         let isSingleColor = dataSet.colors.count == 1

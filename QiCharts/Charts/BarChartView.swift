@@ -15,11 +15,6 @@ import CoreGraphics
 /// Chart that draws bars.
 open class BarChartView: BarLineScatterCandleChartViewBase
 {
-    
-
-    /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
-    private var _drawBarShadowEnabled = false
-    
     internal override func initialize()
     {
         super.initialize()
@@ -137,17 +132,6 @@ open class BarChartView: BarLineScatterCandleChartViewBase
 
     // MARK: Accessors
     
-    /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
-    @objc open var drawBarShadowEnabled: Bool
-    {
-        get { return _drawBarShadowEnabled }
-        set
-        {
-            _drawBarShadowEnabled = newValue
-            setNeedsDisplay()
-        }
-    }
-    
     /// Adds half of the bar width to each side of the x-axis range in order to allow the bars of the barchart to be fully displayed.
     /// **default**: false
     @objc open var fitBars = false
@@ -162,7 +146,4 @@ open class BarChartView: BarLineScatterCandleChartViewBase
     // MARK: - BarChartDataProvider
     
     open var barData: BarChartData? { return _data as? BarChartData }
-    
-    /// - returns: `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
-    open var isDrawBarShadowEnabled: Bool { return drawBarShadowEnabled }
 }

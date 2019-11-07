@@ -45,7 +45,6 @@ class GroupBarViewController: BaseViewController {
         //基本样式
         barChartView.noDataText = "暂无数据"//没有数据时的显示
         //barChartView.drawValueAboveBarEnabled = true//数值显示是否在条柱上面
-        barChartView.drawBarShadowEnabled = false//是否绘制阴影背景
         
         //交互设置
         //barChartView.scaleXEnabled = false//取消X轴缩放

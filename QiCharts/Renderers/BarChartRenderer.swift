@@ -220,67 +220,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
         
         context.saveGState()
         
-        // draw the bar shadow before the values
-        if dataProvider.isDrawBarShadowEnabled
-        {
-            guard let barData = dataProvider.barData else { return }
-            
-            let barWidth = barData.barWidth
-            let barWidthHalf = barWidth / 2.0
-            var x: Double = 0.0
-            
-            for i in stride(from: 0, to: min(Int(ceil(Double(dataSet.entryCount) * animator.phaseX)), dataSet.entryCount), by: 1)
-            {
-                guard let e = dataSet.entryForIndex(i) as? BarChartDataEntry else { continue }
-                
-                x = e.x
-                
-                _barShadowRectBuffer.origin.x = CGFloat(x - barWidthHalf)
-                _barShadowRectBuffer.size.width = CGFloat(barWidth)
-                
-                trans.rectValueToPixel(&_barShadowRectBuffer)
-                
-                if !viewPortHandler.isInBoundsLeft(_barShadowRectBuffer.origin.x + _barShadowRectBuffer.size.width)
-                {
-                    continue
-                }
-                
-                if !viewPortHandler.isInBoundsRight(_barShadowRectBuffer.origin.x)
-                {
-                    break
-                }
-                
-                _barShadowRectBuffer.origin.y = viewPortHandler.contentTop
-                _barShadowRectBuffer.size.height = viewPortHandler.contentHeight
-                
-                context.setFillColor(dataSet.barShadowColor.cgColor)
-                context.fill(_barShadowRectBuffer)
-            }
-        }
-        
         let buffer = _buffers[index]
-        
-        // draw the bar shadow before the values
-        if dataProvider.isDrawBarShadowEnabled
-        {
-            for j in stride(from: 0, to: buffer.rects.count, by: 1)
-            {
-                let barRect = buffer.rects[j]
-                
-                if (!viewPortHandler.isInBoundsLeft(barRect.origin.x + barRect.size.width))
-                {
-                    continue
-                }
-                
-                if (!viewPortHandler.isInBoundsRight(barRect.origin.x))
-                {
-                    break
-                }
-                
-                context.setFillColor(dataSet.barShadowColor.cgColor)
-                context.fill(barRect)
-            }
-        }
         
         let isSingleColor = dataSet.colors.count == 1
         
