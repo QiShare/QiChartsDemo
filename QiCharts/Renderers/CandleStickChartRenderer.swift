@@ -19,9 +19,9 @@ import CoreGraphics
 
 open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
 {
-    @objc open weak var dataProvider: CandleChartDataProvider?
+    @objc open weak var dataProvider: CandleStickChartView?
     
-    @objc public init(dataProvider: CandleChartDataProvider, animator: Animator, viewPortHandler: ViewPortHandler)
+    @objc public init(dataProvider: CandleStickChartView, animator: Animator, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
