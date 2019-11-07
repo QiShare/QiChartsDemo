@@ -19,9 +19,9 @@ import CoreGraphics
 
 open class ScatterChartRenderer: LineScatterCandleRadarRenderer
 {
-    @objc open weak var dataProvider: ScatterChartDataProvider?
+    @objc open weak var dataProvider: ScatterChartView?
     
-    @objc public init(dataProvider: ScatterChartDataProvider, animator: Animator, viewPortHandler: ViewPortHandler)
+    @objc public init(dataProvider: ScatterChartView, animator: Animator, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
