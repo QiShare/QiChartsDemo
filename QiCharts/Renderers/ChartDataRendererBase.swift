@@ -51,7 +51,7 @@ open class DataRenderer: Renderer
     /// Since this might do memory allocations, it should only be called if necessary.
     @objc open func initBuffers() { }
     
-    @objc open func isDrawingValuesAllowed(dataProvider: ChartDataProvider?) -> Bool
+    @objc open func isDrawingValuesAllowed(dataProvider: ChartViewBase?) -> Bool
     {
         guard let data = dataProvider?.data else { return false }
         return data.entryCount < Int(CGFloat(dataProvider?.maxVisibleCount ?? 0) * viewPortHandler.scaleX)

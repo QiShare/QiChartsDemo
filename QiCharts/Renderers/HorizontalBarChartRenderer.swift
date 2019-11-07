@@ -596,7 +596,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
         }
     }
     
-    open override func isDrawingValuesAllowed(dataProvider: ChartDataProvider?) -> Bool
+    open override func isDrawingValuesAllowed(dataProvider: ChartViewBase?) -> Bool
     {
         guard let data = dataProvider?.data
             else { return false }

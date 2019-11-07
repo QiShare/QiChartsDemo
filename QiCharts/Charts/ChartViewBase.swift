@@ -35,7 +35,7 @@ public protocol ChartViewDelegate
     @objc optional func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat)
 }
 
-open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
+open class ChartViewBase: NSUIView, AnimatorDelegate
 {
     // MARK: - Properties
     
