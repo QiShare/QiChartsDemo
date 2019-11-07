@@ -20,9 +20,7 @@ import CoreGraphics
 @objc(ChartDefaultFillFormatter)
 open class DefaultFillFormatter: NSObject
 {
-    public typealias Block = (
-        _ dataSet: LineChartDataSet,
-        _ dataProvider: LineChartDataProvider) -> CGFloat
+    public typealias Block = (_ dataSet: LineChartDataSet, _ dataProvider: LineChartView) -> CGFloat
     
     @objc open var block: Block?
     
@@ -38,9 +36,7 @@ open class DefaultFillFormatter: NSObject
         return DefaultFillFormatter(block: block)
     }
     
-    open func getFillLinePosition(
-        dataSet: LineChartDataSet,
-        dataProvider: LineChartDataProvider) -> CGFloat
+    open func getFillLinePosition(dataSet: LineChartDataSet, dataProvider: LineChartView) -> CGFloat
     {
         guard block == nil else { return block!(dataSet, dataProvider) }
         var fillMin: CGFloat = 0.0
