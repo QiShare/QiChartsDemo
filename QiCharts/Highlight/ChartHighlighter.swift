@@ -33,7 +33,7 @@ open class ChartHighlighter : NSObject
     /// - returns:
     @objc open func getValsForTouch(x: CGFloat, y: CGFloat) -> CGPoint
     {
-        guard let chart = self.chart as? BarLineScatterCandleChartDataProvider else { return .zero }
+        guard let chart = self.chart as? BarLineScatterCandleChartViewBase else { return .zero }
         
         // take any transformer to determine the values
         return chart.getTransformer(forAxis: .left).valueForTouchPoint(x: x, y: y)
@@ -98,7 +98,7 @@ open class ChartHighlighter : NSObject
     {
         var highlights = [Highlight]()
         
-        guard let chart = self.chart as? BarLineScatterCandleChartDataProvider else { return highlights }
+        guard let chart = self.chart as? BarLineScatterCandleChartViewBase else { return highlights }
         
         var entries = set.entriesForXValue(xValue)
         if entries.count == 0, let closest = set.entryForXValue(xValue, closestToY: .nan, rounding: rounding)

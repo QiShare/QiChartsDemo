@@ -31,7 +31,7 @@ open class BarLineScatterCandleRenderer: DataRenderer
 
     /// Calculates and returns the x-bounds for the given DataSet in terms of index in their values array.
     /// This includes minimum and maximum visible x, as well as range.
-    internal func xBounds(chart: BarLineScatterCandleChartDataProvider,
+    internal func xBounds(chart: BarLineScatterCandleChartViewBase,
                           dataSet: BarLineScatterCandleChartDataSet,
                           animator: Animator?) -> XBounds
     {
@@ -61,17 +61,13 @@ open class BarLineScatterCandleRenderer: DataRenderer
             
         }
         
-        public init(chart: BarLineScatterCandleChartDataProvider,
-                    dataSet: BarLineScatterCandleChartDataSet,
-                    animator: Animator?)
+        public init(chart: BarLineScatterCandleChartViewBase, dataSet: BarLineScatterCandleChartDataSet, animator: Animator?)
         {
             self.set(chart: chart, dataSet: dataSet, animator: animator)
         }
         
         /// Calculates the minimum and maximum x values as well as the range between them.
-        open func set(chart: BarLineScatterCandleChartDataProvider,
-                      dataSet: BarLineScatterCandleChartDataSet,
-                      animator: Animator?)
+        open func set(chart: BarLineScatterCandleChartViewBase, dataSet: BarLineScatterCandleChartDataSet, animator: Animator?)
         {
             let phaseX = Swift.max(0.0, Swift.min(1.0, animator?.phaseX ?? 1.0))
             

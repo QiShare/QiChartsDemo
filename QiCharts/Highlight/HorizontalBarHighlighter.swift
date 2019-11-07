@@ -42,7 +42,7 @@ open class HorizontalBarHighlighter: BarHighlighter
     {
         var highlights = [Highlight]()
         
-        guard let chart = self.chart as? BarLineScatterCandleChartDataProvider else { return highlights }
+        guard let chart = self.chart as? BarLineScatterCandleChartViewBase else { return highlights }
         
         var entries = set.entriesForXValue(xValue)
         if entries.count == 0, let closest = set.entryForXValue(xValue, closestToY: .nan, rounding: rounding)

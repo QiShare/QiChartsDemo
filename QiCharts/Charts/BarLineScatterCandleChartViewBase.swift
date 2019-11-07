@@ -17,7 +17,7 @@ import CoreGraphics
 #endif
 
 /// Base-class of LineChart, BarChart, ScatterChart and CandleStickChart.
-open class BarLineScatterCandleChartViewBase: ChartViewBase, BarLineScatterCandleChartDataProvider, NSUIGestureRecognizerDelegate
+open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecognizerDelegate
 {
     /// the maximum number of entries to which values will be drawn
     /// (entry numbers greater than this value will cause value-labels to disappear)
