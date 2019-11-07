@@ -94,7 +94,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
     internal var _legendRenderer: LegendRenderer!
     
     /// object responsible for rendering the data
-    @objc open var renderer: DataRenderer?
+    @objc open var renderer: ChartRenderBase?
     
     @objc open var highlighter: ChartHighlighter?
     

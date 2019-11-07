@@ -12,7 +12,7 @@
 import Foundation
 import CoreGraphics
 
-@objc(ChartAxisValueFormatter)
+@objc(ChartAxisValueFormatterDelegate)
 public protocol AxisValueFormatterDelegate: class
 {
     

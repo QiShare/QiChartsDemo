@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 @objc(BarLineScatterCandleChartRenderer)
-open class BarLineScatterCandleRenderer: DataRenderer
+open class BarLineScatterCandleRenderer: ChartRenderBase
 {
     internal var _xBounds = XBounds() // Reusable XBounds object
     

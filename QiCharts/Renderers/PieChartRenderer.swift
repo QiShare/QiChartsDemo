@@ -17,7 +17,7 @@ import CoreGraphics
 #endif
 
 
-open class PieChartRenderer: DataRenderer
+open class PieChartRenderer: ChartRenderBase
 {
     @objc open weak var chart: PieChartView?
     
