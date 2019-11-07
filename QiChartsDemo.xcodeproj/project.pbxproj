@@ -60,7 +60,7 @@
 		1492829323604EC400C58EF4 /* BarLineScatterCandleChartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492820523604EC300C58EF4 /* BarLineScatterCandleChartDataProvider.swift */; };
 		1492829823604EC400C58EF4 /* CandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492820C23604EC300C58EF4 /* CandleStickChartView.swift */; };
 		1492829923604EC400C58EF4 /* RadarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492820D23604EC300C58EF4 /* RadarChartView.swift */; };
-		1492829A23604EC400C58EF4 /* BarLineChartViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492820E23604EC300C58EF4 /* BarLineChartViewBase.swift */; };
+		1492829A23604EC400C58EF4 /* BarLineScatterCandleChartViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492820E23604EC300C58EF4 /* BarLineScatterCandleChartViewBase.swift */; };
 		1492829B23604EC400C58EF4 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492820F23604EC300C58EF4 /* LineChartView.swift */; };
 		1492829D23604EC400C58EF4 /* HorizontalBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492821123604EC300C58EF4 /* HorizontalBarChartView.swift */; };
 		1492829E23604EC400C58EF4 /* ChartViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492821223604EC300C58EF4 /* ChartViewBase.swift */; };
@@ -193,7 +193,7 @@
 		1492820523604EC300C58EF4 /* BarLineScatterCandleChartDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarLineScatterCandleChartDataProvider.swift; sourceTree = "<group>"; };
 		1492820C23604EC300C58EF4 /* CandleStickChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandleStickChartView.swift; sourceTree = "<group>"; };
 		1492820D23604EC300C58EF4 /* RadarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarChartView.swift; sourceTree = "<group>"; };
-		1492820E23604EC300C58EF4 /* BarLineChartViewBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarLineChartViewBase.swift; sourceTree = "<group>"; };
+		1492820E23604EC300C58EF4 /* BarLineScatterCandleChartViewBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarLineScatterCandleChartViewBase.swift; sourceTree = "<group>"; };
 		1492820F23604EC300C58EF4 /* LineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		1492821123604EC300C58EF4 /* HorizontalBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalBarChartView.swift; sourceTree = "<group>"; };
 		1492821223604EC300C58EF4 /* ChartViewBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewBase.swift; sourceTree = "<group>"; };
@@ -397,8 +397,8 @@
 			isa = PBXGroup;
 			children = (
 				1492821223604EC300C58EF4 /* ChartViewBase.swift */,
-				1492820E23604EC300C58EF4 /* BarLineChartViewBase.swift */,
 				1492821423604EC300C58EF4 /* PieRadarChartViewBase.swift */,
+				1492820E23604EC300C58EF4 /* BarLineScatterCandleChartViewBase.swift */,
 				1492821523604EC300C58EF4 /* BarChartView.swift */,
 				1492821723604EC300C58EF4 /* PieChartView.swift */,
 				1492820D23604EC300C58EF4 /* RadarChartView.swift */,
@@ -693,7 +693,7 @@
 				149282D823604EC400C58EF4 /* Renderer.swift in Sources */,
 				1492826623604EC400C58EF4 /* ChartData.swift in Sources */,
 				149282CE23604EC400C58EF4 /* IShapeRenderer.swift in Sources */,
-				1492829A23604EC400C58EF4 /* BarLineChartViewBase.swift in Sources */,
+				1492829A23604EC400C58EF4 /* BarLineScatterCandleChartViewBase.swift in Sources */,
 				149282A723604EC400C58EF4 /* Legend.swift in Sources */,
 				1492828023604EC400C58EF4 /* BarChartData.swift in Sources */,
 				1492825623604EC400C58EF4 /* PieHighlighter.swift in Sources */,

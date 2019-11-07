@@ -17,7 +17,7 @@ import CoreGraphics
 #endif
 
 /// Base-class of LineChart, BarChart, ScatterChart and CandleStickChart.
-open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleChartDataProvider, NSUIGestureRecognizerDelegate
+open class BarLineScatterCandleChartViewBase: ChartViewBase, BarLineScatterCandleChartDataProvider, NSUIGestureRecognizerDelegate
 {
     /// the maximum number of entries to which values will be drawn
     /// (entry numbers greater than this value will cause value-labels to disappear)
@@ -134,7 +134,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleChartDataPro
         _panGestureRecognizer.isEnabled = _dragXEnabled || _dragYEnabled
 
         #if !os(tvOS)
-            _pinchGestureRecognizer = NSUIPinchGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.pinchGestureRecognized(_:)))
+            _pinchGestureRecognizer = NSUIPinchGestureRecognizer(target: self, action: #selector(BarLineScatterCandleChartViewBase.pinchGestureRecognized(_:)))
             _pinchGestureRecognizer.delegate = self
             self.addGestureRecognizer(_pinchGestureRecognizer)
             _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
@@ -774,7 +774,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleChartDataPro
                     _decelerationLastTime = CACurrentMediaTime()
                     _decelerationVelocity = recognizer.velocity(in: self)
                     
-                    _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(BarLineChartViewBase.decelerationLoop))
+                    _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(BarLineScatterCandleChartViewBase.decelerationLoop))
                     _decelerationDisplayLink.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
                 }
                 

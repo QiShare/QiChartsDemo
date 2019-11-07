@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 /// Chart that draws lines, surfaces, circles, ...
-open class LineChartView: BarLineChartViewBase
+open class LineChartView: BarLineScatterCandleChartViewBase
 {
     internal override func initialize()
     {

@@ -56,8 +56,8 @@ open class ZoomViewJob: ViewPortJob
         var matrix = viewPortHandler.setZoom(scaleX: scaleX, scaleY: scaleY)
         viewPortHandler.refresh(newMatrix: matrix, chart: view, invalidate: false)
         
-        let yValsInView = (view as! BarLineChartViewBase).getAxis(axisDependency).axisRange / Double(viewPortHandler.scaleY)
-        let xValsInView = (view as! BarLineChartViewBase).xAxis.axisRange / Double(viewPortHandler.scaleX)
+        let yValsInView = (view as! BarLineScatterCandleChartViewBase).getAxis(axisDependency).axisRange / Double(viewPortHandler.scaleY)
+        let xValsInView = (view as! BarLineScatterCandleChartViewBase).xAxis.axisRange / Double(viewPortHandler.scaleX)
         
         var pt = CGPoint(
             x: CGFloat(xValue - xValsInView / 2.0),
@@ -69,7 +69,7 @@ open class ZoomViewJob: ViewPortJob
         matrix = viewPortHandler.translate(pt: pt)
         viewPortHandler.refresh(newMatrix: matrix, chart: view, invalidate: false)
         
-        (view as! BarLineChartViewBase).calculateOffsets()
+        (view as! BarLineScatterCandleChartViewBase).calculateOffsets()
         view.setNeedsDisplay()
     }
 }
