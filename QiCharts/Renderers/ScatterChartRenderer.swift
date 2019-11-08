@@ -36,7 +36,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
         {
             guard let set = scatterData.getDataSetByIndex(i) else { continue }
             
-            if set.isVisible
+            if set.visible
             {
                 if !(set is ScatterChartDataSet)
                 {
@@ -163,7 +163,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
                         dataSetIndex: i,
                         viewPortHandler: viewPortHandler)
                     
-                    if dataSet.isDrawValuesEnabled
+                    if dataSet.drawValuesEnabled
                     {
                         ChartUtils.drawText(
                             context: context,
@@ -176,7 +176,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
                         )
                     }
                     
-                    if let icon = e.icon, dataSet.isDrawIconsEnabled
+                    if let icon = e.icon, dataSet.drawValuesEnabled
                     {
                         ChartUtils.drawImage(context: context,
                                              image: icon,

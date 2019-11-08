@@ -41,7 +41,7 @@ open class BarLineScatterCandleRenderer: ChartRenderBase
     /// - returns: `true` if the DataSet values should be drawn, `false` if not.
     internal func shouldDrawValues(forDataSet set: ChartDataSet) -> Bool
     {
-        return set.isVisible && (set.isDrawValuesEnabled || set.isDrawIconsEnabled)
+        return set.visible && (set.drawValuesEnabled || set.drawIconsEnabled)
     }
 
     /// Class representing the bounds of the current viewport in terms of indices in the values array of a DataSet.

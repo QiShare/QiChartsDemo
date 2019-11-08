@@ -191,7 +191,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
         {
             guard let set = barData.getDataSetByIndex(i) else { continue }
             
-            if set.isVisible
+            if set.visible
             {
                 if !(set is BarChartDataSet)
                 {
@@ -356,7 +356,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                         
                         let val = e.y
                         
-                        if dataSet.isDrawValuesEnabled
+                        if dataSet.drawValuesEnabled
                         {
                             drawValue(
                                 context: context,
@@ -374,7 +374,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                                 color: dataSet.valueTextColorAt(j))
                         }
                         
-                        if let icon = e.icon, dataSet.isDrawIconsEnabled
+                        if let icon = e.icon, dataSet.drawIconsEnabled
                         {
                             var px = x
                             var py = val >= 0.0
@@ -423,7 +423,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                                 continue
                             }
                             
-                            if dataSet.isDrawValuesEnabled
+                            if dataSet.drawValuesEnabled
                             {
                                 drawValue(
                                     context: context,
@@ -440,7 +440,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                                     color: dataSet.valueTextColorAt(index))
                             }
                             
-                            if let icon = e.icon, dataSet.isDrawIconsEnabled
+                            if let icon = e.icon, dataSet.drawIconsEnabled
                             {
                                 var px = x
                                 var py = rect.origin.y +
@@ -509,7 +509,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                                     continue
                                 }
                                 
-                                if dataSet.isDrawValuesEnabled
+                                if dataSet.drawValuesEnabled
                                 {
                                     drawValue(
                                         context: context,
@@ -525,7 +525,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                                         color: dataSet.valueTextColorAt(index))
                                 }
                                 
-                                if let icon = e.icon, dataSet.isDrawIconsEnabled
+                                if let icon = e.icon, dataSet.drawIconsEnabled
                                 {
                                     ChartUtils.drawImage(
                                         context: context,

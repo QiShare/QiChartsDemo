@@ -279,7 +279,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
             {
                 guard let dataSet = dataSets[dataSetIndex] as? BarChartDataSet else { continue }
                 
-                if !shouldDrawValues(forDataSet: dataSet) || !(dataSet.isDrawIconsEnabled && dataSet.isVisible)
+                if !shouldDrawValues(forDataSet: dataSet) || !(dataSet.drawIconsEnabled && dataSet.visible)
                 {
                     continue
                 }
@@ -343,7 +343,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                             negOffset = -negOffset - valueTextWidth
                         }
                         
-                        if dataSet.isDrawValuesEnabled
+                        if dataSet.drawValuesEnabled
                         {
                             drawValue(
                                 context: context,
@@ -356,7 +356,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                                 color: dataSet.valueTextColorAt(j))
                         }
                         
-                        if let icon = e.icon, dataSet.isDrawIconsEnabled
+                        if let icon = e.icon, dataSet.drawIconsEnabled
                         {
                             var px = (rect.origin.x + rect.size.width)
                                 + (val >= 0.0 ? posOffset : negOffset)
@@ -424,7 +424,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                                 negOffset = -negOffset - valueTextWidth
                             }
                             
-                            if dataSet.isDrawValuesEnabled
+                            if dataSet.drawValuesEnabled
                             {
                                 drawValue(
                                     context: context,
@@ -437,7 +437,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                                     color: dataSet.valueTextColorAt(index))
                             }
                             
-                            if let icon = e.icon, dataSet.isDrawIconsEnabled
+                            if let icon = e.icon, dataSet.drawIconsEnabled
                             {
                                 var px = (rect.origin.x + rect.size.width)
                                     + (val >= 0.0 ? posOffset : negOffset)
@@ -528,7 +528,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                                     continue
                                 }
                                 
-                                if dataSet.isDrawValuesEnabled
+                                if dataSet.drawValuesEnabled
                                 {
                                     drawValue(context: context,
                                         value: valueText,
@@ -539,7 +539,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                                         color: dataSet.valueTextColorAt(index))
                                 }
                                 
-                                if let icon = e.icon, dataSet.isDrawIconsEnabled
+                                if let icon = e.icon, dataSet.drawIconsEnabled
                                 {
                                     ChartUtils.drawImage(
                                         context: context,

@@ -36,7 +36,7 @@ open class LineChartRenderer: LineRadarRenderer
         {
             guard let set = lineData.getDataSetByIndex(i) else { continue }
             
-            if set.isVisible
+            if set.visible
             {
                 if !(set is LineChartDataSet)
                 {
@@ -556,7 +556,7 @@ open class LineChartRenderer: LineRadarRenderer
                         continue
                     }
                     
-                    if dataSet.isDrawValuesEnabled {
+                    if dataSet.drawValuesEnabled {
                         ChartUtils.drawText(
                             context: context,
                             text: formatter.stringForValue(
@@ -571,7 +571,7 @@ open class LineChartRenderer: LineRadarRenderer
                             attributes: [NSAttributedString.Key.font: valueFont, NSAttributedString.Key.foregroundColor: dataSet.valueTextColorAt(j)])
                     }
                     
-                    if let icon = e.icon, dataSet.isDrawIconsEnabled
+                    if let icon = e.icon, dataSet.drawIconsEnabled
                     {
                         ChartUtils.drawImage(context: context,
                                              image: icon,
@@ -609,7 +609,7 @@ open class LineChartRenderer: LineRadarRenderer
         {
             guard let dataSet = lineData.getDataSetByIndex(i) as? LineChartDataSet else { continue }
             
-            if !dataSet.isVisible || !dataSet.isDrawCirclesEnabled || dataSet.entryCount == 0
+            if !dataSet.visible || !dataSet.isDrawCirclesEnabled || dataSet.entryCount == 0
             {
                 continue
             }

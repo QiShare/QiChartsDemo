@@ -28,18 +28,15 @@ open class ChartDataSet: NSObject
 {
     // MARK: - Styling functions and accessors
     
+    /// 描述DataSet的标签
+    open var label: String? = "DataSet"
+    
+    /// 该DataSet对应的那个轴需要被绘制
+    open var axisDependency = YAxis.AxisDependency.left
+    
     /// All the colors that are used for this DataSet.
     /// Colors are reused as soon as the number of Entries the DataSet represents is higher than the size of the colors array.
     open var colors = [NSUIColor]()
-    
-    /// List representing all colors that are used for drawing the actual values for this DataSet
-    open var valueColors = [NSUIColor]()
-
-    /// The label string that describes the DataSet.
-    open var label: String? = "DataSet"
-    
-    /// The axis this DataSet should be plotted against.
-    open var axisDependency = YAxis.AxisDependency.left
     
     /// - returns: The color at the given index of the DataSet's color array.
     /// This prevents out-of-bounds by performing a modulus on the color index, so colours will repeat themselves.
@@ -134,6 +131,12 @@ open class ChartDataSet: NSObject
         return _valueFormatter == nil
     }
     
+    /// the font for the value-text labels
+    open var valueFont: NSUIFont = NSUIFont.systemFont(ofSize: 7.0)
+    
+    /// List representing all colors that are used for drawing the actual values for this DataSet
+    open var valueColors = [NSUIColor]()
+    
     /// Sets/get a single color for value text.
     /// Setting the color clears the colors array and adds a single color.
     /// Getting will return the first color in the array.
@@ -161,8 +164,6 @@ open class ChartDataSet: NSObject
         return valueColors[index % valueColors.count]
     }
     
-    /// the font for the value-text labels
-    open var valueFont: NSUIFont = NSUIFont.systemFont(ofSize: 7.0)
     
     /// The form to draw for this dataset in the legend.
     open var form = Legend.Form.default
@@ -193,23 +194,11 @@ open class ChartDataSet: NSObject
     ///
     /// - note: For bar and line charts: if `maxVisibleCount` is reached, no values will be drawn even if this is enabled.
     open var drawValuesEnabled = true
-    
-    /// - returns: `true` if y-value drawing is enabled, `false` ifnot
-    open var isDrawValuesEnabled: Bool
-    {
-        return drawValuesEnabled
-    }
 
     /// Set this to true to draw y-icons on the chart.
     ///
     /// - note: For bar and line charts: if `maxVisibleCount` is reached, no icons will be drawn even if this is enabled.
     open var drawIconsEnabled = true
-    
-    /// Returns true if y-icon drawing is enabled, false if not
-    open var isDrawIconsEnabled: Bool
-    {
-        return drawIconsEnabled
-    }
     
     /// Offset of icons drawn on the chart.
     ///
@@ -220,12 +209,6 @@ open class ChartDataSet: NSObject
     
     /// Set the visibility of this DataSet. If not visible, the DataSet will not be drawn to the chart upon refreshing it.
     open var visible = true
-    
-    /// - returns: `true` if this DataSet is visible inside the chart, or `false` ifit is currently hidden.
-    open var isVisible: Bool
-    {
-        return visible
-    }
     
     
     // MARK: - init

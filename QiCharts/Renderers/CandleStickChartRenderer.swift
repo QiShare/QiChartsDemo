@@ -34,7 +34,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
 
         for set in candleData.dataSets as! [CandleChartDataSet]
         {
-            if set.isVisible
+            if set.visible
             {
                 drawDataSet(context: context, dataSet: set)
             }
@@ -290,7 +290,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                         continue
                     }
                     
-                    if dataSet.isDrawValuesEnabled
+                    if dataSet.drawValuesEnabled
                     {
                         ChartUtils.drawText(
                             context: context,
@@ -306,7 +306,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                             attributes: [NSAttributedString.Key.font: valueFont, NSAttributedString.Key.foregroundColor: dataSet.valueTextColorAt(j)])
                     }
                     
-                    if let icon = e.icon, dataSet.isDrawIconsEnabled
+                    if let icon = e.icon, dataSet.drawIconsEnabled
                     {
                         ChartUtils.drawImage(context: context,
                                              image: icon,

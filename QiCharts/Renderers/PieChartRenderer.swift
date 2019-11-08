@@ -38,7 +38,7 @@ open class PieChartRenderer: ChartRenderBase
         {
             for set in pieData!.dataSets as! [PieChartDataSet]
             {
-                if set.isVisible && set.entryCount > 0
+                if set.visible && set.entryCount > 0
                 {
                     drawDataSet(context: context, dataSet: set)
                 }
@@ -300,9 +300,9 @@ open class PieChartRenderer: ChartRenderBase
         {
             guard let dataSet = dataSets[i] as? PieChartDataSet else { continue }
             
-            let drawValues = dataSet.isDrawValuesEnabled
+            let drawValues = dataSet.drawValuesEnabled
             
-            if !drawValues && !drawEntryLabels && !dataSet.isDrawIconsEnabled
+            if !drawValues && !drawEntryLabels && !dataSet.drawIconsEnabled
             {
                 continue
             }
@@ -525,7 +525,7 @@ open class PieChartRenderer: ChartRenderBase
                     }
                 }
                 
-                if let icon = e.icon, dataSet.isDrawIconsEnabled
+                if let icon = e.icon, dataSet.drawIconsEnabled
                 {
                     // calculate the icon's position
                     

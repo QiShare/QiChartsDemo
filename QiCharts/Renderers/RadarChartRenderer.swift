@@ -40,7 +40,7 @@ open class RadarChartRenderer: LineRadarRenderer
             
             for set in radarData!.dataSets as! [RadarChartDataSet]
             {
-                if set.isVisible
+                if set.visible
                 {
                     drawDataSet(context: context, dataSet: set, mostEntries: mostEntries)
                 }
@@ -175,7 +175,7 @@ open class RadarChartRenderer: LineRadarRenderer
                 
                 guard let formatter = dataSet.valueFormatter else { continue }
                 
-                if dataSet.isDrawValuesEnabled
+                if dataSet.drawValuesEnabled
                 {
                     ChartUtils.drawText(
                         context: context,
@@ -191,7 +191,7 @@ open class RadarChartRenderer: LineRadarRenderer
                     )
                 }
                 
-                if let icon = e.icon, dataSet.isDrawIconsEnabled
+                if let icon = e.icon, dataSet.drawIconsEnabled
                 {
                     var pIcon = center.moving(distance: CGFloat(e.y) * factor * CGFloat(phaseY) + iconsOffset.y,
                                               atAngle: sliceangle * CGFloat(j) * CGFloat(phaseX) + chart.rotationAngle)
