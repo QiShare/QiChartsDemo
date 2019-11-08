@@ -619,19 +619,15 @@ open class ChartData: NSObject
         }
     }
     
-    /// if true, value highlightning is enabled
-    @objc open var isHighlightEnabled: Bool { return highlightEnabled }
     
-    /// Clears this data object from all DataSets and removes all Entries.
-    /// Don't forget to invalidate the chart after this.
+    /// 清除全部dataSets
     @objc open func clearValues()
     {
         dataSets.removeAll(keepingCapacity: false)
         notifyDataChanged()
     }
     
-    /// Checks if this data object contains the specified DataSet. 
-    /// - returns: `true` if so, `false` ifnot.
+    /// - returns: DataSet是否包含某dataSet
     @objc open func contains(dataSet: ChartDataSet) -> Bool
     {
         for set in dataSets
@@ -645,7 +641,7 @@ open class ChartData: NSObject
         return false
     }
     
-    /// - returns: The total entry count across all DataSet objects this data object contains.
+    /// - returns: 获取所有DataSet中所有entry的数量之和
     @objc open var entryCount: Int
     {
         var count = 0
@@ -658,7 +654,7 @@ open class ChartData: NSObject
         return count
     }
 
-    /// - returns: The DataSet object with the maximum number of entries or null if there are no DataSets.
+    /// - returns: 获取EntryCount最大的那个DataSet
     @objc open var maxEntryCountSet: ChartDataSet?
     {
         if _dataSets.count == 0

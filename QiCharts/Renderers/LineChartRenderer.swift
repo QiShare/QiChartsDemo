@@ -710,7 +710,7 @@ open class LineChartRenderer: LineRadarRenderer
         for high in indices
         {
             guard let set = lineData.getDataSetByIndex(high.dataSetIndex) as? LineChartDataSet
-                , set.isHighlightEnabled
+                , set.highlightEnabled
                 else { continue }
             
             guard let e = set.entryForXValue(high.x, closestToY: high.y) else { continue }

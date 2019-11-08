@@ -570,7 +570,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
         {
             guard
                 let set = barData.getDataSetByIndex(high.dataSetIndex) as? BarChartDataSet,
-                set.isHighlightEnabled
+                set.highlightEnabled
                 else { continue }
             
             if let e = set.entryForXValue(high.x, closestToY: high.y) as? BarChartDataEntry

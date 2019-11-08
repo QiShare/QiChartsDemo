@@ -207,7 +207,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
         {
             guard
                 let set = scatterData.getDataSetByIndex(high.dataSetIndex) as? ScatterChartDataSet,
-                set.isHighlightEnabled
+                set.highlightEnabled
                 else { continue }
             
             guard let entry = set.entryForXValue(high.x, closestToY: high.y) else { continue }

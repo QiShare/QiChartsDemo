@@ -689,7 +689,7 @@ open class PieChartRenderer: ChartRenderBase
             
             guard let set = data.getDataSetByIndex(indices[i].dataSetIndex) as? PieChartDataSet else { continue }
             
-            if !set.isHighlightEnabled
+            if !set.highlightEnabled
             {
                 continue
             }

@@ -303,7 +303,7 @@ open class RadarChartRenderer: LineRadarRenderer
         {
             guard
                 let set = chart.data?.getDataSetByIndex(high.dataSetIndex) as? RadarChartDataSet,
-                set.isHighlightEnabled
+                set.highlightEnabled
                 else { continue }
             
             guard let e = set.entryForIndex(Int(high.x)) as? RadarChartDataEntry
