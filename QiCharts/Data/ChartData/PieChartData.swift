@@ -99,20 +99,6 @@ open class PieChartData: ChartData
         super.addDataSet(d)
     }
     
-    /// Removes the DataSet at the given index in the DataSet array from the data object.
-    /// Also recalculates all minimum and maximum values.
-    ///
-    /// - returns: `true` if a DataSet was removed, `false` ifno DataSet could be removed.
-    open override func removeDataSetByIndex(_ index: Int) -> Bool
-    {
-        if index >= _dataSets.count || index < 0
-        {
-            return false
-        }
-        
-        return false
-    }
-    
     /// - returns: The total y-value sum across all DataSet objects the this object represents.
     @objc open var yValueSum: Double
     {

@@ -450,46 +450,6 @@ open class ChartData: NSObject
         _dataSets.append(dataSet)
     }
     
-    /// Removes the given DataSet from this data object.
-    /// Also recalculates all minimum and maximum values.
-    ///
-    /// - returns: `true` if a DataSet was removed, `false` ifno DataSet could be removed.
-    @objc @discardableResult open func removeDataSet(_ dataSet: ChartDataSet!) -> Bool
-    {
-        if dataSet === nil
-        {
-            return false
-        }
-        
-        for i in 0 ..< _dataSets.count
-        {
-            if _dataSets[i] === dataSet
-            {
-                return removeDataSetByIndex(i)
-            }
-        }
-        
-        return false
-    }
-    
-    /// Removes the DataSet at the given index in the DataSet array from the data object. 
-    /// Also recalculates all minimum and maximum values. 
-    ///
-    /// - returns: `true` if a DataSet was removed, `false` ifno DataSet could be removed.
-    @objc @discardableResult open func removeDataSetByIndex(_ index: Int) -> Bool
-    {
-        if index >= _dataSets.count || index < 0
-        {
-            return false
-        }
-        
-        _dataSets.remove(at: index)
-        
-        calcMinMax()
-        
-        return true
-    }
-    
     /// Adds an Entry to the DataSet at the specified index. Entries are added to the end of the list.
     @objc open func addEntry(_ e: ChartDataEntry, dataSetIndex: Int)
     {
@@ -505,44 +465,6 @@ open class ChartData: NSObject
         {
             print("ChartData.addEntry() - Cannot add Entry because dataSetIndex too high or too low.", terminator: "\n")
         }
-    }
-    
-    /// Removes the given Entry object from the DataSet at the specified index.
-    @objc @discardableResult open func removeEntry(_ entry: ChartDataEntry, dataSetIndex: Int) -> Bool
-    {
-        // entry outofbounds
-        if dataSetIndex >= _dataSets.count
-        {
-            return false
-        }
-        
-        // remove the entry from the dataset
-        let removed = _dataSets[dataSetIndex].removeEntry(entry)
-        
-        if removed
-        {
-            calcMinMax()
-        }
-        
-        return removed
-    }
-    
-    /// Removes the Entry object closest to the given xIndex from the ChartDataSet at the
-    /// specified index. 
-    /// - returns: `true` if an entry was removed, `false` ifno Entry was found that meets the specified requirements.
-    @objc @discardableResult open func removeEntry(xValue: Double, dataSetIndex: Int) -> Bool
-    {
-        if dataSetIndex >= _dataSets.count
-        {
-            return false
-        }
-        
-        if let entry = _dataSets[dataSetIndex].entryForXValue(xValue, closestToY: Double.nan)
-        {
-            return removeEntry(entry, dataSetIndex: dataSetIndex)
-        }
-        
-        return false
     }
     
     /// - returns: The DataSet that contains the provided Entry, or null, if no DataSet contains this entry.

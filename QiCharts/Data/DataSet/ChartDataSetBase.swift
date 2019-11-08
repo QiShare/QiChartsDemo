@@ -126,53 +126,6 @@ open class ChartDataSetBase: NSObject
         fatalError("addEntryOrdered is not implemented in ChartBaseDataSet")
     }
     
-    @discardableResult open func removeEntry(_ entry: ChartDataEntry) -> Bool
-    {
-        fatalError("removeEntry is not implemented in ChartBaseDataSet")
-    }
-    
-    @discardableResult open func removeEntry(index: Int) -> Bool
-    {
-        if let entry = entryForIndex(index)
-        {
-            return removeEntry(entry)
-        }
-        return false
-    }
-    
-    @discardableResult open func removeEntry(x: Double) -> Bool
-    {
-        if let entry = entryForXValue(x, closestToY: Double.nan)
-        {
-            return removeEntry(entry)
-        }
-        return false
-    }
-    
-    @discardableResult open func removeFirst() -> Bool
-    {
-        if entryCount > 0
-        {
-            if let entry = entryForIndex(0)
-            {
-                return removeEntry(entry)
-            }
-        }
-        return false
-    }
-    
-    @discardableResult open func removeLast() -> Bool
-    {
-        if entryCount > 0
-        {
-            if let entry = entryForIndex(entryCount - 1)
-            {
-                return removeEntry(entry)
-            }
-        }
-        return false
-    }
-    
     open func contains(_ e: ChartDataEntry) -> Bool
     {
         fatalError("removeEntry is not implemented in ChartBaseDataSet")

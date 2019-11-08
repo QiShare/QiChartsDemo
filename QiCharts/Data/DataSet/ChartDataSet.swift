@@ -428,48 +428,6 @@ open class ChartDataSet: ChartDataSetBase
         return true
     }
     
-    /// Removes an Entry from the DataSet dynamically.
-    /// This will also recalculate the current minimum and maximum values of the DataSet and the value-sum.
-    /// - parameter entry: the entry to remove
-    /// - returns: `true` if the entry was removed successfully, else if the entry does not exist
-    open override func removeEntry(_ entry: ChartDataEntry) -> Bool
-    {
-        var removed = false
-        isIndirectValuesCall = true
-
-        for i in 0 ..< values.count
-        {
-            if values[i] === entry
-            {
-                values.remove(at: i)
-                removed = true
-                break
-            }
-        }
-
-        notifyDataSetChanged()
-
-        return removed
-    }
-    
-    /// Removes the first Entry (at index 0) of this DataSet from the entries array.
-    ///
-    /// - returns: `true` if successful, `false` if not.
-    open override func removeFirst() -> Bool
-    {
-        let entry: ChartDataEntry? = values.isEmpty ? nil : values.removeFirst()
-        return entry != nil
-    }
-    
-    /// Removes the last Entry (at index size-1) of this DataSet from the entries array.
-    ///
-    /// - returns: `true` if successful, `false` if not.
-    open override func removeLast() -> Bool
-    {
-        let entry: ChartDataEntry? = values.isEmpty ? nil : values.removeLast()
-        return entry != nil
-    }
-    
     /// Checks if this DataSet contains the specified Entry.
     /// - returns: `true` if contains the entry, `false` if not.
     open override func contains(_ e: ChartDataEntry) -> Bool
