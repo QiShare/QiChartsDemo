@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 /// Determines how to round DataSet index values for `ChartDataSet.entryIndex(x, rounding)` when an exact x-value is not found.
 @objc
@@ -21,29 +22,250 @@ public enum ChartDataSetRounding: Int
 }
 
 /// The DataSet class represents one group or type of entries (Entry) in the Chart that belong together.
-/// It is designed to logically separate different groups of values inside the Chart (e.g. the values for a specific line in the LineChart, or the values of a specific group of bars in the BarChart).
-open class ChartDataSet: ChartDataSetBase
+/// It is designed to logically separate different groups of values inside the Chart
+/// (e.g. the values for a specific line in the LineChart, or the values of a specific group of bars in the BarChart).
+open class ChartDataSet: NSObject
 {
-    public required init()
-    {
-        values = []
+    // MARK: - Styling functions and accessors
+    
+    /// All the colors that are used for this DataSet.
+    /// Colors are reused as soon as the number of Entries the DataSet represents is higher than the size of the colors array.
+    open var colors = [NSUIColor]()
+    
+    /// List representing all colors that are used for drawing the actual values for this DataSet
+    open var valueColors = [NSUIColor]()
 
-        super.init()
+    /// The label string that describes the DataSet.
+    open var label: String? = "DataSet"
+    
+    /// The axis this DataSet should be plotted against.
+    open var axisDependency = YAxis.AxisDependency.left
+    
+    /// - returns: The color at the given index of the DataSet's color array.
+    /// This prevents out-of-bounds by performing a modulus on the color index, so colours will repeat themselves.
+    open func color(atIndex index: Int) -> NSUIColor
+    {
+        var index = index
+        if index < 0
+        {
+            index = 0
+        }
+        return colors[index % colors.count]
     }
     
-    public override init(label: String?)
+    /// Resets all colors of this DataSet and recreates the colors array.
+    open func resetColors()
+    {
+        colors.removeAll(keepingCapacity: false)
+    }
+    
+    /// Adds a new color to the colors array of the DataSet.
+    /// - parameter color: the color to add
+    open func addColor(_ color: NSUIColor)
+    {
+        colors.append(color)
+    }
+    
+    /// Sets the one and **only** color that should be used for this DataSet.
+    /// Internally, this recreates the colors array and adds the specified color.
+    /// - parameter color: the color to set
+    open func setColor(_ color: NSUIColor)
+    {
+        colors.removeAll(keepingCapacity: false)
+        colors.append(color)
+    }
+    
+    /// Sets colors to a single color a specific alpha value.
+    /// - parameter color: the color to set
+    /// - parameter alpha: alpha to apply to the set `color`
+    @objc open func setColor(_ color: NSUIColor, alpha: CGFloat)
+    {
+        setColor(color.withAlphaComponent(alpha))
+    }
+    
+    /// Sets colors with a specific alpha value.
+    /// - parameter colors: the colors to set
+    /// - parameter alpha: alpha to apply to the set `colors`
+    @objc open func setColors(_ colors: [NSUIColor], alpha: CGFloat)
+    {
+        var colorsWithAlpha = colors
+        
+        for i in 0 ..< colorsWithAlpha.count
+        {
+            colorsWithAlpha[i] = colorsWithAlpha[i] .withAlphaComponent(alpha)
+        }
+        
+        self.colors = colorsWithAlpha
+    }
+    
+    /// Sets colors with a specific alpha value.
+    /// - parameter colors: the colors to set
+    /// - parameter alpha: alpha to apply to the set `colors`
+    open func setColors(_ colors: NSUIColor...)
+    {
+        self.colors = colors
+    }
+    
+    /// if true, value highlighting is enabled
+    open var highlightEnabled = true
+    
+    /// - returns: `true` if value highlighting is enabled for this dataset
+    open var isHighlightEnabled: Bool { return highlightEnabled }
+    
+    /// Custom formatter that is used instead of the auto-formatter if set
+    internal var _valueFormatter: DefaultValueFormatter?
+    
+    /// Custom formatter that is used instead of the auto-formatter if set
+    open var valueFormatter: DefaultValueFormatter?
+    {
+        get
+        {
+            if needsFormatter
+            {
+                return ChartUtils.defaultValueFormatter()
+            }
+            
+            return _valueFormatter
+        }
+        set
+        {
+            if newValue == nil { return }
+            
+            _valueFormatter = newValue
+        }
+    }
+    
+    open var needsFormatter: Bool
+    {
+        return _valueFormatter == nil
+    }
+    
+    /// Sets/get a single color for value text.
+    /// Setting the color clears the colors array and adds a single color.
+    /// Getting will return the first color in the array.
+    open var valueTextColor: NSUIColor
+    {
+        get
+        {
+            return valueColors[0]
+        }
+        set
+        {
+            valueColors.removeAll(keepingCapacity: false)
+            valueColors.append(newValue)
+        }
+    }
+    
+    /// - returns: The color at the specified index that is used for drawing the values inside the chart. Uses modulus internally.
+    open func valueTextColorAt(_ index: Int) -> NSUIColor
+    {
+        var index = index
+        if index < 0
+        {
+            index = 0
+        }
+        return valueColors[index % valueColors.count]
+    }
+    
+    /// the font for the value-text labels
+    open var valueFont: NSUIFont = NSUIFont.systemFont(ofSize: 7.0)
+    
+    /// The form to draw for this dataset in the legend.
+    open var form = Legend.Form.default
+    
+    /// The form size to draw for this dataset in the legend.
+    ///
+    /// Return `NaN` to use the default legend form size.
+    open var formSize: CGFloat = CGFloat.nan
+    
+    /// The line width for drawing the form of this dataset in the legend
+    ///
+    /// Return `NaN` to use the default legend form line width.
+    open var formLineWidth: CGFloat = CGFloat.nan
+    
+    /// Line dash configuration for legend shapes that consist of lines.
+    ///
+    /// This is how much (in pixels) into the dash pattern are we starting from.
+    open var formLineDashPhase: CGFloat = 0.0
+    
+    /// Line dash configuration for legend shapes that consist of lines.
+    ///
+    /// This is the actual dash pattern.
+    /// I.e. [2, 3] will paint [--   --   ]
+    /// [1, 3, 4, 2] will paint [-   ----  -   ----  ]
+    open var formLineDashLengths: [CGFloat]? = nil
+    
+    /// Set this to true to draw y-values on the chart.
+    ///
+    /// - note: For bar and line charts: if `maxVisibleCount` is reached, no values will be drawn even if this is enabled.
+    open var drawValuesEnabled = true
+    
+    /// - returns: `true` if y-value drawing is enabled, `false` ifnot
+    open var isDrawValuesEnabled: Bool
+    {
+        return drawValuesEnabled
+    }
+
+    /// Set this to true to draw y-icons on the chart.
+    ///
+    /// - note: For bar and line charts: if `maxVisibleCount` is reached, no icons will be drawn even if this is enabled.
+    open var drawIconsEnabled = true
+    
+    /// Returns true if y-icon drawing is enabled, false if not
+    open var isDrawIconsEnabled: Bool
+    {
+        return drawIconsEnabled
+    }
+    
+    /// Offset of icons drawn on the chart.
+    ///
+    /// For all charts except Pie and Radar it will be ordinary (x offset, y offset).
+    ///
+    /// For Pie and Radar chart it will be (y offset, distance from center offset); so if you want icon to be rendered under value, you should increase X component of CGPoint, and if you want icon to be rendered closet to center, you should decrease height component of CGPoint.
+    open var iconsOffset = CGPoint(x: 0, y: 0)
+    
+    /// Set the visibility of this DataSet. If not visible, the DataSet will not be drawn to the chart upon refreshing it.
+    open var visible = true
+    
+    /// - returns: `true` if this DataSet is visible inside the chart, or `false` ifit is currently hidden.
+    open var isVisible: Bool
+    {
+        return visible
+    }
+    
+    
+    // MARK: - init
+    
+    public required override init()
     {
         values = []
-
-        super.init(label: label)
+        super.init()
+        
+        // default color
+        colors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+        valueColors.append(NSUIColor.black)
+    }
+    
+    public init(label: String?)
+    {
+        values = []
+        super.init()
+        
+        // default color
+        colors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+        valueColors.append(NSUIColor.black)
+        
+        self.label = label
     }
     
     @objc public init(values: [ChartDataEntry]?, label: String?)
     {
         self.values = values ?? []
+        super.init()
 
-        super.init(label: label)
-
+        // default color
+        colors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+        valueColors.append(NSUIColor.black)
         self.calcMinMax()
     }
     
@@ -66,7 +288,7 @@ open class ChartDataSet: ChartDataSetBase
                 isIndirectValuesCall = false
                 return
             }
-            notifyDataSetChanged()
+            calcMinMax()
         }
     }
     // TODO: Temporary fix for performance. Will be removed in 4.0
@@ -84,7 +306,7 @@ open class ChartDataSet: ChartDataSetBase
     /// minimum x-value in the value array
     internal var _xMin: Double = Double.greatestFiniteMagnitude
     
-    open override func calcMinMax()
+    open func calcMinMax()
     {
         _yMax = -Double.greatestFiniteMagnitude
         _yMin = Double.greatestFiniteMagnitude
@@ -96,7 +318,7 @@ open class ChartDataSet: ChartDataSetBase
         values.forEach { calcMinMax(entry: $0) }
     }
     
-    open override func calcMinMaxY(fromX: Double, toX: Double)
+    open func calcMinMaxY(fromX: Double, toX: Double)
     {
         _yMax = -Double.greatestFiniteMagnitude
         _yMin = Double.greatestFiniteMagnitude
@@ -148,24 +370,24 @@ open class ChartDataSet: ChartDataSetBase
     }
     
     /// - returns: The minimum y-value this DataSet holds
-    open override var yMin: Double { return _yMin }
+    open var yMin: Double { return _yMin }
     
     /// - returns: The maximum y-value this DataSet holds
-    open override var yMax: Double { return _yMax }
+    open var yMax: Double { return _yMax }
     
     /// - returns: The minimum x-value this DataSet holds
-    open override var xMin: Double { return _xMin }
+    open var xMin: Double { return _xMin }
     
     /// - returns: The maximum x-value this DataSet holds
-    open override var xMax: Double { return _xMax }
+    open var xMax: Double { return _xMax }
     
     /// - returns: The number of y-values this DataSet represents
-    open override var entryCount: Int { return values.count }
+    open var entryCount: Int { return values.count }
     
     /// - returns: The entry object found at the given index (not x-value!)
     /// - throws: out of bounds
     /// if `i` is out of bounds, it may throw an out-of-bounds exception
-    open override func entryForIndex(_ i: Int) -> ChartDataEntry?
+    open func entryForIndex(_ i: Int) -> ChartDataEntry?
     {
         guard i >= values.startIndex, i < values.endIndex else {
             return nil
@@ -179,7 +401,7 @@ open class ChartDataSet: ChartDataSetBase
     /// - parameter xValue: the x-value
     /// - parameter closestToY: If there are multiple y-values for the specified x-value,
     /// - parameter rounding: determine whether to round up/down/closest if there is no Entry matching the provided x-value
-    open override func entryForXValue(
+    open func entryForXValue(
         _ xValue: Double,
         closestToY yValue: Double,
         rounding: ChartDataSetRounding) -> ChartDataEntry?
@@ -197,7 +419,7 @@ open class ChartDataSet: ChartDataSetBase
     /// nil if no Entry object at that x-value.
     /// - parameter xValue: the x-value
     /// - parameter closestToY: If there are multiple y-values for the specified x-value,
-    open override func entryForXValue(
+    open func entryForXValue(
         _ xValue: Double,
         closestToY yValue: Double) -> ChartDataEntry?
     {
@@ -206,7 +428,7 @@ open class ChartDataSet: ChartDataSetBase
     
     /// - returns: All Entry objects found at the given xIndex with binary search.
     /// An empty array if no Entry object at that index.
-    open override func entriesForXValue(_ xValue: Double) -> [ChartDataEntry]
+    open func entriesForXValue(_ xValue: Double) -> [ChartDataEntry]
     {
         var entries = [ChartDataEntry]()
         
@@ -268,7 +490,7 @@ open class ChartDataSet: ChartDataSetBase
     /// - parameter xValue: x-value of the entry to search for
     /// - parameter closestToY: If there are multiple y-values for the specified x-value,
     /// - parameter rounding: Rounding method if exact value was not found
-    open override func entryIndex(
+    open func entryIndex(
         x xValue: Double,
         closestToY yValue: Double,
         rounding: ChartDataSetRounding) -> Int
@@ -373,7 +595,7 @@ open class ChartDataSet: ChartDataSetBase
     /// - returns: The array-index of the specified entry
     ///
     /// - parameter e: the entry to search for
-    open override func entryIndex(entry e: ChartDataEntry) -> Int
+    open func entryIndex(entry e: ChartDataEntry) -> Int
     {
         for i in 0 ..< values.count
         {
@@ -391,7 +613,7 @@ open class ChartDataSet: ChartDataSetBase
     /// This will also recalculate the current minimum and maximum values of the DataSet and the value-sum.
     /// - parameter e: the entry to add
     /// - returns: True
-    open override func addEntry(_ e: ChartDataEntry) -> Bool
+    open func addEntry(_ e: ChartDataEntry) -> Bool
     {
         calcMinMax(entry: e)
 
@@ -406,7 +628,7 @@ open class ChartDataSet: ChartDataSetBase
     /// This will also recalculate the current minimum and maximum values of the DataSet and the value-sum.
     /// - parameter e: the entry to add
     /// - returns: True
-    open override func addEntryOrdered(_ e: ChartDataEntry) -> Bool
+    open func addEntryOrdered(_ e: ChartDataEntry) -> Bool
     {
         calcMinMax(entry: e)
         
@@ -430,7 +652,7 @@ open class ChartDataSet: ChartDataSetBase
     
     /// Checks if this DataSet contains the specified Entry.
     /// - returns: `true` if contains the entry, `false` if not.
-    open override func contains(_ e: ChartDataEntry) -> Bool
+    open func contains(_ e: ChartDataEntry) -> Bool
     {
         for entry in values
         {
@@ -444,7 +666,7 @@ open class ChartDataSet: ChartDataSetBase
     }
     
     /// Removes all values from this DataSet and recalculates min and max value.
-    open override func clear()
+    open func clear()
     {
         values.removeAll(keepingCapacity: true)
     }
@@ -453,14 +675,37 @@ open class ChartDataSet: ChartDataSetBase
 
     // MARK: - NSCopying
     
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
+    open func copyWithZone(_ zone: NSZone?) -> AnyObject
     {
-        let copy = super.copyWithZone(zone) as! ChartDataSet
+        let copy = type(of: self).init()
+        
+        copy.colors = colors
+        copy.valueColors = valueColors
+        copy.label = label
         
         copy.values = values
         copy._yMax = _yMax
         copy._yMin = _yMin
 
         return copy
+    }
+    
+    // MARK: - NSObject
+    
+    open override var description: String
+    {
+        return String(format: "%@, label: %@, %i entries", arguments: [NSStringFromClass(type(of: self)), self.label ?? "", self.entryCount])
+    }
+    
+    open override var debugDescription: String
+    {
+        var desc = description + ":"
+        
+        for i in 0 ..< self.entryCount
+        {
+            desc += "\n" + (self.entryForIndex(i)?.description ?? "")
+        }
+        
+        return desc
     }
 }
