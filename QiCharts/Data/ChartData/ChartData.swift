@@ -342,14 +342,7 @@ open class ChartData: NSObject
         }
     }
     
-    /// Retrieve the index of a ChartDataSet with a specific label from the ChartData. Search can be case sensitive or not.
-    /// 
-    /// **IMPORTANT: This method does calculations at runtime, do not over-use in performance critical situations.**
-    ///
-    /// - parameter dataSets: the DataSet array to search
-    /// - parameter type:
-    /// - parameter ignorecase: if true, the search is not case-sensitive
-    /// - returns: The index of the DataSet Object with the given label. Sensitive or not.
+    /// 根据一个Label获取某DataSet的Index
     internal func getDataSetIndexByLabel(_ label: String, ignorecase: Bool) -> Int
     {
         if ignorecase
@@ -380,10 +373,10 @@ open class ChartData: NSObject
         return -1
     }
     
-    /// - returns: The labels of all DataSets as a string array.
+    /// - returns: 获取所有dataSet的所有labels
     internal func dataSetLabels() -> [String]
     {
-        var types = [String]()
+        var labelArr = [String]()
         
         for i in 0 ..< _dataSets.count
         {
@@ -392,16 +385,13 @@ open class ChartData: NSObject
                 continue
             }
             
-            types[i] = _dataSets[i].label!
+            labelArr[i] = _dataSets[i].label!
         }
         
-        return types
+        return labelArr
     }
     
-    /// Get the Entry for a corresponding highlight object
-    ///
-    /// - parameter highlight:
-    /// - returns: The entry that is highlighted
+    /// 根据Highlight获取某entry
     @objc open func entryForHighlight(_ highlight: Highlight) -> ChartDataEntry?
     {
         if highlight.dataSetIndex >= dataSets.count
@@ -414,11 +404,7 @@ open class ChartData: NSObject
         }
     }
     
-    /// **IMPORTANT: This method does calculations at runtime. Use with care in performance critical situations.**
-    ///
-    /// - parameter label:
-    /// - parameter ignorecase:
-    /// - returns: The DataSet Object with the given label. Sensitive or not.
+    /// 根据Label获取某个DataSet
     @objc open func getDataSetByLabel(_ label: String, ignorecase: Bool) -> ChartDataSet?
     {
         let index = getDataSetIndexByLabel(label, ignorecase: ignorecase)
@@ -450,7 +436,7 @@ open class ChartData: NSObject
         _dataSets.append(dataSet)
     }
     
-    /// Adds an Entry to the DataSet at the specified index. Entries are added to the end of the list.
+    /// 向某DataSet追加一个Entry
     @objc open func addEntry(_ e: ChartDataEntry, dataSetIndex: Int)
     {
         if _dataSets.count > dataSetIndex && dataSetIndex >= 0
@@ -467,7 +453,7 @@ open class ChartData: NSObject
         }
     }
     
-    /// - returns: The DataSet that contains the provided Entry, or null, if no DataSet contains this entry.
+    /// - returns: 根据entry获取DataSet
     @objc open func getDataSetForEntry(_ e: ChartDataEntry!) -> ChartDataSet?
     {
         if e == nil
@@ -488,7 +474,7 @@ open class ChartData: NSObject
         return nil
     }
 
-    /// - returns: The index of the provided DataSet in the DataSet array of this data object, or -1 if it does not exist.
+    /// - returns: 获取DataSet的index
     @objc open func indexOfDataSet(_ dataSet: ChartDataSet) -> Int
     {
         for i in 0 ..< _dataSets.count
@@ -502,7 +488,7 @@ open class ChartData: NSObject
         return -1
     }
     
-    /// - returns: The first DataSet from the datasets-array that has it's dependency on the left axis. Returns null if no DataSet with left dependency could be found.
+    /// - returns: 获取第一个需要绘制leftAxis的DataSet
     @objc open func getFirstLeft(dataSets: [ChartDataSet]) -> ChartDataSet?
     {
         for dataSet in dataSets
@@ -516,7 +502,7 @@ open class ChartData: NSObject
         return nil
     }
     
-    /// - returns: The first DataSet from the datasets-array that has it's dependency on the right axis. Returns null if no DataSet with right dependency could be found.
+    /// - returns: 获取第一个需要绘制rightAxis的DataSet
     @objc open func getFirstRight(dataSets: [ChartDataSet]) -> ChartDataSet?
     {
         for dataSet in _dataSets
@@ -533,13 +519,6 @@ open class ChartData: NSObject
     /// - returns: All colors used across all DataSet objects this object represents.
     @objc open func getColors() -> [NSUIColor]?
     {
-        var clrcnt = 0
-        
-        for i in 0 ..< _dataSets.count
-        {
-            clrcnt += _dataSets[i].colors.count
-        }
-        
         var colors = [NSUIColor]()
         
         for i in 0 ..< _dataSets.count
@@ -555,7 +534,16 @@ open class ChartData: NSObject
         return colors
     }
     
-    /// Sets a custom IValueFormatter for all DataSets this data object contains.
+    
+    /// 是否绘制Values的值
+    @objc open func setDrawValues(_ enabled: Bool)
+    {
+        for set in dataSets
+        {
+            set.drawValuesEnabled = enabled
+        }
+    }
+    
     @objc open func setValueFormatter(_ formatter: DefaultValueFormatter?)
     {
         guard let formatter = formatter
@@ -567,7 +555,6 @@ open class ChartData: NSObject
         }
     }
     
-    /// Sets the color of the value-text (color in which the value-labels are drawn) for all DataSets this data object contains.
     @objc open func setValueTextColor(_ color: NSUIColor!)
     {
         for set in dataSets
@@ -576,7 +563,6 @@ open class ChartData: NSObject
         }
     }
     
-    /// Sets the font for all value-labels for all DataSets this data object contains.
     @objc open func setValueFont(_ font: NSUIFont!)
     {
         for set in dataSets
@@ -585,17 +571,8 @@ open class ChartData: NSObject
         }
     }
     
-    /// Enables / disables drawing values (value-text) for all DataSets this data object contains.
-    @objc open func setDrawValues(_ enabled: Bool)
-    {
-        for set in dataSets
-        {
-            set.drawValuesEnabled = enabled
-        }
-    }
     
-    /// Enables / disables highlighting values for all DataSets this data object contains.
-    /// If set to true, this means that values can be highlighted programmatically or by touch gesture.
+    /// 是否可以高亮显示
     @objc open var highlightEnabled: Bool
     {
         get
