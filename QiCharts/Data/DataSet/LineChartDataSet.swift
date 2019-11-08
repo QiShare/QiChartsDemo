@@ -144,10 +144,10 @@ open class LineChartDataSet: LineRadarChartDataSet
     open var lineCapType = CGLineCap.butt
     
     /// formatter for customizing the position of the fill-line
-    private var _fillFormatter: DefaultFillFormatter = DefaultFillFormatter()
+    private var _fillFormatter: ChartFillFormatter = ChartFillFormatter()
     
     /// Sets a custom IFillFormatter to the chart that handles the position of the filled-line for each DataSet. Set this to null to use the default logic.
-    open var fillFormatter: DefaultFillFormatter?
+    open var fillFormatter: ChartFillFormatter?
     {
         get
         {
@@ -155,7 +155,7 @@ open class LineChartDataSet: LineRadarChartDataSet
         }
         set
         {
-            _fillFormatter = newValue ?? DefaultFillFormatter()
+            _fillFormatter = newValue ?? ChartFillFormatter()
         }
     }
     

@@ -89,7 +89,7 @@ class LineViewController: BaseViewController {
         //文字格式
         let formatter = NumberFormatter()  //自定义格式
         formatter.positivePrefix = "#"  //数字前缀positivePrefix、 后缀positiveSuffix
-        lineChartView.xAxis.valueFormatter = DefaultAxisValueFormatter(formatter: formatter)
+        lineChartView.xAxis.valueFormatter = ChartAxisValueFormatter(formatter: formatter)
         //自定义刻度标签文字
         //        let xValues = ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月"]
         //        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: xValues)
@@ -176,7 +176,7 @@ class LineViewController: BaseViewController {
         //文字格式
         let formatter = NumberFormatter()  //自定义格式
         formatter.positiveSuffix = "%"  //数字后缀单位
-        chartDataSet1.valueFormatter = DefaultValueFormatter(formatter: formatter)
+        chartDataSet1.valueFormatter = ChartValueFormatter(formatter: formatter)
         //绘制填充色背景
         //*半透明的填充色
         chartDataSet1.drawFilledEnabled = true //开启填充色绘制

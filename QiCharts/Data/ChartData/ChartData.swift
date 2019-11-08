@@ -544,7 +544,7 @@ open class ChartData: NSObject
         }
     }
     
-    @objc open func setValueFormatter(_ formatter: DefaultValueFormatter?)
+    @objc open func setValueFormatter(_ formatter: ChartValueFormatter?)
     {
         guard let formatter = formatter
             else { return }

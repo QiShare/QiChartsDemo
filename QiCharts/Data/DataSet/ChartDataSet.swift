@@ -101,10 +101,10 @@ open class ChartDataSet: NSObject
     open var highlightEnabled = true
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    internal var _valueFormatter: DefaultValueFormatter?
+    internal var _valueFormatter: ChartValueFormatter?
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    open var valueFormatter: DefaultValueFormatter?
+    open var valueFormatter: ChartValueFormatter?
     {
         get
         {

@@ -17,8 +17,8 @@ import CoreGraphics
 #endif
 
 /// Default formatter that calculates the position of the filled line.
-@objc(ChartDefaultFillFormatter)
-open class DefaultFillFormatter: NSObject
+@objc(ChartFillFormatter)
+open class ChartFillFormatter: NSObject
 {
     public typealias Block = (_ dataSet: LineChartDataSet, _ dataProvider: LineChartView) -> CGFloat
     
@@ -31,9 +31,9 @@ open class DefaultFillFormatter: NSObject
         self.block = block
     }
     
-    @objc public static func with(block: @escaping Block) -> DefaultFillFormatter?
+    @objc public static func with(block: @escaping Block) -> ChartFillFormatter?
     {
-        return DefaultFillFormatter(block: block)
+        return ChartFillFormatter(block: block)
     }
     
     open func getFillLinePosition(dataSet: LineChartDataSet, dataProvider: LineChartView) -> CGFloat

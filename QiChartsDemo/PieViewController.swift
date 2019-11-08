@@ -122,7 +122,7 @@ class PieViewController: BaseViewController {
         formatter.numberStyle = NumberFormatter.Style.percent //自定义数据显示格式  小数点形式(可以尝试不同看效果)
         formatter.maximumFractionDigits = 0
         formatter.multiplier = 1
-        let forma :DefaultValueFormatter = DefaultValueFormatter.init(formatter: formatter)
+        let forma :ChartValueFormatter = ChartValueFormatter.init(formatter: formatter)
         data.setValueFormatter(forma)
         data.setValueFont(UIFont.systemFont(ofSize: 10))
         data.setValueTextColor(ZHFColor.orange)

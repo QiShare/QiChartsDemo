@@ -71,7 +71,7 @@ class BarViewController: BaseViewController {
         leftAxisFormatter.maximumFractionDigits = 1
         leftAxisFormatter.positivePrefix = "$"  //数字前缀positivePrefix、 后缀positiveSuffix
         leftAxis = barChartView.leftAxis
-        leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: leftAxisFormatter)
+        leftAxis.valueFormatter = ChartAxisValueFormatter.init(formatter: leftAxisFormatter)
         leftAxis.axisMinimum = 0     //最小值
         leftAxis.axisMaximum = axisMaximum   //最大值
         leftAxis.forceLabelsEnabled = true //不强制绘制制定数量的label
@@ -163,7 +163,7 @@ class BarViewController: BaseViewController {
         data.setValueTextColor(UIColor.orange)
         let formatter: NumberFormatter = NumberFormatter.init()
         formatter.numberStyle = NumberFormatter.Style.currency//自定义数据显示格式  小数点形式(可以尝试不同看效果)
-        let forma :DefaultValueFormatter = DefaultValueFormatter.init(formatter: formatter)
+        let forma :ChartValueFormatter = ChartValueFormatter.init(formatter: formatter)
         data.setValueFormatter(forma)
         barChartView.data = data
         

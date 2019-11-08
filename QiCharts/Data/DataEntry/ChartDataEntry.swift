@@ -30,9 +30,6 @@ open class ChartDataEntry: NSObject
         super.init()
     }
     
-    
-    // mark -
-    
     /// An Entry represents one single entry in the chart.
     /// - parameter x: the x value
     /// - parameter y: the y value (the actual value of the entry)

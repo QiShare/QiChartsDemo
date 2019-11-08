@@ -34,7 +34,7 @@ open class AxisBase: ComponentBase
     }
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    private var _axisValueFormatter: DefaultAxisValueFormatter?
+    private var _axisValueFormatter: ChartAxisValueFormatter?
     
     @objc open var labelFont = NSUIFont.systemFont(ofSize: 10.0)
     @objc open var labelTextColor = NSUIColor.black
@@ -175,18 +175,18 @@ open class AxisBase: ComponentBase
     /// Sets the formatter to be used for formatting the axis labels.
     /// If no formatter is set, the chart will automatically determine a reasonable formatting (concerning decimals) for all the values that are drawn inside the chart.
     /// Use `nil` to use the formatter calculated by the chart.
-    @objc open var valueFormatter: DefaultAxisValueFormatter?
+    @objc open var valueFormatter: ChartAxisValueFormatter?
     {
         get {
             if _axisValueFormatter == nil || (_axisValueFormatter != nil && _axisValueFormatter!.hasAutoDecimals && _axisValueFormatter!.decimals != decimals) {
                 
-                _axisValueFormatter = DefaultAxisValueFormatter(decimals: decimals)
+                _axisValueFormatter = ChartAxisValueFormatter(decimals: decimals)
             }
             
             return _axisValueFormatter
         }
         set {
-            _axisValueFormatter = newValue ?? DefaultAxisValueFormatter(decimals: decimals)
+            _axisValueFormatter = newValue ?? ChartAxisValueFormatter(decimals: decimals)
         }
     }
     

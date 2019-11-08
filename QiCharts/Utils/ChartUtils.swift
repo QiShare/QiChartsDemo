@@ -103,7 +103,7 @@ extension CGPoint
 
 open class ChartUtils
 {
-    private static var _defaultValueFormatter: DefaultValueFormatter = ChartUtils.generateDefaultValueFormatter()
+    private static var _defaultValueFormatter: ChartValueFormatter = ChartUtils.generateDefaultValueFormatter()
     
     open class func drawImage(
         context: CGContext,
@@ -274,14 +274,14 @@ open class ChartUtils
         drawMultilineText(context: context, text: text, knownTextSize: rect.size, point: point, attributes: attributes, constrainedToSize: constrainedToSize, anchor: anchor, angleRadians: angleRadians)
     }
 
-    private class func generateDefaultValueFormatter() -> DefaultValueFormatter
+    private class func generateDefaultValueFormatter() -> ChartValueFormatter
     {
-        let formatter = DefaultValueFormatter(decimals: 1)
+        let formatter = ChartValueFormatter(decimals: 1)
         return formatter
     }
     
     /// - returns: The default value formatter used for all chart components that needs a default
-    open class func defaultValueFormatter() -> DefaultValueFormatter
+    open class func defaultValueFormatter() -> ChartValueFormatter
     {
         return _defaultValueFormatter
     }

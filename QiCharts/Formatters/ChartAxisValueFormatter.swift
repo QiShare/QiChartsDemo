@@ -1,5 +1,5 @@
 //
-//  DefaultValueFormatter.swift
+//  DefaultAxisValueFormatter.swift
 //  Charts
 //
 //  Copyright 2015 Daniel Cohen Gindi & Philipp Jahoda
@@ -11,14 +11,12 @@
 
 import Foundation
 
-@objc(ChartDefaultValueFormatter)
-open class DefaultValueFormatter: NSObject
+@objc(ChartAxisValueFormatter)
+open class ChartAxisValueFormatter: NSObject
 {
     public typealias Block = (
         _ value: Double,
-        _ entry: ChartDataEntry,
-        _ dataSetIndex: Int,
-        _ viewPortHandler: ViewPortHandler?) -> String
+        _ axis: AxisBase?) -> String
     
     @objc open var block: Block?
     
@@ -34,7 +32,8 @@ open class DefaultValueFormatter: NSObject
             _formatter = newValue
         }
     }
-    
+
+    // TODO: Documentation. Especially the nil case
     private var _decimals: Int?
     open var decimals: Int?
     {
@@ -84,18 +83,15 @@ open class DefaultValueFormatter: NSObject
         self.block = block
     }
     
-    @objc public static func with(block: @escaping Block) -> DefaultValueFormatter?
+    @objc public static func with(block: @escaping Block) -> ChartAxisValueFormatter?
     {
-        return DefaultValueFormatter(block: block)
+        return ChartAxisValueFormatter(block: block)
     }
     
-    open func stringForValue(_ value: Double,
-                             entry: ChartDataEntry,
-                             dataSetIndex: Int,
-                             viewPortHandler: ViewPortHandler?) -> String
+    open func stringForValue(_ value: Double, axis: AxisBase?) -> String
     {
         if let block = block {
-            return block(value, entry, dataSetIndex, viewPortHandler)
+            return block(value, axis)
         } else {
             return formatter?.string(from: NSNumber(floatLiteral: value)) ?? ""
         }
