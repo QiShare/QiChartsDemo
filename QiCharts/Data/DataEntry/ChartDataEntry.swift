@@ -11,23 +11,35 @@
 
 import Foundation
 
-open class ChartDataEntry: ChartDataEntryBase
+open class ChartDataEntry: NSObject
 {
     /// the x value
     @objc open var x = Double(0.0)
     
-    public required init()
+    /// the y value
+    @objc open var y = Double(0.0)
+    
+    /// optional spot for additional data this Entry represents
+    @objc open var data: AnyObject?
+    
+    /// optional icon image
+    @objc open var icon: NSUIImage?
+    
+    public required override init()
     {
         super.init()
     }
+    
+    
+    // mark -
     
     /// An Entry represents one single entry in the chart.
     /// - parameter x: the x value
     /// - parameter y: the y value (the actual value of the entry)
     @objc public init(x: Double, y: Double)
     {
-        super.init(y: y)
-        
+        super.init()
+        self.y = y
         self.x = x
     }
     
@@ -38,10 +50,9 @@ open class ChartDataEntry: ChartDataEntryBase
     
     @objc public init(x: Double, y: Double, data: AnyObject?)
     {
-        super.init(y: y)
-        
+        super.init()
         self.x = x
-        
+        self.y = y
         self.data = data
     }
     
@@ -52,9 +63,10 @@ open class ChartDataEntry: ChartDataEntryBase
     
     @objc public init(x: Double, y: Double, icon: NSUIImage?)
     {
-        super.init(y: y, icon: icon)
-        
+        super.init()
+        self.y = y
         self.x = x
+        self.icon = icon
     }
     
     /// An Entry represents one single entry in the chart.
@@ -65,9 +77,11 @@ open class ChartDataEntry: ChartDataEntryBase
     
     @objc public init(x: Double, y: Double, icon: NSUIImage?, data: AnyObject?)
     {
-        super.init(y: y, icon: icon, data: data)
-        
+        super.init()
+        self.y = y
         self.x = x
+        self.data = data
+        self.icon = icon
     }
         
     // MARK: NSObject
@@ -86,6 +100,7 @@ open class ChartDataEntry: ChartDataEntryBase
         copy.x = x
         copy.y = y
         copy.data = data
+        copy.icon = icon
         
         return copy
     }
@@ -93,6 +108,7 @@ open class ChartDataEntry: ChartDataEntryBase
 
 // MARK: Equatable
 extension ChartDataEntry/*: Equatable*/ {
+    
     open override func isEqual(_ object: Any?) -> Bool {
         guard let object = object as? ChartDataEntry else { return false }
 
