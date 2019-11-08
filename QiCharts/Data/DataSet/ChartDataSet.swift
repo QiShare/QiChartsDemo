@@ -53,12 +53,6 @@ open class ChartDataSet: NSObject
         return colors[index % colors.count]
     }
     
-    /// Resets all colors of this DataSet and recreates the colors array.
-    open func resetColors()
-    {
-        colors.removeAll(keepingCapacity: false)
-    }
-    
     /// Adds a new color to the colors array of the DataSet.
     /// - parameter color: the color to add
     open func addColor(_ color: NSUIColor)
