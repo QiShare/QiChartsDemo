@@ -31,6 +31,7 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for normal bars (not stacked).
+    /// 其中x是当前柱状的索引，y是柱状的高度
     public override init(x: Double, y: Double)
     {
         super.init(x: x, y: y)

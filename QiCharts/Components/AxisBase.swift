@@ -356,7 +356,7 @@ open class AxisBase: ComponentBase
         }
     }
     
-    /// Calculates the minimum, maximum and range values of the YAxis with the given minimum and maximum values from the chart data.
+    ///  计算最大值与最小值之间的跨度
     /// - parameter dataMin: the y-min value according to chart data
     /// - parameter dataMax: the y-max value according to chart
     @objc open func calculate(min dataMin: Double, max dataMax: Double)

@@ -1203,6 +1203,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     }
 
     /// Limits the maximum and minimum value count that can be visible by pinching and zooming.
+    ///  设置图表缩放的跨度
     ///
     /// e.g. minRange=10, maxRange=100 no less than 10 values and no more that 100 values can be viewed
     /// at once without scrolling.

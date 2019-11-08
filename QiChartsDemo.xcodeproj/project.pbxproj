@@ -469,10 +469,10 @@
 		1492824323604EC300C58EF4 /* ShapeRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				1492824723604EC300C58EF4 /* IShapeRenderer.swift */,
 				1492824423604EC300C58EF4 /* XShapeRenderer.swift */,
 				1492824523604EC300C58EF4 /* SquareShapeRenderer.swift */,
 				1492824623604EC300C58EF4 /* ChevronDownShapeRenderer.swift */,
-				1492824723604EC300C58EF4 /* IShapeRenderer.swift */,
 				1492824823604EC300C58EF4 /* CircleShapeRenderer.swift */,
 				1492824923604EC300C58EF4 /* CrossShapeRenderer.swift */,
 				1492824A23604EC300C58EF4 /* TriangleShapeRenderer.swift */,

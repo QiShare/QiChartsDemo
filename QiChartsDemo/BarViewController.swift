@@ -64,7 +64,6 @@ class BarViewController: BaseViewController {
         xAxis.labelWidth = 1 //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
         xAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
         xAxis.labelTextColor = UIColor.brown//数值字体颜色
-        xAxis.granularity = 1//x轴标签间距
     
         //2.Y轴左样式设置（对应界面显示的--->0 到 100）
         let leftAxisFormatter = NumberFormatter()
@@ -89,8 +88,6 @@ class BarViewController: BaseViewController {
         leftAxis.gridColor = UIColor.gray //网格线颜色
         leftAxis.gridAntialiasEnabled = true//开启抗锯齿
         leftAxis.spaceTop = 0.15//最大值到顶部的范围比
-        
-        
         
         //设置限制线
         let limitLine : ChartLimitLine = ChartLimitLine.init(limit: Double(axisMaximum * 0.85), label: "限制线")
@@ -129,7 +126,7 @@ class BarViewController: BaseViewController {
         let x1Vals: NSMutableArray  = NSMutableArray.init()
         for i in 0 ..< count {
             //x轴字体展示
-            x1Vals.add("\(i)月")
+            x1Vals.add("201\(i)")
             self.xVals = x1Vals
         }
         
@@ -146,7 +143,9 @@ class BarViewController: BaseViewController {
         set1.barBorderWidth = 0.2 //边线宽
         set1.drawValuesEnabled = true //是否在柱形图上面显示数值
         set1.highlightEnabled = true //点击选中柱形图是否有高亮效果，（单击空白处取消选中）
-        set1.setColors(UIColor.gray,ZHFColor.green,ZHFColor.yellow,ZHFColor.zhf_randomColor(),ZHFColor.zhf_randomColor())//设置柱形图颜色(是一个循环，例如：你设置5个颜色，你设置8个柱形，后三个对应的颜色是该设置中的前三个，依次类推)
+        
+        //设置柱形图颜色(是一个循环，例如：你设置5个颜色，你设置8个柱形，后三个对应的颜色是该设置中的前三个，依次类推)
+        set1.setColors(UIColor.gray,ZHFColor.green,ZHFColor.yellow,ZHFColor.zhf_randomColor(),ZHFColor.zhf_randomColor())
       //  set1.setColors(ChartColorTemplates.material(), alpha: 1)
       //  set1.setColor(ZHFColor.gray)//颜色一致
         
