@@ -121,15 +121,6 @@ open class BarChartView: BarLineScatterCandleChartViewBase
         notifyDataSetChanged()
     }
     
-    /// Highlights the value at the given x-value in the given DataSet. Provide -1 as the dataSetIndex to undo all highlighting.
-    /// - parameter x:
-    /// - parameter dataSetIndex:
-    /// - parameter stackIndex: the index inside the stack - only relevant for stacked entries
-    @objc open func highlightValue(x: Double, dataSetIndex: Int, stackIndex: Int)
-    {
-        highlightValue(Highlight(x: x, dataSetIndex: dataSetIndex, stackIndex: stackIndex))
-    }
-
     // MARK: Accessors
     
     /// Adds half of the bar width to each side of the x-axis range in order to allow the bars of the barchart to be fully displayed.

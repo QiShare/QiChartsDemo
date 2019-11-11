@@ -231,9 +231,9 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         renderer.drawData(context: context)
         
         // if highlighting is enabled
-        if (valuesToHighlight())
+        if (_highlights.count > 0)
         {
-            renderer.drawHighlighted(context: context, indices: _indicesToHighlight)
+            renderer.drawHighlighted(context: context, indices: _highlights)
         }
         
         context.restoreGState()
@@ -534,7 +534,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         
         if recognizer.state == NSUIGestureRecognizerState.ended
         {
-            if !isHighLightPerTapEnabled { return }
+            if !highlightPerTapEnabled { return }
             
             let h = getHighlightByTouchPoint(recognizer.location(in: self))
             

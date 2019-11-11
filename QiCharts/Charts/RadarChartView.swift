@@ -125,9 +125,9 @@ open class RadarChartView: PieRadarChartViewBase
 
         renderer.drawData(context: context)
 
-        if valuesToHighlight()
+        if _highlights.count > 0
         {
-            renderer.drawHighlighted(context: context, indices: _indicesToHighlight)
+            renderer.drawHighlighted(context: context, indices: _highlights)
         }
         
         if _yAxis.isEnabled && !_yAxis.isDrawLimitLinesBehindDataEnabled

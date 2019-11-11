@@ -109,9 +109,9 @@ open class PieChartView: PieRadarChartViewBase
         
         renderer.drawData(context: context)
         
-        if (valuesToHighlight())
+        if (_highlights.count > 0)
         {
-            renderer.drawHighlighted(context: context, indices: _indicesToHighlight)
+            renderer.drawHighlighted(context: context, indices: highlights)
         }
         
         renderer.drawExtras(context: context)
@@ -229,15 +229,15 @@ open class PieChartView: PieRadarChartViewBase
     @objc open func needsHighlight(index: Int) -> Bool
     {
         // no highlight
-        if !valuesToHighlight()
+        if !(_highlights.count > 0)
         {
             return false
         }
         
-        for i in 0 ..< _indicesToHighlight.count
+        for i in 0 ..< highlights.count
         {
             // check if the xvalue for the given dataset needs highlight
-            if Int(_indicesToHighlight[i].x) == index
+            if Int(_highlights[i].x) == index
             {
                 return true
             }
