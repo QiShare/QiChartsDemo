@@ -69,9 +69,9 @@ open class ChartHighlighter : NSObject
     /// - returns:
     @objc open func getHighlights(xValue: Double, x: CGFloat, y: CGFloat) -> [Highlight]
     {
-        var vals = [Highlight]()
+        var highlights = [Highlight]()
         
-        guard let data = self.data else { return vals }
+        guard let data = self.data else { return highlights }
         
         for i in 0 ..< data.dataSetCount
         {
@@ -83,10 +83,10 @@ open class ChartHighlighter : NSObject
 
             // extract all y-values from all DataSets at the given x-value.
             // some datasets (i.e bubble charts) make sense to have multiple values for an x-value. We'll have to find a way to handle that later on. It's more complicated now when x-indices are floating point.
-            vals.append(contentsOf: buildHighlights(dataSet: dataSet, dataSetIndex: i, xValue: xValue, rounding: .closest))
+            highlights.append(contentsOf: buildHighlights(dataSet: dataSet, dataSetIndex: i, xValue: xValue, rounding: .closest))
         }
         
-        return vals
+        return highlights
     }
     
     /// - returns: An array of `Highlight` objects corresponding to the selected xValue and dataSetIndex.

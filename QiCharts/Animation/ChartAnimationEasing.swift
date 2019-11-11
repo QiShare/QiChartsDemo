@@ -13,8 +13,8 @@ import Foundation
 import CoreGraphics
 
 @objc
-public enum ChartEasingOption: Int
-{
+public enum ChartEasingOption: Int {
+    
     case linear
     case easeInQuad
     case easeOutQuad
@@ -50,72 +50,72 @@ public enum ChartEasingOption: Int
 
 public typealias ChartEasingFunctionBlock = ((_ elapsed: TimeInterval, _ duration: TimeInterval) -> Double)
 
-internal func easingFunctionFromOption(_ easing: ChartEasingOption) -> ChartEasingFunctionBlock
-{
-    switch easing
-    {
-    case .linear:
-        return EasingFunctions.Linear
-    case .easeInQuad:
-        return EasingFunctions.EaseInQuad
-    case .easeOutQuad:
-        return EasingFunctions.EaseOutQuad
-    case .easeInOutQuad:
-        return EasingFunctions.EaseInOutQuad
-    case .easeInCubic:
-        return EasingFunctions.EaseInCubic
-    case .easeOutCubic:
-        return EasingFunctions.EaseOutCubic
-    case .easeInOutCubic:
-        return EasingFunctions.EaseInOutCubic
-    case .easeInQuart:
-        return EasingFunctions.EaseInQuart
-    case .easeOutQuart:
-        return EasingFunctions.EaseOutQuart
-    case .easeInOutQuart:
-        return EasingFunctions.EaseInOutQuart
-    case .easeInQuint:
-        return EasingFunctions.EaseInQuint
-    case .easeOutQuint:
-        return EasingFunctions.EaseOutQuint
-    case .easeInOutQuint:
-        return EasingFunctions.EaseInOutQuint
-    case .easeInSine:
-        return EasingFunctions.EaseInSine
-    case .easeOutSine:
-        return EasingFunctions.EaseOutSine
-    case .easeInOutSine:
-        return EasingFunctions.EaseInOutSine
-    case .easeInExpo:
-        return EasingFunctions.EaseInExpo
-    case .easeOutExpo:
-        return EasingFunctions.EaseOutExpo
-    case .easeInOutExpo:
-        return EasingFunctions.EaseInOutExpo
-    case .easeInCirc:
-        return EasingFunctions.EaseInCirc
-    case .easeOutCirc:
-        return EasingFunctions.EaseOutCirc
-    case .easeInOutCirc:
-        return EasingFunctions.EaseInOutCirc
-    case .easeInElastic:
-        return EasingFunctions.EaseInElastic
-    case .easeOutElastic:
-        return EasingFunctions.EaseOutElastic
-    case .easeInOutElastic:
-        return EasingFunctions.EaseInOutElastic
-    case .easeInBack:
-        return EasingFunctions.EaseInBack
-    case .easeOutBack:
-        return EasingFunctions.EaseOutBack
-    case .easeInOutBack:
-        return EasingFunctions.EaseInOutBack
-    case .easeInBounce:
-        return EasingFunctions.EaseInBounce
-    case .easeOutBounce:
-        return EasingFunctions.EaseOutBounce
-    case .easeInOutBounce:
-        return EasingFunctions.EaseInOutBounce
+internal func easingFunctionFromOption(_ easing: ChartEasingOption) -> ChartEasingFunctionBlock {
+    
+    switch easing {
+        
+        case .linear:
+            return EasingFunctions.Linear
+        case .easeInQuad:
+            return EasingFunctions.EaseInQuad
+        case .easeOutQuad:
+            return EasingFunctions.EaseOutQuad
+        case .easeInOutQuad:
+            return EasingFunctions.EaseInOutQuad
+        case .easeInCubic:
+            return EasingFunctions.EaseInCubic
+        case .easeOutCubic:
+            return EasingFunctions.EaseOutCubic
+        case .easeInOutCubic:
+            return EasingFunctions.EaseInOutCubic
+        case .easeInQuart:
+            return EasingFunctions.EaseInQuart
+        case .easeOutQuart:
+            return EasingFunctions.EaseOutQuart
+        case .easeInOutQuart:
+            return EasingFunctions.EaseInOutQuart
+        case .easeInQuint:
+            return EasingFunctions.EaseInQuint
+        case .easeOutQuint:
+            return EasingFunctions.EaseOutQuint
+        case .easeInOutQuint:
+            return EasingFunctions.EaseInOutQuint
+        case .easeInSine:
+            return EasingFunctions.EaseInSine
+        case .easeOutSine:
+            return EasingFunctions.EaseOutSine
+        case .easeInOutSine:
+            return EasingFunctions.EaseInOutSine
+        case .easeInExpo:
+            return EasingFunctions.EaseInExpo
+        case .easeOutExpo:
+            return EasingFunctions.EaseOutExpo
+        case .easeInOutExpo:
+            return EasingFunctions.EaseInOutExpo
+        case .easeInCirc:
+            return EasingFunctions.EaseInCirc
+        case .easeOutCirc:
+            return EasingFunctions.EaseOutCirc
+        case .easeInOutCirc:
+            return EasingFunctions.EaseInOutCirc
+        case .easeInElastic:
+            return EasingFunctions.EaseInElastic
+        case .easeOutElastic:
+            return EasingFunctions.EaseOutElastic
+        case .easeInOutElastic:
+            return EasingFunctions.EaseInOutElastic
+        case .easeInBack:
+            return EasingFunctions.EaseInBack
+        case .easeOutBack:
+            return EasingFunctions.EaseOutBack
+        case .easeInOutBack:
+            return EasingFunctions.EaseInOutBack
+        case .easeInBounce:
+            return EasingFunctions.EaseInBounce
+        case .easeOutBounce:
+            return EasingFunctions.EaseOutBounce
+        case .easeInOutBounce:
+            return EasingFunctions.EaseInOutBounce
     }
 }
 

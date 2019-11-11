@@ -12,7 +12,7 @@
 import Foundation
 import CoreGraphics
 
-/// Chart that draws bars.
+
 open class BarChartView: BarLineScatterCandleChartViewBase
 {
     internal override func initialize()
@@ -61,19 +61,19 @@ open class BarChartView: BarLineScatterCandleChartViewBase
             return nil
         }
         
-        guard let h = self.highlighter?.getHighlight(x: pt.x, y: pt.y)
+        guard let highlight = self.highlighter?.getHighlight(x: pt.x, y: pt.y)
             else { return nil }
         
-        if !isHighlightFullBarEnabled { return h }
+        if !isHighlightFullBarEnabled { return highlight }
         
         // For isHighlightFullBarEnabled, remove stackIndex
         return Highlight(
-            x: h.x, y: h.y,
-            xPx: h.xPx, yPx: h.yPx,
-            dataIndex: h.dataIndex,
-            dataSetIndex: h.dataSetIndex,
+            x: highlight.x, y: highlight.y,
+            xPx: highlight.xPx, yPx: highlight.yPx,
+            dataIndex: highlight.dataIndex,
+            dataSetIndex: highlight.dataSetIndex,
             stackIndex: -1,
-            axis: h.axis)
+            axis: highlight.axis)
     }
         
     /// - returns: The bounding box of the specified Entry in the specified DataSet. Returns null if the Entry could not be found in the charts data.
