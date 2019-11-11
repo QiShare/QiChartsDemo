@@ -20,7 +20,6 @@ import CoreGraphics
 public protocol AnimatorDelegate
 {
     func animatorUpdated(_ animator: Animator)
-    
     func animatorStopped(_ animator: Animator)
 }
 
@@ -56,7 +55,7 @@ open class Animator: NSObject
     private var _enabledX: Bool = false
     private var _enabledY: Bool = false
     
-    /// 初始化animator时，设置动画方式选择器block
+    /// 初始化animator时，设置动画方式选择器
     private var _easingX: ChartEasingFunctionBlock?
     private var _easingY: ChartEasingFunctionBlock?
 
