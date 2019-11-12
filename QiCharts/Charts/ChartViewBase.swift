@@ -342,7 +342,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
             attributes: attrs)
     }
     
-    // MARK: - Highlighting
+    // MARK: - 高亮操作
 
     /// 设置高亮对象集合数据
     @objc open func highlightValues(_ highs: [Highlight]?)
@@ -393,6 +393,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         }
     }
     
+    /// 执行高亮动作，由外部直接调用
     @objc open func highlightValue(_ highlight: Highlight?, callDelegate: Bool)
     {
         var entry: ChartDataEntry?
@@ -445,9 +446,9 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         
         return self.highlighter?.getHighlight(x: pt.x, y: pt.y)
     }
-  
     
-    // MARK: - Markers
+    
+    // MARK: - 绘制标记视图
 
     /// draws all MarkerViews on the highlighted positions
     internal func drawMarkers(context: CGContext)
@@ -493,7 +494,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
     }
     
     
-    // MARK: - Animation
+    // MARK: - 动画相关
     
     @objc open func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easingX: ChartEasingFunctionBlock?, easingY: ChartEasingFunctionBlock?)
     {
@@ -768,7 +769,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         return Int(INT_MAX)
     }
     
-    // MARK: - AnimatorDelegate
+    // MARK: - 动画回调
     
     open func animatorUpdated(_ chartAnimator: Animator)
     {
@@ -780,7 +781,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         
     }
     
-    // MARK: - Touches
+    // MARK: - 手势相关
     
     open override func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
     {

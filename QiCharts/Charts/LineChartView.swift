@@ -19,7 +19,7 @@ open class LineChartView: BarLineScatterCandleChartViewBase
     {
         super.initialize()
         
-        renderer = LineChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
+        renderer = LineChartRenderer(chartView: self, animator: _animator, viewPortHandler: _viewPortHandler)
     }
     
     // MARK: - LineChartDataProvider

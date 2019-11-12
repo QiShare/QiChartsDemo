@@ -24,9 +24,9 @@ open class HorizontalBarChartRenderer: BarChartRenderer
         var rects = [CGRect]()
     }
     
-    public override init(dataProvider: BarChartView, animator: Animator, viewPortHandler: ViewPortHandler)
+    public override init(chartView: BarChartView, animator: Animator, viewPortHandler: ViewPortHandler)
     {
-        super.init(dataProvider: dataProvider, animator: animator, viewPortHandler: viewPortHandler)
+        super.init(chartView: chartView, animator: animator, viewPortHandler: viewPortHandler)
     }
     
     // [CGRect] per dataset
@@ -34,7 +34,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
     
     open override func initBuffers()
     {
-        if let barData = dataProvider?.barData
+        if let barData = chartView?.barData
         {
             // Matche buffers count to dataset count
             if _buffers.count != barData.dataSetCount
@@ -67,10 +67,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
     
     private func prepareBuffer(dataSet: BarChartDataSet, index: Int)
     {
-        guard let
-            dataProvider = dataProvider,
-            let barData = dataProvider.barData
-            else { return }
+        guard let chartView = chartView, let barData = chartView.barData else { return }
         
         let barWidthHalf = barData.barWidth / 2.0
         
@@ -78,7 +75,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
         var bufferIndex = 0
         let containsStacks = dataSet.isStacked
         
-        let isInverted = dataProvider.isInverted(axis: dataSet.axisDependency)
+        let isInverted = chartView.isInverted(axis: dataSet.axisDependency)
         let phaseY = animator.phaseY
         var barRect = CGRect()
         var x: Double
@@ -181,9 +178,9 @@ open class HorizontalBarChartRenderer: BarChartRenderer
     
     open override func drawDataSet(context: CGContext, dataSet: BarChartDataSet, index: Int)
     {
-        guard let dataProvider = dataProvider else { return }
+        guard let chartView = chartView else { return }
         
-        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+        let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
         
         prepareBuffer(dataSet: dataSet, index: index)
         trans.rectValuesToPixel(&_buffers[index].rects)
@@ -260,12 +257,9 @@ open class HorizontalBarChartRenderer: BarChartRenderer
     open override func drawValues(context: CGContext)
     {
         // if values are drawn
-        if isDrawingValuesAllowed(dataProvider: dataProvider)
+        if isDrawingValuesAllowed(chartView: chartView)
         {
-            guard
-                let dataProvider = dataProvider,
-                let barData = dataProvider.barData
-                else { return }
+            guard let chartView = chartView, let barData = chartView.barData else { return }
             
             let dataSets = barData.dataSets
             
@@ -284,14 +278,14 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                     continue
                 }
                 
-                let isInverted = dataProvider.isInverted(axis: dataSet.axisDependency)
+                let isInverted = chartView.isInverted(axis: dataSet.axisDependency)
                 
                 let valueFont = dataSet.valueFont
                 let yOffset = -valueFont.lineHeight / 2.0
                 
                 guard let formatter = dataSet.valueFormatter else { continue }
                 
-                let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+                let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
                 
                 let phaseY = animator.phaseY
                 
@@ -558,11 +552,11 @@ open class HorizontalBarChartRenderer: BarChartRenderer
         }
     }
     
-    open override func isDrawingValuesAllowed(dataProvider: ChartViewBase?) -> Bool
+    open override func isDrawingValuesAllowed(chartView: ChartViewBase?) -> Bool
     {
-        guard let data = dataProvider?.data
+        guard let data = chartView?.data
             else { return false }
-        return data.entryCount < Int(CGFloat(dataProvider?.maxVisibleCount ?? 0) * self.viewPortHandler.scaleY)
+        return data.entryCount < Int(CGFloat(chartView?.maxVisibleCount ?? 0) * self.viewPortHandler.scaleY)
     }
     
     /// Sets the drawing position of the highlight object based on the riven bar-rect.

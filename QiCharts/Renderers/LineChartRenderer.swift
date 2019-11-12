@@ -19,18 +19,18 @@ import CoreGraphics
 
 open class LineChartRenderer: LineRadarRenderer
 {
-    @objc open weak var dataProvider: LineChartView?
+    @objc open weak var chartView: LineChartView?
     
-    @objc public init(dataProvider: LineChartView, animator: Animator, viewPortHandler: ViewPortHandler)
+    @objc public init(chartView: LineChartView, animator: Animator, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
-        self.dataProvider = dataProvider
+        self.chartView = chartView
     }
     
     open override func drawData(context: CGContext)
     {
-        guard let lineData = dataProvider?.lineData else { return }
+        guard let lineData = chartView?.lineData else { return }
         
         for i in 0 ..< lineData.dataSetCount
         {
@@ -86,13 +86,13 @@ open class LineChartRenderer: LineRadarRenderer
     
     @objc open func drawCubicBezier(context: CGContext, dataSet: LineChartDataSet)
     {
-        guard let dataProvider = dataProvider else { return }
+        guard let chartView = chartView else { return }
         
-        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+        let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
         
         let phaseY = animator.phaseY
         
-        _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
+        _xBounds.set(chart: chartView, dataSet: dataSet, animator: animator)
         
         // get the color that is specified for this position from the DataSet
         let drawingColor = dataSet.colors.first!
@@ -180,13 +180,13 @@ open class LineChartRenderer: LineRadarRenderer
     
     @objc open func drawHorizontalBezier(context: CGContext, dataSet: LineChartDataSet)
     {
-        guard let dataProvider = dataProvider else { return }
+        guard let chartView = chartView else { return }
         
-        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+        let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
         
         let phaseY = animator.phaseY
         
-        _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
+        _xBounds.set(chart: chartView, dataSet: dataSet, animator: animator)
         
         // get the color that is specified for this position from the DataSet
         let drawingColor = dataSet.colors.first!
@@ -253,7 +253,7 @@ open class LineChartRenderer: LineRadarRenderer
                 bounds: XBounds)
     {
         guard
-            let dataProvider = dataProvider
+            let chartView = chartView
             else { return }
         
         if bounds.range <= 0
@@ -261,7 +261,7 @@ open class LineChartRenderer: LineRadarRenderer
             return
         }
         
-        let fillMin = dataSet.fillFormatter?.getFillLinePosition(dataSet: dataSet, dataProvider: dataProvider) ?? 0.0
+        let fillMin = dataSet.fillFormatter?.getFillLinePosition(dataSet: dataSet, chartView: chartView) ?? 0.0
 
         var pt1 = CGPoint(x: CGFloat(dataSet.entryForIndex(bounds.min + bounds.range)?.x ?? 0.0), y: fillMin)
         var pt2 = CGPoint(x: CGFloat(dataSet.entryForIndex(bounds.min)?.x ?? 0.0), y: fillMin)
@@ -286,9 +286,9 @@ open class LineChartRenderer: LineRadarRenderer
     
     @objc open func drawLinear(context: CGContext, dataSet: LineChartDataSet)
     {
-        guard let dataProvider = dataProvider else { return }
+        guard let chartView = chartView else { return }
         
-        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+        let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
         
         let valueToPixelMatrix = trans.valueToPixelMatrix
         
@@ -298,7 +298,7 @@ open class LineChartRenderer: LineRadarRenderer
         
         let phaseY = animator.phaseY
         
-        _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
+        _xBounds.set(chart: chartView, dataSet: dataSet, animator: animator)
         
         // if drawing filled is enabled
         if dataSet.isDrawFilledEnabled && entryCount > 0
@@ -434,11 +434,11 @@ open class LineChartRenderer: LineRadarRenderer
     
     open func drawLinearFill(context: CGContext, dataSet: LineChartDataSet, trans: Transformer, bounds: XBounds)
     {
-        guard let dataProvider = dataProvider else { return }
+        guard let chartView = chartView else { return }
         
         let filled = generateFilledPath(
             dataSet: dataSet,
-            fillMin: dataSet.fillFormatter?.getFillLinePosition(dataSet: dataSet, dataProvider: dataProvider) ?? 0.0,
+            fillMin: dataSet.fillFormatter?.getFillLinePosition(dataSet: dataSet, chartView: chartView) ?? 0.0,
             bounds: bounds,
             matrix: trans.valueToPixelMatrix)
         
@@ -498,11 +498,11 @@ open class LineChartRenderer: LineRadarRenderer
     open override func drawValues(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
-            let lineData = dataProvider.lineData
+            let chartView = chartView,
+            let lineData = chartView.lineData
             else { return }
 
-        if isDrawingValuesAllowed(dataProvider: dataProvider)
+        if isDrawingValuesAllowed(chartView: chartView)
         {
             let dataSets = lineData.dataSets
             
@@ -523,7 +523,7 @@ open class LineChartRenderer: LineRadarRenderer
                 
                 guard let formatter = dataSet.valueFormatter else { continue }
                 
-                let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+                let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
                 let valueToPixelMatrix = trans.valueToPixelMatrix
                 
                 let iconsOffset = dataSet.iconsOffset
@@ -536,7 +536,7 @@ open class LineChartRenderer: LineRadarRenderer
                     valOffset = valOffset / 2
                 }
                 
-                _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
+                _xBounds.set(chart: chartView, dataSet: dataSet, animator: animator)
                 
                 for j in stride(from: _xBounds.min, through: min(_xBounds.min + _xBounds.range, _xBounds.max), by: 1)
                 {
@@ -592,8 +592,8 @@ open class LineChartRenderer: LineRadarRenderer
     private func drawCircles(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
-            let lineData = dataProvider.lineData
+            let chartView = chartView,
+            let lineData = chartView.lineData
             else { return }
         
         let phaseY = animator.phaseY
@@ -614,10 +614,10 @@ open class LineChartRenderer: LineRadarRenderer
                 continue
             }
             
-            let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+            let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
             let valueToPixelMatrix = trans.valueToPixelMatrix
             
-            _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
+            _xBounds.set(chart: chartView, dataSet: dataSet, animator: animator)
             
             let circleRadius = dataSet.circleRadius
             let circleDiameter = circleRadius * 2.0
@@ -699,11 +699,11 @@ open class LineChartRenderer: LineRadarRenderer
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
         guard
-            let dataProvider = dataProvider,
-            let lineData = dataProvider.lineData
+            let chartView = chartView,
+            let lineData = chartView.lineData
             else { return }
         
-        let chartXMax = dataProvider.chartXMax
+        let chartXMax = chartView.chartXMax
         
         context.saveGState()
         
@@ -739,7 +739,7 @@ open class LineChartRenderer: LineRadarRenderer
                 continue
             }
             
-            let trans = dataProvider.getTransformer(forAxis: set.axisDependency)
+            let trans = chartView.getTransformer(forAxis: set.axisDependency)
             
             let pt = trans.pixelForValues(x: x, y: y)
             

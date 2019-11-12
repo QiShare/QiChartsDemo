@@ -36,19 +36,19 @@ open class ChartFillFormatter: NSObject
         return ChartFillFormatter(block: block)
     }
     
-    open func getFillLinePosition(dataSet: LineChartDataSet, dataProvider: LineChartView) -> CGFloat
+    open func getFillLinePosition(dataSet: LineChartDataSet, chartView: LineChartView) -> CGFloat
     {
-        guard block == nil else { return block!(dataSet, dataProvider) }
+        guard block == nil else { return block!(dataSet, chartView) }
         var fillMin: CGFloat = 0.0
 
         if dataSet.yMax > 0.0 && dataSet.yMin < 0.0
         {
             fillMin = 0.0
         }
-        else if let data = dataProvider.data
+        else if let data = chartView.data
         {
-            let max = data.yMax > 0.0 ? 0.0 : dataProvider.chartYMax
-            let min = data.yMin < 0.0 ? 0.0 : dataProvider.chartYMin
+            let max = data.yMax > 0.0 ? 0.0 : chartView.chartYMax
+            let min = data.yMin < 0.0 ? 0.0 : chartView.chartYMin
 
             fillMin = CGFloat(dataSet.yMin >= 0.0 ? min : max)
         }

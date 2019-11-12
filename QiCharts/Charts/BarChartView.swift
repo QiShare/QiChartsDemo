@@ -19,7 +19,7 @@ open class BarChartView: BarLineScatterCandleChartViewBase
     {
         super.initialize()
         
-        renderer = BarChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
+        renderer = BarChartRenderer(chartView: self, animator: _animator, viewPortHandler: _viewPortHandler)
         
         self.highlighter = BarHighlighter(chart: self)
         

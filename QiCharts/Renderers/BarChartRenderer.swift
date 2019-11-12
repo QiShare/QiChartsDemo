@@ -23,13 +23,13 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
         var rects = [CGRect]()
     }
     
-    @objc open weak var dataProvider: BarChartView?
+    @objc open weak var chartView: BarChartView?
     
-    @objc public init(dataProvider: BarChartView, animator: Animator, viewPortHandler: ViewPortHandler)
+    @objc public init(chartView: BarChartView, animator: Animator, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
-        self.dataProvider = dataProvider
+        self.chartView = chartView
     }
     
     // [CGRect] per dataset
@@ -37,7 +37,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
     
     open override func initBuffers()
     {
-        if let barData = dataProvider?.barData
+        if let barData = chartView?.barData
         {
             // Matche buffers count to dataset count
             if _buffers.count != barData.dataSetCount
@@ -71,8 +71,8 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
     private func prepareBuffer(dataSet: BarChartDataSet, index: Int)
     {
         guard
-            let dataProvider = dataProvider,
-            let barData = dataProvider.barData
+            let chartView = chartView,
+            let barData = chartView.barData
             else { return }
         
         let barWidthHalf = barData.barWidth / 2.0
@@ -81,7 +81,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
         var bufferIndex = 0
         let containsStacks = dataSet.isStacked
         
-        let isInverted = dataProvider.isInverted(axis: dataSet.axisDependency)
+        let isInverted = chartView.isInverted(axis: dataSet.axisDependency)
         let phaseY = animator.phaseY
         var barRect = CGRect()
         var x: Double
@@ -182,10 +182,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
     
     open override func drawData(context: CGContext)
     {
-        guard
-            let dataProvider = dataProvider,
-            let barData = dataProvider.barData
-            else { return }
+        guard let chartView = chartView, let barData = chartView.barData else { return }
         
         for i in 0 ..< barData.dataSetCount
         {
@@ -207,9 +204,9 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
     
     @objc open func drawDataSet(context: CGContext, dataSet: BarChartDataSet, index: Int)
     {
-        guard let dataProvider = dataProvider else { return }
+        guard let chartView = chartView else { return }
         
-        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+        let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
         
         prepareBuffer(dataSet: dataSet, index: index)
         trans.rectValuesToPixel(&_buffers[index].rects)
@@ -286,12 +283,9 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
     open override func drawValues(context: CGContext)
     {
         // if values are drawn
-        if isDrawingValuesAllowed(dataProvider: dataProvider)
+        if isDrawingValuesAllowed(chartView: chartView)
         {
-            guard
-                let dataProvider = dataProvider,
-                let barData = dataProvider.barData
-                else { return }
+            guard let chartView = chartView, let barData = chartView.barData else { return }
 
             let dataSets = barData.dataSets
 
@@ -308,7 +302,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                     continue
                 }
                 
-                let isInverted = dataProvider.isInverted(axis: dataSet.axisDependency)
+                let isInverted = chartView.isInverted(axis: dataSet.axisDependency)
                 
                 // calculate the correct offset depending on the draw position of the value
                 let valueFont = dataSet.valueFont
@@ -326,7 +320,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                 
                 guard let formatter = dataSet.valueFormatter else { continue }
                 
-                let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+                let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
                 
                 let phaseY = animator.phaseY
                 
@@ -557,10 +551,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
     
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
-        guard
-            let dataProvider = dataProvider,
-            let barData = dataProvider.barData
-            else { return }
+        guard let chartView = chartView, let barData = chartView.barData else { return }
         
         context.saveGState()
         
@@ -580,7 +571,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                     continue
                 }
                 
-                let trans = dataProvider.getTransformer(forAxis: set.axisDependency)
+                let trans = chartView.getTransformer(forAxis: set.axisDependency)
                 
                 context.setFillColor(set.highlightColor.cgColor)
                 context.setAlpha(set.highlightAlpha)
@@ -592,7 +583,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                 
                 if isStack
                 {
-                    if dataProvider.isHighlightFullBarEnabled
+                    if chartView.isHighlightFullBarEnabled
                     {
                         y1 = e.positiveSum
                         y2 = -e.negativeSum

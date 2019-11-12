@@ -234,13 +234,10 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     
     open override func drawValues(context: CGContext)
     {
-        guard
-            let dataProvider = dataProvider,
-            let candleData = dataProvider.candleData
-            else { return }
+        guard let dataProvider = dataProvider, let candleData = dataProvider.candleData else { return }
         
         // if values are drawn
-        if isDrawingValuesAllowed(dataProvider: dataProvider)
+        if isDrawingValuesAllowed(chartView: dataProvider)
         {
             let dataSets = candleData.dataSets
             

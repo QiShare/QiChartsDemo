@@ -51,9 +51,9 @@ open class ChartRenderBase: Renderer
     /// Since this might do memory allocations, it should only be called if necessary.
     @objc open func initBuffers() { }
     
-    @objc open func isDrawingValuesAllowed(dataProvider: ChartViewBase?) -> Bool
+    @objc open func isDrawingValuesAllowed(chartView: ChartViewBase?) -> Bool
     {
-        guard let data = dataProvider?.data else { return false }
-        return data.entryCount < Int(CGFloat(dataProvider?.maxVisibleCount ?? 0) * viewPortHandler.scaleX)
+        guard let data = chartView?.data else { return false }
+        return data.entryCount < Int(CGFloat(chartView?.maxVisibleCount ?? 0) * viewPortHandler.scaleX)
     }
 }

@@ -106,7 +106,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
             else { return }
         
         // if values are drawn
-        if isDrawingValuesAllowed(dataProvider: dataProvider)
+        if isDrawingValuesAllowed(chartView: dataProvider)
         {
             guard let dataSets = scatterData.dataSets as? [ScatterChartDataSet] else { return }
             
