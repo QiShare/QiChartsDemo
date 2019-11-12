@@ -80,9 +80,6 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         return _legend
     }
     
-    /// 摩擦系数，范围[0, 1)
-    private var _dragDecelerationFrictionCoef: CGFloat = 0.9
-    
     /// ValueFormatter
     internal var _defaultValueFormatter: ChartValueFormatter? = ChartValueFormatter(decimals: 0)
     
@@ -729,10 +726,9 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         }
     }
     
-    /// Deceleration friction coefficient in [0 ; 1] interval, higher values indicate that speed will decrease slowly, for example if it set to 0, it will stop immediately.
-    /// 1 is an invalid value, and will be converted to 0.999 automatically.
-    /// 
-    /// **default**: true
+    /// 摩擦系数，范围[0, 1)
+    private var _dragDecelerationFrictionCoef: CGFloat = 0.9
+    
     @objc open var dragDecelerationFrictionCoef: CGFloat
     {
         get
