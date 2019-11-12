@@ -19,7 +19,7 @@ class KLineViewController: BaseViewController {
         //1.添加K 线图（烛形图)
         addCandleStickChart()
         //2. 基本样式
-        setCandleStickChartViewBaseStyle()
+        setCandleStickChartViewStyle()
         //3.添加（刷新数据）
         updataData()
     }
@@ -32,7 +32,8 @@ class KLineViewController: BaseViewController {
         candleStickChartView.delegate = self
         self.view.addSubview(candleStickChartView)
     }
-    func setCandleStickChartViewBaseStyle(){
+    
+    func setCandleStickChartViewStyle(){
         //K 线图（烛形图）描述
         candleStickChartView.chartDescription?.text = "K 线图（烛形图）描述"
         candleStickChartView.chartDescription?.position = CGPoint.init(x: candleStickChartView.frame.width - 30, y:candleStickChartView.frame.height - 20)//位置（及在bubbleChartView的中心点）
@@ -61,6 +62,7 @@ class KLineViewController: BaseViewController {
         xAxis.axisMinimum = 0 //最小刻度值
         xAxis.granularity = 1 //最小间隔
     }
+    
     @objc func updataData(){
         //第一组烛形图的10条随机数据
         let dataEntries1 = (0..<10).map { (i) -> CandleChartDataEntry in
@@ -103,7 +105,6 @@ class KLineViewController: BaseViewController {
         //设置烛形图数据
         candleStickChartView.data = chartData
     }
-    
     
     override func rightBarBtnClicked() {
         self.updataData()

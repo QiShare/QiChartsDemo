@@ -19,12 +19,12 @@ class RadarViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //添加雷达图
         addRadarChart()
-        //设置基本样式
-        setRadarChartViewBaseStyle()
+        setRadarChartViewStyle()
+        updataData()
     }
-   //添加雷达图
+   
+    
     func addRadarChart(){
         radarChartView.backgroundColor = ZHFColor.white
         radarChartView.frame.size = CGSize.init(width: ScreenWidth - 20, height: 300)
@@ -32,7 +32,8 @@ class RadarViewController: BaseViewController {
         radarChartView.delegate = self
         self.view.addSubview(radarChartView)
     }
-    func setRadarChartViewBaseStyle(){
+    
+    func setRadarChartViewStyle(){
         //雷达图描述
         radarChartView.rotationEnabled = true //是否允许转动
         radarChartView.highlightPerTapEnabled = true //是否能被选中
@@ -73,13 +74,10 @@ class RadarViewController: BaseViewController {
         radarChartView.legend.font = UIFont.systemFont(ofSize: 10)//字体大小
         radarChartView.legend.textColor = ZHFColor.gray//字体颜色
         radarChartView.legend.form = Legend.Form.circle//图示样式: 方形、线条、圆形
-        //为雷达图提供数据
-        self.data = setData()
-        radarChartView.data = self.data;
-        //设置动画效果
-        radarChartView.animate(yAxisDuration: 1)//展示方式xAxisDuration 和 yAxisDuration两种
+        
+        
     }
-    func setData() -> RadarChartData{
+    func updataData() {
         let count = 12
         //对应x轴上面需要显示的数据
         let x1Vals: NSMutableArray  = NSMutableArray.init()
@@ -110,12 +108,11 @@ class RadarViewController: BaseViewController {
         dataSets.add(set1)
         //创建RadarChartData对象, 此对象就是radarChartView需要最终数据对象
         let data:  RadarChartData = RadarChartData.init(dataSets: dataSets as? [ChartDataSet])
-        return data
-    }
-    @objc func updataData(){
-        //重新设置基本样式
-        setRadarChartViewBaseStyle()
-      
+        
+        radarChartView.data = data
+        
+        //设置动画效果
+        radarChartView.animate(yAxisDuration: 1)//展示方式xAxisDuration 和 yAxisDuration两种
     }
     
     override func rightBarBtnClicked() {

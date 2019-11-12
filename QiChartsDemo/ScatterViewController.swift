@@ -23,7 +23,6 @@ class ScatterViewController: BaseViewController {
         super.viewDidLoad()
         
         addScatterChartView()
-        setBarChartViewBaseStyle()
         setBarChartViewXY()
         updataData()
     }
@@ -34,9 +33,7 @@ class ScatterViewController: BaseViewController {
         chartView.center = self.view.center
         chartView.delegate = self
         self.view.addSubview(chartView)
-    }
-    
-    func setBarChartViewBaseStyle(){
+        
         //基本样式
         chartView.noDataText = "暂无数据"//没有数据时的显示
         //barChartView.drawValueAboveBarEnabled = true//数值显示是否在条柱上面

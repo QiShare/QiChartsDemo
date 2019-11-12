@@ -23,7 +23,6 @@ class BarViewController: BaseViewController {
         super.viewDidLoad()
         
         addBarChartView()
-        setBarChartViewBaseStyle()
         setBarChartViewXY()
         updataData()
     }
@@ -37,9 +36,7 @@ class BarViewController: BaseViewController {
         
         barChartView.layer.borderWidth = 1.0
         barChartView.layer.borderColor = UIColor.red.cgColor
-    }
-    
-    func setBarChartViewBaseStyle(){
+        
         //基本样式
         barChartView.noDataText = "暂无数据"//没有数据时的显示
         //barChartView.drawValueAboveBarEnabled = true//数值显示是否在条柱上面
