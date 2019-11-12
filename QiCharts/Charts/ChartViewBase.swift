@@ -1,14 +1,10 @@
 //
 //  ChartViewBase.swift
-//  Charts
+//  QiCharts
 //
-//  Copyright 2015 Daniel Cohen Gindi & Philipp Jahoda
-//  A port of MPAndroidChart for iOS
-//  Licensed under Apache License 2.0
+//  Created by wangdacheng on 2019/10/14.
+//  Copyright © 2019 qishare. All rights reserved.
 //
-//  https://github.com/danielgindi/Charts
-//
-//  Based on https://github.com/PhilJay/MPAndroidChart/commit/c42b880
 
 import Foundation
 import CoreGraphics

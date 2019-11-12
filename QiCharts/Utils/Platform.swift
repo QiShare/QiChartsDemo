@@ -1,3 +1,11 @@
+//
+//  Platform.swift
+//  QiCharts
+//
+//  Created by wangdacheng on 2019/10/14.
+//  Copyright © 2019 qishare. All rights reserved.
+//
+
 import Foundation
 
 /** This file provides a thin abstraction layer atop of UIKit (iOS, tvOS) and Cocoa (OS X). The two APIs are very much 
