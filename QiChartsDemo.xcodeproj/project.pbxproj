@@ -119,6 +119,7 @@
 		149282E72361A13600C58EF4 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282E62361A13600C58EF4 /* BalloonMarker.swift */; };
 		149282E92361A3F900C58EF4 /* RadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282E82361A3F900C58EF4 /* RadarViewController.swift */; };
 		149282EB2361A40A00C58EF4 /* KLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149282EA2361A40A00C58EF4 /* KLineViewController.swift */; };
+		14FADD48237A627A00DBCE42 /* ScatterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FADD47237A627A00DBCE42 /* ScatterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,6 +248,7 @@
 		149282E62361A13600C58EF4 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		149282E82361A3F900C58EF4 /* RadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarViewController.swift; sourceTree = "<group>"; };
 		149282EA2361A40A00C58EF4 /* KLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLineViewController.swift; sourceTree = "<group>"; };
+		14FADD47237A627A00DBCE42 /* ScatterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScatterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +300,7 @@
 				149282E82361A3F900C58EF4 /* RadarViewController.swift */,
 				149282EA2361A40A00C58EF4 /* KLineViewController.swift */,
 				149282E4236197A800C58EF4 /* LineViewController.swift */,
+				14FADD47237A627A00DBCE42 /* ScatterViewController.swift */,
 				149282E62361A13600C58EF4 /* BalloonMarker.swift */,
 				149282DE236081EF00C58EF4 /* ZHFColor.swift */,
 				1422F3FB235423AC0084B501 /* Assets.xcassets */,
@@ -636,6 +639,7 @@
 				149282E32361854200C58EF4 /* PieViewController.swift in Sources */,
 				1422F3F3235423AB0084B501 /* AppDelegate.swift in Sources */,
 				149282E5236197A800C58EF4 /* LineViewController.swift in Sources */,
+				14FADD48237A627A00DBCE42 /* ScatterViewController.swift in Sources */,
 				141500292371847E0046C37C /* GroupBarViewController.swift in Sources */,
 				1434C1F32355B4C800C665E5 /* BarViewController.swift in Sources */,
 				149282E72361A13600C58EF4 /* BalloonMarker.swift in Sources */,

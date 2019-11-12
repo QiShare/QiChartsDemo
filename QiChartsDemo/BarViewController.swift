@@ -48,7 +48,7 @@ class BarViewController: BaseViewController {
         //barChartView.scaleXEnabled = false//取消X轴缩放
         barChartView.scaleYEnabled = false//取消Y轴缩放
         barChartView.doubleTapToZoomEnabled = false//取消双击是否缩放
-        //barChartView.pinchZoomEnabled = false//取消XY轴是否同时缩放
+        barChartView.pinchZoomEnabled = false//取消XY轴是否同时缩放
         barChartView.dragEnabled = true //启用拖拽图表
         barChartView.dragDecelerationEnabled = true //拖拽后是否有惯性效果
         barChartView.dragDecelerationFrictionCoef = 0.9 //拖拽后惯性效果的摩擦系数(0~1)，数值越小，惯性越不明显
