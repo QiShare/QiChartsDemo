@@ -15,7 +15,7 @@ import CoreGraphics
 
 open class YAxisRendererHorizontalBarChart: YAxisRenderer
 {
-    public override init(viewPortHandler: ViewPortHandler, yAxis: YAxis?, transformer: Transformer?)
+    public override init(viewPortHandler: ViewPortHandler, yAxis: YAxis?, transformer: ChartTransformer?)
     {
         super.init(viewPortHandler: viewPortHandler, yAxis: yAxis, transformer: transformer)
     }

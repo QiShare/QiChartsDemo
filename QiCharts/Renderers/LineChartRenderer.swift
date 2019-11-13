@@ -429,7 +429,7 @@ open class LineChartRenderer: LineRadarRenderer
         context.restoreGState()
     }
     
-    open func drawLinearFill(context: CGContext, dataSet: LineChartDataSet, trans: Transformer, bounds: XBounds)
+    open func drawLinearFill(context: CGContext, dataSet: LineChartDataSet, trans: ChartTransformer, bounds: XBounds)
     {
         guard let chartView = chartView else { return }
         

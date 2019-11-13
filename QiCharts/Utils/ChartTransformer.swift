@@ -11,7 +11,7 @@ import CoreGraphics
 
 /// Transformer class that contains all matrices and is responsible for transforming values into pixels on the screen and backwards.
 @objc(ChartTransformer)
-open class Transformer: NSObject
+open class ChartTransformer: NSObject
 {
     /// matrix to map the values to the screen pixels
     internal var _matrixValueToPx = CGAffineTransform.identity
@@ -165,10 +165,7 @@ open class Transformer: NSObject
     
     @objc open var valueToPixelMatrix: CGAffineTransform
     {
-        return
-            _matrixValueToPx.concatenating(_viewPortHandler.touchMatrix
-                ).concatenating(_matrixOffset
-        )
+        return _matrixValueToPx.concatenating(_viewPortHandler.touchMatrix).concatenating(_matrixOffset)
     }
     
     @objc open var pixelToValueMatrix: CGAffineTransform

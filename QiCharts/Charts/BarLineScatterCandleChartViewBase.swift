@@ -75,8 +75,8 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     /// **default**: An instance of YAxisRenderer
     @objc open lazy var rightYAxisRenderer = YAxisRenderer(viewPortHandler: _viewPortHandler, yAxis: rightAxis, transformer: _rightAxisTransformer)
     
-    internal var _leftAxisTransformer: Transformer!
-    internal var _rightAxisTransformer: Transformer!
+    internal var _leftAxisTransformer: ChartTransformer!
+    internal var _rightAxisTransformer: ChartTransformer!
     
     /// The X axis renderer. This is a read-write property so you can set your own custom renderer here.
     /// **default**: An instance of XAxisRenderer
@@ -111,8 +111,8 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     {
         super.initialize()
 
-        _leftAxisTransformer = Transformer(viewPortHandler: _viewPortHandler)
-        _rightAxisTransformer = Transformer(viewPortHandler: _viewPortHandler)
+        _leftAxisTransformer = ChartTransformer(viewPortHandler: _viewPortHandler)
+        _rightAxisTransformer = ChartTransformer(viewPortHandler: _viewPortHandler)
         
         self.highlighter = ChartHighlighter(chart: self)
         
@@ -1534,7 +1534,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     /// - returns: The Transformer class that contains all matrices and is
     /// responsible for transforming values into pixels on the screen and
     /// backwards.
-    open func getTransformer(forAxis axis: YAxis.AxisDependency) -> Transformer
+    open func getTransformer(forAxis axis: YAxis.AxisDependency) -> ChartTransformer
     {
         if axis == .left
         {

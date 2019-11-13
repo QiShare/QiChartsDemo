@@ -52,7 +52,8 @@ open class ViewPortHandler: NSObject
     /// offset that allows the chart to be dragged over its bounds on the x-axis
     private var _transOffsetY = CGFloat(0.0)
     
-    /// Constructor - don't forget calling setChartDimens(...)
+    // MARK: - 初始化
+    
     @objc public init(width: CGFloat, height: CGFloat)
     {
         super.init()
@@ -70,6 +71,7 @@ open class ViewPortHandler: NSObject
         _chartHeight = height
         _chartWidth = width
         
+        /// 处理约束
         restrainViewPort(offsetLeft: offsetLeft, offsetTop: offsetTop, offsetRight: offsetRight, offsetBottom: offsetBottom)
     }
     
@@ -85,6 +87,7 @@ open class ViewPortHandler: NSObject
         }
     }
 
+    /// 受约束过的，真实绘制区域
     @objc open func restrainViewPort(offsetLeft: CGFloat, offsetTop: CGFloat, offsetRight: CGFloat, offsetBottom: CGFloat)
     {
         _contentRect.origin.x = offsetLeft
@@ -92,6 +95,8 @@ open class ViewPortHandler: NSObject
         _contentRect.size.width = _chartWidth - offsetLeft - offsetRight
         _contentRect.size.height = _chartHeight - offsetBottom - offsetTop
     }
+    
+    // MARK: - 获取当前viewPort的rect相关属性
     
     @objc open var offsetLeft: CGFloat
     {
@@ -163,7 +168,7 @@ open class ViewPortHandler: NSObject
         return _chartWidth
     }
 
-    // MARK: - Scaling/Panning etc.
+    // MARK: - 缩放、平移等
     
     /// Zooms by the specified zoom factors.
     @objc open func zoom(scaleX: CGFloat, scaleY: CGFloat) -> CGAffineTransform
@@ -251,7 +256,7 @@ open class ViewPortHandler: NSObject
         refresh(newMatrix: matrix, chart: chart, invalidate: true)
     }
     
-    /// call this method to refresh the graph with a given matrix
+    /// 刷新给定的newMatrix
     @objc @discardableResult open func refresh(newMatrix: CGAffineTransform, chart: ChartViewBase, invalidate: Bool) -> CGAffineTransform
     {
         _touchMatrix = newMatrix
@@ -401,7 +406,7 @@ open class ViewPortHandler: NSObject
         return _touchMatrix
     }
     
-    // MARK: - Boundaries Check
+    // MARK: - 检查边界相关
     
     @objc open func isInBoundsX(_ x: CGFloat) -> Bool
     {
