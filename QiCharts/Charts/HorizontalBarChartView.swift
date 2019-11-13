@@ -73,7 +73,7 @@ open class HorizontalBarChartView: BarChartView
                 offsetTop += min(legend.neededHeight, _viewPortHandler.chartHeight * legend.maxSizePercent) + legend.yOffset
                 
                 // left axis equals the top x-axis in a horizontal chart
-                if leftAxis.isEnabled && leftAxis.isDrawLabelsEnabled
+                if leftAxis.isEnabled && leftAxis.drawLabelsEnabled
                 {
                     offsetTop += leftAxis.getRequiredHeightSpace()
                 }
@@ -82,7 +82,7 @@ open class HorizontalBarChartView: BarChartView
                 offsetBottom += min(legend.neededHeight, _viewPortHandler.chartHeight * legend.maxSizePercent) + legend.yOffset
 
                 // right axis equals the bottom x-axis in a horizontal chart
-                if rightAxis.isEnabled && rightAxis.isDrawLabelsEnabled
+                if rightAxis.isEnabled && rightAxis.drawLabelsEnabled
                 {
                     offsetBottom += rightAxis.getRequiredHeightSpace()
                 }

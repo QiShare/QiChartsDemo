@@ -82,7 +82,7 @@ open class XAxisRenderer: AxisRendererBase
     {
         guard let xAxis = self.axis as? XAxis else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled
+        if !xAxis.isEnabled || !xAxis.drawLabelsEnabled
         {
             return
         }
@@ -118,7 +118,7 @@ open class XAxisRenderer: AxisRendererBase
     {
         guard let xAxis = self.axis as? XAxis else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawAxisLineEnabled
+        if !xAxis.isEnabled || !xAxis.drawAxisLineEnabled
         {
             return
         }
@@ -181,7 +181,7 @@ open class XAxisRenderer: AxisRendererBase
             NSAttributedString.Key.paragraphStyle: paraStyle]
         let labelRotationAngleRadians = xAxis.labelRotationAngle.DEG2RAD
         
-        let centeringEnabled = xAxis.isCenterAxisLabelsEnabled
+        let centeringEnabled = xAxis.centerAxisLabelsEnabled
 
         let valueToPixelMatrix = transformer.valueToPixelMatrix
         
@@ -275,7 +275,7 @@ open class XAxisRenderer: AxisRendererBase
             let transformer = self.transformer
             else { return }
         
-        if !xAxis.isDrawGridLinesEnabled || !xAxis.isEnabled
+        if !xAxis.drawGridLinesEnabled || !xAxis.isEnabled
         {
             return
         }

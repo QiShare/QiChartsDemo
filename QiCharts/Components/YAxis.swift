@@ -123,7 +123,7 @@ open class YAxis: AxisBase
     /// - returns: `true` if this axis needs horizontal offset, `false` ifno offset is needed.
     @objc open var needsOffset: Bool
     {
-        if isEnabled && isDrawLabelsEnabled && labelPosition == .outsideChart
+        if isEnabled && drawLabelsEnabled && labelPosition == .outsideChart
         {
             return true
         }

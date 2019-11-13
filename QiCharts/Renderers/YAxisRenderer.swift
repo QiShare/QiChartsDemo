@@ -26,7 +26,7 @@ open class YAxisRenderer: AxisRendererBase
     {
         guard let yAxis = self.axis as? YAxis else { return }
         
-        if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled
+        if !yAxis.isEnabled || !yAxis.drawLabelsEnabled
         {
             return
         }

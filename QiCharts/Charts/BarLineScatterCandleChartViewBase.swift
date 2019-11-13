@@ -205,17 +205,17 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         leftYAxisRenderer.renderGridLines(context: context)
         rightYAxisRenderer.renderGridLines(context: context)
         
-        if _xAxis.isEnabled && _xAxis.isDrawLimitLinesBehindDataEnabled
+        if _xAxis.isEnabled && _xAxis.drawLimitLinesBehindDataEnabled
         {
             xAxisRenderer.renderLimitLines(context: context)
         }
         
-        if leftAxis.isEnabled && leftAxis.isDrawLimitLinesBehindDataEnabled
+        if leftAxis.isEnabled && leftAxis.drawLimitLinesBehindDataEnabled
         {
             leftYAxisRenderer.renderLimitLines(context: context)
         }
         
-        if rightAxis.isEnabled && rightAxis.isDrawLimitLinesBehindDataEnabled
+        if rightAxis.isEnabled && rightAxis.drawLimitLinesBehindDataEnabled
         {
             rightYAxisRenderer.renderLimitLines(context: context)
         }
@@ -237,17 +237,17 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         
         renderer.drawExtras(context: context)
         
-        if _xAxis.isEnabled && !_xAxis.isDrawLimitLinesBehindDataEnabled
+        if _xAxis.isEnabled && !_xAxis.drawLimitLinesBehindDataEnabled
         {
             xAxisRenderer.renderLimitLines(context: context)
         }
         
-        if leftAxis.isEnabled && !leftAxis.isDrawLimitLinesBehindDataEnabled
+        if leftAxis.isEnabled && !leftAxis.drawLimitLinesBehindDataEnabled
         {
             leftYAxisRenderer.renderLimitLines(context: context)
         }
         
-        if rightAxis.isEnabled && !rightAxis.isDrawLimitLinesBehindDataEnabled
+        if rightAxis.isEnabled && !rightAxis.drawLimitLinesBehindDataEnabled
         {
             rightYAxisRenderer.renderLimitLines(context: context)
         }
@@ -392,14 +392,14 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
                 {
                 case .top:
                     offsetTop += min(_legend.neededHeight, _viewPortHandler.chartHeight * _legend.maxSizePercent) + _legend.yOffset
-                    if xAxis.isEnabled && xAxis.isDrawLabelsEnabled
+                    if xAxis.isEnabled && xAxis.drawLabelsEnabled
                     {
                         offsetTop += xAxis.labelRotatedHeight
                     }
                     
                 case .bottom:
                     offsetBottom += min(_legend.neededHeight, _viewPortHandler.chartHeight * _legend.maxSizePercent) + _legend.yOffset
-                    if xAxis.isEnabled && xAxis.isDrawLabelsEnabled
+                    if xAxis.isEnabled && xAxis.drawLabelsEnabled
                     {
                         offsetBottom += xAxis.labelRotatedHeight
                     }
@@ -436,7 +436,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
                 offsetRight += rightAxis.requiredSize().width
             }
 
-            if xAxis.isEnabled && xAxis.isDrawLabelsEnabled
+            if xAxis.isEnabled && xAxis.drawLabelsEnabled
             {
                 let xlabelheight = xAxis.labelRotatedHeight + xAxis.yOffset
                 

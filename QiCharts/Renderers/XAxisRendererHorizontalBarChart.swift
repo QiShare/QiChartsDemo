@@ -79,7 +79,7 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             let xAxis = self.axis as? XAxis
             else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled || chart?.data === nil
+        if !xAxis.isEnabled || !xAxis.drawLabelsEnabled || chart?.data === nil
         {
             return
         }
@@ -121,7 +121,7 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
         let labelTextColor = xAxis.labelTextColor
         let labelRotationAngleRadians = xAxis.labelRotationAngle.DEG2RAD
         
-        let centeringEnabled = xAxis.isCenterAxisLabelsEnabled
+        let centeringEnabled = xAxis.centerAxisLabelsEnabled
         
         // pre allocate to save performance (dont allocate in loop)
         var position = CGPoint(x: 0.0, y: 0.0)
@@ -204,7 +204,7 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
     {
         guard let xAxis = self.axis as? XAxis else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawAxisLineEnabled
+        if !xAxis.isEnabled || !xAxis.drawAxisLineEnabled
         {
             return
         }

@@ -52,41 +52,49 @@ class BarViewController: BaseViewController {
     }
     
     func setBarChartViewXY(){
-        //1.X轴样式设置（对应界面显示的--->0月到7月）
+        
+        /// 设置x轴左样式
         xAxis = barChartView.xAxis
-        xAxis.delegate = self //重写代理方法  设置x轴数据
-        xAxis.axisLineWidth = 0.5 //设置X轴线宽
-        xAxis.labelPosition = XAxis.LabelPosition.bottom //X轴（5种位置显示，根据需求进行设置）
-        xAxis.drawGridLinesEnabled = false//不绘制网格
-        xAxis.labelWidth = 1 //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
-        xAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
-        xAxis.labelTextColor = UIColor.brown//数值字体颜色
+        xAxis.delegate = self
+        xAxis.axisLineWidth = 0.5
+        xAxis.labelPosition = XAxis.LabelPosition.bottom
+        xAxis.drawGridLinesEnabled = false
+        //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
+        xAxis.labelWidth = 1
+        xAxis.labelFont = UIFont.systemFont(ofSize: 10)
+        xAxis.labelTextColor = UIColor.brown
+        xAxis.axisLineColor = .red
     
-        //2.Y轴左样式设置（对应界面显示的--->0 到 100）
+        /// 设置y轴左样式
         let leftAxisFormatter = NumberFormatter()
         leftAxisFormatter.minimumFractionDigits = 0
         leftAxisFormatter.maximumFractionDigits = 1
-        leftAxisFormatter.positivePrefix = "$"  //数字前缀positivePrefix、 后缀positiveSuffix
+        leftAxisFormatter.positivePrefix = "$"
         leftAxis = barChartView.leftAxis
         leftAxis.valueFormatter = ChartAxisValueFormatter.init(formatter: leftAxisFormatter)
-        leftAxis.axisMinimum = 0     //最小值
-        leftAxis.axisMaximum = axisMaximum   //最大值
-        leftAxis.forceLabelsEnabled = true //不强制绘制制定数量的label
-        leftAxis.labelCount = 6    //Y轴label数量，数值不一定，如果forceLabelsEnabled等于true, 则强制绘制制定数量的label, 但是可能不平均
-        leftAxis.inverted = false   //是否将Y轴进行上下翻转
-        leftAxis.axisLineWidth = 0.5   //Y轴线宽
-        leftAxis.axisLineColor = UIColor.black   //Y轴颜色
-        leftAxis.labelPosition = YAxis.LabelPosition.outsideChart//坐标数值的位置
-        leftAxis.labelTextColor = UIColor.brown//坐标数值字体颜色
-        leftAxis.labelFont = UIFont.systemFont(ofSize: 10) //y轴字体大小
-        //设置虚线样式的网格线(对应的是每条横着的虚线[10.0, 3.0]对应实线和虚线的长度)
-        leftAxis.drawGridLinesEnabled = true //是否绘制网格线(默认为true)
+        leftAxis.axisMinimum = 0
+        leftAxis.axisMaximum = axisMaximum
+        /// 不强制绘制制定数量的label
+        leftAxis.forceLabelsEnabled = true
+        /// y轴label数量，数值不一定，如果forceLabelsEnabled等于true, 则强制绘制制定数量的label, 但是可能不平均
+        leftAxis.labelCount = 6
+        ///是否将Y轴进行上下翻转
+        leftAxis.inverted = false
+        leftAxis.axisLineWidth = 0.5
+        leftAxis.axisLineColor = UIColor.black
+        leftAxis.labelPosition = YAxis.LabelPosition.outsideChart
+        leftAxis.labelTextColor = UIColor.brown
+        leftAxis.labelFont = UIFont.systemFont(ofSize: 10)
+        ///设置虚线样式的网格线(对应的是每条横着的虚线[10.0, 3.0]对应实线和虚线的长度)
+        leftAxis.drawGridLinesEnabled = true
         leftAxis.gridLineDashLengths = [5.0, 3.0]
-        leftAxis.gridColor = UIColor.gray //网格线颜色
-        leftAxis.gridAntialiasEnabled = true//开启抗锯齿
-        leftAxis.spaceTop = 0.15//最大值到顶部的范围比
+        leftAxis.gridColor = UIColor.gray
+        ///开启抗锯齿
+        leftAxis.gridAntialiasEnabled = true
+        ///最大值到顶部的范围比
+        leftAxis.spaceTop = 0.15
         
-        //设置限制线
+        /// 设置限制线
         let limitLine : ChartLimitLine = ChartLimitLine.init(limit: Double(axisMaximum * 0.85), label: "限制线")
         limitLine.lineWidth = 1.0
         limitLine.lineColor = UIColor.red
@@ -97,16 +105,16 @@ class BarViewController: BaseViewController {
         leftAxis.addLimitLine(limitLine)
         leftAxis.drawLimitLinesBehindDataEnabled = true //设置限制线在柱线图后面（默认在前）
         
-        //3.Y轴右样式设置（如若设置可参考左样式）
+        /// y轴右样式设置（如若设置可参考左样式）
         barChartView.rightAxis.enabled = false //不绘制右边轴线
         
-        //4.描述文字设置
+        /// 描述文字设置
         barChartView.chartDescription?.text = "柱形图"//右下角的description文字样式 不设置的话会有默认数据
         barChartView.chartDescription?.position = CGPoint.init(x: 80, y: 5)//位置（及在barChartView的中心点）
         barChartView.chartDescription?.font = UIFont.systemFont(ofSize: 12)//大小
         barChartView.chartDescription?.textColor = UIColor.orange
         
-        //5.设置类型试图的对齐方式，右上角 (默认左下角)
+        /// 设置类型试图的对齐方式，右上角 (默认左下角)
         let legend = barChartView.legend
         legend.enabled = true
         legend.horizontalAlignment = .right
@@ -118,30 +126,30 @@ class BarViewController: BaseViewController {
     
     @objc func updataData(){
         
-        //对应x轴上面需要显示的数据
+        /// 对应x轴上面需要显示的数据
         let count = 8
         let x1Vals: NSMutableArray  = NSMutableArray.init()
         for i in 0 ..< count {
-            //x轴字体展示
+            /// x轴字体展示
             x1Vals.add("201\(i)")
             self.xVals = x1Vals
         }
         
         
-         //对应Y轴上面需要显示的数据
+         /// 对应Y轴上面需要显示的数据
         let yVals: NSMutableArray  = NSMutableArray.init()
         for i in 0 ..< count {
             let val: Double = Double(arc4random_uniform(UInt32(axisMaximum)))
             let entry:BarChartDataEntry  = BarChartDataEntry.init(x:  Double(i), y: Double(val))
             yVals.add(entry)
         }
-         //创建BarChartDataSet对象，其中包含有Y轴数据信息，以及可以设置柱形样式
+        /// 创建BarChartDataSet对象，其中包含有Y轴数据信息，以及可以设置柱形样式
         let set1: BarChartDataSet = BarChartDataSet.init(values: yVals as? [ChartDataEntry], label: "信息")
         set1.barBorderWidth = 0.2 //边线宽
         set1.drawValuesEnabled = true //是否在柱形图上面显示数值
         set1.highlightEnabled = true //点击选中柱形图是否有高亮效果，（单击空白处取消选中）
         
-        //设置柱形图颜色(是一个循环，例如：你设置5个颜色，你设置8个柱形，后三个对应的颜色是该设置中的前三个，依次类推)
+        /// 设置柱形图颜色(是一个循环，例如：你设置5个颜色，你设置8个柱形，后三个对应的颜色是该设置中的前三个，依次类推)
         set1.setColors(UIColor.gray,ZHFColor.green,ZHFColor.yellow,ZHFColor.zhf_randomColor(),ZHFColor.zhf_randomColor())
       //  set1.setColors(ChartColorTemplates.material(), alpha: 1)
       //  set1.setColor(ZHFColor.gray)//颜色一致
@@ -153,7 +161,7 @@ class BarViewController: BaseViewController {
         
         
         
-        //创建BarChartData对象, 此对象就是barChartView需要最终数据对象
+        /// 创建BarChartData对象, 此对象就是barChartView需要最终数据对象
         let data: BarChartData = BarChartData.init(dataSets: dataSets as? [ChartDataSet])
         data.barWidth = 0.7  //默认是0.85  （介于0-1之间）
         data.setValueFont(UIFont.systemFont(ofSize: 10))
@@ -182,19 +190,19 @@ extension BarViewController :ChartViewDelegate, AxisValueFormatterDelegate {
         
         return self.xVals[Int(value)] as! String
     }
-    //1.点击选中
+    /// 1.点击选中
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         ZHFLog(message: "点击选中")
     }
-    //2.没有选中
+    /// 2.没有选中
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
          ZHFLog(message: "没有选中")
     }
-    //3.捏合放大或缩小
+    /// 3.捏合放大或缩小
     func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
         ZHFLog(message: "捏合放大或缩小")
     }
-    //4.拖拽图表
+    /// 4.拖拽图表
     func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
         ZHFLog(message: "拖拽图表")
     }

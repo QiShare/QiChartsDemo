@@ -123,7 +123,7 @@ open class AxisRendererBase: Renderer
         var n = axis.centerAxisLabelsEnabled ? 1 : 0
         
         // force label count
-        if axis.isForceLabelsEnabled
+        if axis.forceLabelsEnabled
         {
             interval = Double(range) / Double(labelCount - 1)
             

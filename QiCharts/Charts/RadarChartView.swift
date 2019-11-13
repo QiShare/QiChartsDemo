@@ -115,7 +115,7 @@ open class RadarChartView: PieRadarChartViewBase
             renderer.drawExtras(context: context)
         }
         
-        if _yAxis.isEnabled && _yAxis.isDrawLimitLinesBehindDataEnabled
+        if _yAxis.isEnabled && _yAxis.drawLimitLinesBehindDataEnabled
         {
             _yAxisRenderer.renderLimitLines(context: context)
         }
@@ -127,7 +127,7 @@ open class RadarChartView: PieRadarChartViewBase
             renderer.drawHighlighted(context: context, indices: _highlights)
         }
         
-        if _yAxis.isEnabled && !_yAxis.isDrawLimitLinesBehindDataEnabled
+        if _yAxis.isEnabled && !_yAxis.drawLimitLinesBehindDataEnabled
         {
             _yAxisRenderer.renderLimitLines(context: context)
         }
@@ -209,7 +209,7 @@ open class RadarChartView: PieRadarChartViewBase
 
     internal override var requiredBaseOffset: CGFloat
     {
-        return _xAxis.isEnabled && _xAxis.isDrawLabelsEnabled ? _xAxis.labelRotatedWidth : 10.0
+        return _xAxis.isEnabled && _xAxis.drawLabelsEnabled ? _xAxis.labelRotatedWidth : 10.0
     }
 
     open override var radius: CGFloat

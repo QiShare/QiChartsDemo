@@ -53,7 +53,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
     {
         guard let yAxis = axis as? YAxis else { return }
         
-        if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled
+        if !yAxis.isEnabled || !yAxis.drawLabelsEnabled
         {
             return
         }

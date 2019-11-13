@@ -31,7 +31,7 @@ open class XAxisRendererRadarChart: XAxisRenderer
             let chart = chart
             else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled
+        if !xAxis.isEnabled || !xAxis.drawLabelsEnabled
         {
             return
         }

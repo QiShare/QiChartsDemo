@@ -46,7 +46,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         
         // If granularity is enabled, then do not allow the interval to go below specified granularity.
         // This is used to avoid repeated values when rounding values for display.
-        if axis.isGranularityEnabled
+        if axis.granularityEnabled
         {
             interval = interval < axis.granularity ? axis.granularity : interval
         }
@@ -62,11 +62,11 @@ open class YAxisRendererRadarChart: YAxisRenderer
             interval = floor(10.0 * intervalMagnitude) == 0.0 ? interval : floor(10.0 * intervalMagnitude)
         }
         
-        let centeringEnabled = axis.isCenterAxisLabelsEnabled
+        let centeringEnabled = axis.centerAxisLabelsEnabled
         var n = centeringEnabled ? 1 : 0
 
         // force label count
-        if axis.isForceLabelsEnabled
+        if axis.forceLabelsEnabled
         {
             let step = Double(range) / Double(labelCount - 1)
             
@@ -163,7 +163,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
             let chart = chart
             else { return }
         
-        if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled
+        if !yAxis.isEnabled || !yAxis.drawLabelsEnabled
         {
             return
         }
