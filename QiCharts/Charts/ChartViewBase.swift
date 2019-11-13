@@ -673,8 +673,6 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         return true
     }
     
-    internal var _viewportJobs = [ViewPortJob]()
-    
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
     {
         if keyPath == "bounds" || keyPath == "frame"
@@ -690,39 +688,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
                 // This may cause the chart view to mutate properties affecting the view port -- lets do this
                 // before we try to run any pending jobs on the view port itself
                 notifyDataSetChanged()
-
-                // Finish any pending viewport changes
-                while (!_viewportJobs.isEmpty)
-                {
-                    let job = _viewportJobs.remove(at: 0)
-                    job.doJob()
-                }
             }
-        }
-    }
-    
-    @objc open func removeViewportJob(_ job: ViewPortJob)
-    {
-        if let index = _viewportJobs.firstIndex(where: { $0 === job })
-        {
-            _viewportJobs.remove(at: index)
-        }
-    }
-    
-    @objc open func clearAllViewportJobs()
-    {
-        _viewportJobs.removeAll(keepingCapacity: false)
-    }
-    
-    @objc open func addViewportJob(_ job: ViewPortJob)
-    {
-        if _viewPortHandler.hasChartDimens
-        {
-            job.doJob()
-        }
-        else
-        {
-            _viewportJobs.append(job)
         }
     }
     

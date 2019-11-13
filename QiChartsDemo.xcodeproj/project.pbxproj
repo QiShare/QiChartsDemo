@@ -75,12 +75,6 @@
 		149282AC23604EC400C58EF4 /* ChartLimitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822123604EC300C58EF4 /* ChartLimitLine.swift */; };
 		149282AD23604EC400C58EF4 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822223604EC300C58EF4 /* MarkerView.swift */; };
 		149282AE23604EC400C58EF4 /* ComponentBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822323604EC300C58EF4 /* ComponentBase.swift */; };
-		149282AF23604EC400C58EF4 /* AnimatedZoomViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822523604EC300C58EF4 /* AnimatedZoomViewJob.swift */; };
-		149282B023604EC400C58EF4 /* ViewPortJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822623604EC300C58EF4 /* ViewPortJob.swift */; };
-		149282B123604EC400C58EF4 /* MoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822723604EC300C58EF4 /* MoveViewJob.swift */; };
-		149282B223604EC400C58EF4 /* ZoomViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822823604EC300C58EF4 /* ZoomViewJob.swift */; };
-		149282B323604EC400C58EF4 /* AnimatedViewPortJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822923604EC300C58EF4 /* AnimatedViewPortJob.swift */; };
-		149282B423604EC400C58EF4 /* AnimatedMoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822A23604EC300C58EF4 /* AnimatedMoveViewJob.swift */; };
 		149282B623604EC400C58EF4 /* ChartFillFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822D23604EC300C58EF4 /* ChartFillFormatter.swift */; };
 		149282B723604EC400C58EF4 /* ChartValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822E23604EC300C58EF4 /* ChartValueFormatter.swift */; };
 		149282B823604EC400C58EF4 /* ChartAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1492822F23604EC300C58EF4 /* ChartAxisValueFormatter.swift */; };
@@ -204,12 +198,6 @@
 		1492822123604EC300C58EF4 /* ChartLimitLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartLimitLine.swift; sourceTree = "<group>"; };
 		1492822223604EC300C58EF4 /* MarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
 		1492822323604EC300C58EF4 /* ComponentBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentBase.swift; sourceTree = "<group>"; };
-		1492822523604EC300C58EF4 /* AnimatedZoomViewJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedZoomViewJob.swift; sourceTree = "<group>"; };
-		1492822623604EC300C58EF4 /* ViewPortJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPortJob.swift; sourceTree = "<group>"; };
-		1492822723604EC300C58EF4 /* MoveViewJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveViewJob.swift; sourceTree = "<group>"; };
-		1492822823604EC300C58EF4 /* ZoomViewJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomViewJob.swift; sourceTree = "<group>"; };
-		1492822923604EC300C58EF4 /* AnimatedViewPortJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedViewPortJob.swift; sourceTree = "<group>"; };
-		1492822A23604EC300C58EF4 /* AnimatedMoveViewJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedMoveViewJob.swift; sourceTree = "<group>"; };
 		1492822D23604EC300C58EF4 /* ChartFillFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartFillFormatter.swift; sourceTree = "<group>"; };
 		1492822E23604EC300C58EF4 /* ChartValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartValueFormatter.swift; sourceTree = "<group>"; };
 		1492822F23604EC300C58EF4 /* ChartAxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartAxisValueFormatter.swift; sourceTree = "<group>"; };
@@ -319,7 +307,6 @@
 				149281D323604EC300C58EF4 /* Data */,
 				1492822B23604EC300C58EF4 /* Formatters */,
 				149281BD23604EC300C58EF4 /* Highlight */,
-				1492822423604EC300C58EF4 /* Jobs */,
 				1492823323604EC300C58EF4 /* Renderers */,
 				149281CB23604EC300C58EF4 /* Utils */,
 				1422F40F23546B7E0084B501 /* QiCharts.h */,
@@ -409,19 +396,6 @@
 				1492821B23604EC300C58EF4 /* MarkerImage.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		1492822423604EC300C58EF4 /* Jobs */ = {
-			isa = PBXGroup;
-			children = (
-				1492822623604EC300C58EF4 /* ViewPortJob.swift */,
-				1492822923604EC300C58EF4 /* AnimatedViewPortJob.swift */,
-				1492822523604EC300C58EF4 /* AnimatedZoomViewJob.swift */,
-				1492822A23604EC300C58EF4 /* AnimatedMoveViewJob.swift */,
-				1492822723604EC300C58EF4 /* MoveViewJob.swift */,
-				1492822823604EC300C58EF4 /* ZoomViewJob.swift */,
-			);
-			path = Jobs;
 			sourceTree = "<group>";
 		};
 		1492822B23604EC300C58EF4 /* Formatters */ = {
@@ -656,7 +630,6 @@
 				1492827623604EC400C58EF4 /* PieChartDataSet.swift in Sources */,
 				149282B723604EC400C58EF4 /* ChartValueFormatter.swift in Sources */,
 				1492825723604EC400C58EF4 /* HorizontalBarHighlighter.swift in Sources */,
-				149282B223604EC400C58EF4 /* ZoomViewJob.swift in Sources */,
 				1492825823604EC400C58EF4 /* PieRadarHighlighter.swift in Sources */,
 				149282A123604EC400C58EF4 /* BarChartView.swift in Sources */,
 				149282D123604EC400C58EF4 /* TriangleShapeRenderer.swift in Sources */,
@@ -704,11 +677,9 @@
 				1492829D23604EC400C58EF4 /* HorizontalBarChartView.swift in Sources */,
 				149282C323604EC400C58EF4 /* YAxisRenderer.swift in Sources */,
 				149282A623604EC400C58EF4 /* MarkerImage.swift in Sources */,
-				149282B323604EC400C58EF4 /* AnimatedViewPortJob.swift in Sources */,
 				149282CF23604EC400C58EF4 /* CircleShapeRenderer.swift in Sources */,
 				149282CB23604EC400C58EF4 /* XShapeRenderer.swift in Sources */,
 				149282B823604EC400C58EF4 /* ChartAxisValueFormatter.swift in Sources */,
-				149282B123604EC400C58EF4 /* MoveViewJob.swift in Sources */,
 				1492826C23604EC400C58EF4 /* CandleChartDataEntry.swift in Sources */,
 				1492826E23604EC400C58EF4 /* LineChartData.swift in Sources */,
 				1492827123604EC400C58EF4 /* LineRadarChartDataSet.swift in Sources */,
@@ -730,14 +701,11 @@
 				149282AC23604EC400C58EF4 /* ChartLimitLine.swift in Sources */,
 				149282D623604EC400C58EF4 /* YAxisRendererRadarChart.swift in Sources */,
 				149282C623604EC400C58EF4 /* CandleStickChartRenderer.swift in Sources */,
-				149282AF23604EC400C58EF4 /* AnimatedZoomViewJob.swift in Sources */,
 				149282CA23604EC400C58EF4 /* BarLineScatterCandleRenderer.swift in Sources */,
 				149282AE23604EC400C58EF4 /* ComponentBase.swift in Sources */,
 				1492826223604EC400C58EF4 /* Platform.swift in Sources */,
 				1492827D23604EC400C58EF4 /* LineChartDataSet.swift in Sources */,
-				149282B023604EC400C58EF4 /* ViewPortJob.swift in Sources */,
 				1492825F23604EC400C58EF4 /* Fill.swift in Sources */,
-				149282B423604EC400C58EF4 /* AnimatedMoveViewJob.swift in Sources */,
 				149282C223604EC400C58EF4 /* ChartRenderBase.swift in Sources */,
 				1492827523604EC400C58EF4 /* ChartDataEntry.swift in Sources */,
 				1492827923604EC400C58EF4 /* ScatterChartDataSet.swift in Sources */,
