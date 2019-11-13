@@ -26,7 +26,7 @@
 		1492825D23604EC400C58EF4 /* ChartAnimationEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281C923604EC300C58EF4 /* ChartAnimationEasing.swift */; };
 		1492825E23604EC400C58EF4 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281CA23604EC300C58EF4 /* Animator.swift */; };
 		1492825F23604EC400C58EF4 /* Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281CC23604EC300C58EF4 /* Fill.swift */; };
-		1492826023604EC400C58EF4 /* ChartTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281CD23604EC300C58EF4 /* ChartTransformer.swift */; };
+		1492826023604EC400C58EF4 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281CD23604EC300C58EF4 /* Transformer.swift */; };
 		1492826123604EC400C58EF4 /* ViewPortHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281CE23604EC300C58EF4 /* ViewPortHandler.swift */; };
 		1492826223604EC400C58EF4 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281CF23604EC300C58EF4 /* Platform.swift */; };
 		1492826323604EC400C58EF4 /* ChartColorTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149281D023604EC300C58EF4 /* ChartColorTemplates.swift */; };
@@ -149,7 +149,7 @@
 		149281C923604EC300C58EF4 /* ChartAnimationEasing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartAnimationEasing.swift; sourceTree = "<group>"; };
 		149281CA23604EC300C58EF4 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		149281CC23604EC300C58EF4 /* Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fill.swift; sourceTree = "<group>"; };
-		149281CD23604EC300C58EF4 /* ChartTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartTransformer.swift; sourceTree = "<group>"; };
+		149281CD23604EC300C58EF4 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		149281CE23604EC300C58EF4 /* ViewPortHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPortHandler.swift; sourceTree = "<group>"; };
 		149281CF23604EC300C58EF4 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		149281D023604EC300C58EF4 /* ChartColorTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartColorTemplates.swift; sourceTree = "<group>"; };
@@ -343,7 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				149281CC23604EC300C58EF4 /* Fill.swift */,
-				149281CD23604EC300C58EF4 /* ChartTransformer.swift */,
+				149281CD23604EC300C58EF4 /* Transformer.swift */,
 				149281CE23604EC300C58EF4 /* ViewPortHandler.swift */,
 				149281CF23604EC300C58EF4 /* Platform.swift */,
 				149281D023604EC300C58EF4 /* ChartColorTemplates.swift */,
@@ -638,7 +638,7 @@
 				149282CD23604EC400C58EF4 /* ChevronDownShapeRenderer.swift in Sources */,
 				149282BD23604EC400C58EF4 /* LegendRenderer.swift in Sources */,
 				149282D023604EC400C58EF4 /* CrossShapeRenderer.swift in Sources */,
-				1492826023604EC400C58EF4 /* ChartTransformer.swift in Sources */,
+				1492826023604EC400C58EF4 /* Transformer.swift in Sources */,
 				1492825A23604EC400C58EF4 /* ChartHighlighter.swift in Sources */,
 				1492827C23604EC400C58EF4 /* CandleChartData.swift in Sources */,
 				1492826A23604EC400C58EF4 /* BarLineScatterCandleChartDataSet.swift in Sources */,

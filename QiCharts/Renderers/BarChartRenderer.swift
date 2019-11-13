@@ -261,7 +261,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
           y1: Double,
           y2: Double,
           barWidthHalf: Double,
-          trans: ChartTransformer,
+          trans: Transformer,
           rect: inout CGRect)
     {
         let left = x - barWidthHalf

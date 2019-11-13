@@ -16,9 +16,9 @@ open class AxisRendererBase: Renderer
     @objc open var axis: AxisBase?
     
     /// transformer to transform values to screen pixels and return
-    @objc open var transformer: ChartTransformer?
+    @objc open var transformer: Transformer?
 
-    @objc public init(viewPortHandler: ViewPortHandler, transformer: ChartTransformer?, axis: AxisBase?)
+    @objc public init(viewPortHandler: ViewPortHandler, transformer: Transformer?, axis: AxisBase?)
     {
         super.init(viewPortHandler: viewPortHandler)
         

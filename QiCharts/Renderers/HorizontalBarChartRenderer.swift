@@ -235,7 +235,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
         y1: Double,
         y2: Double,
         barWidthHalf: Double,
-        trans: ChartTransformer,
+        trans: Transformer,
         rect: inout CGRect)
     {
         let top = x - barWidthHalf

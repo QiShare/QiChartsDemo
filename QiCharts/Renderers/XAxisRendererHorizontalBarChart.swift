@@ -17,7 +17,7 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
 {
     internal weak var chart: BarChartView?
     
-    @objc public init(viewPortHandler: ViewPortHandler, xAxis: XAxis?, transformer: ChartTransformer?, chart: BarChartView)
+    @objc public init(viewPortHandler: ViewPortHandler, xAxis: XAxis?, transformer: Transformer?, chart: BarChartView)
     {
         super.init(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: transformer)
         
