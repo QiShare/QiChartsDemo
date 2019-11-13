@@ -135,6 +135,7 @@ open class AxisBase: ComponentBase
         }
     }
     
+    /// 标签格式
     private var _axisValueFormatter: ChartAxisValueFormatter?
     @objc open var valueFormatter: ChartAxisValueFormatter?
     {
