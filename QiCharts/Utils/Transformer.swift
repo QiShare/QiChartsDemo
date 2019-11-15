@@ -26,7 +26,7 @@ open class Transformer: NSObject
         _viewPortHandler = viewPortHandler
     }
 
-    /// Prepares the matrix that transforms values to pixels. Calculates the scale factors from the charts size and offsets.
+    /// 初始化，并根据图表大小和偏移量计算比例因子
     @objc open func prepareMatrixValuePx(chartXMin: Double, deltaX: CGFloat, deltaY: CGFloat, chartYMin: Double)
     {
         var scaleX = (_viewPortHandler.contentWidth / deltaX)
@@ -46,8 +46,7 @@ open class Transformer: NSObject
         _matrixValueToPx = _matrixValueToPx.scaledBy(x: scaleX, y: -scaleY)
         _matrixValueToPx = _matrixValueToPx.translatedBy(x: CGFloat(-chartXMin), y: CGFloat(-chartYMin))
     }
-
-    /// Prepares the matrix that contains all offsets.
+    
     @objc open func prepareMatrixOffset(inverted: Bool)
     {
         if !inverted
@@ -60,9 +59,7 @@ open class Transformer: NSObject
             _matrixOffset = _matrixOffset.translatedBy(x: _viewPortHandler.offsetLeft, y: -_viewPortHandler.offsetTop)
         }
     }
-
-    /// Transform an array of points with all matrices.
-    // VERY IMPORTANT: Keep matrix order "value-touch-offset" when transforming.
+    
     open func pointValuesToPixel(_ points: inout [CGPoint])
     {
         let trans = valueToPixelMatrix
@@ -88,7 +85,7 @@ open class Transformer: NSObject
         r = r.applying(valueToPixelMatrix)
     }
     
-    /// Transform a rectangle with all matrices with potential animation phases.
+    /// 在图表上transfer给定的区域，有 animation phases.
     open func rectValueToPixel(_ r: inout CGRect, phaseY: Double)
     {
         // multiply the height of the rect with the phase
@@ -101,13 +98,13 @@ open class Transformer: NSObject
         r = r.applying(valueToPixelMatrix)
     }
     
-    /// Transform a rectangle with all matrices.
+    /// 在图表上transfer给定的区域
     open func rectValueToPixelHorizontal(_ r: inout CGRect)
     {
         r = r.applying(valueToPixelMatrix)
     }
     
-    /// Transform a rectangle with all matrices with potential animation phases.
+    /// 在图表上transfer给定的接触点，有 animation phases.
     open func rectValueToPixelHorizontal(_ r: inout CGRect, phaseY: Double)
     {
         // multiply the height of the rect with the phase
@@ -119,7 +116,7 @@ open class Transformer: NSObject
         r = r.applying(valueToPixelMatrix)
     }
 
-    /// transforms multiple rects with all matrices
+    /// 在图表上transfer给定的区域数组
     open func rectValuesToPixel(_ rects: inout [CGRect])
     {
         let trans = valueToPixelMatrix
@@ -130,7 +127,7 @@ open class Transformer: NSObject
         }
     }
     
-    /// Transforms the given array of touch points (pixels) into values on the chart.
+    /// 在图表上transfer给定的接触点数组（像素数组）
     open func pixelsToValues(_ pixels: inout [CGPoint])
     {
         let trans = pixelToValueMatrix
@@ -141,28 +138,25 @@ open class Transformer: NSObject
         }
     }
     
-    /// Transforms the given touch point (pixels) into a value on the chart.
+    /// 在图表上transfer给定的接触点
     open func pixelToValues(_ pixel: inout CGPoint)
     {
         pixel = pixel.applying(pixelToValueMatrix)
     }
     
-    /// - returns: The x and y values in the chart at the given touch point
-    /// (encapsulated in a CGPoint). This method transforms pixel coordinates to
-    /// coordinates / values in the chart.
+    /// 在图表上transfer给定的像素坐标
     @objc open func valueForTouchPoint(_ point: CGPoint) -> CGPoint
     {
         return point.applying(pixelToValueMatrix)
     }
     
-    /// - returns: The x and y values in the chart at the given touch point
-    /// (x/y). This method transforms pixel coordinates to
-    /// coordinates / values in the chart.
+    /// 在图表上transfer给定的像素坐标
     @objc open func valueForTouchPoint(x: CGFloat, y: CGFloat) -> CGPoint
     {
         return CGPoint(x: x, y: y).applying(pixelToValueMatrix)
     }
     
+    /// 将_viewPortHandler.touchMatrix与_matrixOffset两个transform叠加
     @objc open var valueToPixelMatrix: CGAffineTransform
     {
         return _matrixValueToPx.concatenating(_viewPortHandler.touchMatrix).concatenating(_matrixOffset)
