@@ -13,12 +13,13 @@ import CoreGraphics
 @objc(ChartTransformer)
 open class Transformer: NSObject
 {
-    /// matrix to map the values to the screen pixels
+    /// 整个图表（viewPort）对应的矩阵（带默认值）
     internal var _matrixValueToPx = CGAffineTransform.identity
 
-    /// matrix for handling the different offsets of the chart
+    /// 矩阵偏移量（带默认值）
     internal var _matrixOffset = CGAffineTransform.identity
 
+    /// 当前视口设置的信息，如偏移、缩放和平移级别等
     internal var _viewPortHandler: ViewPortHandler
 
     @objc public init(viewPortHandler: ViewPortHandler)

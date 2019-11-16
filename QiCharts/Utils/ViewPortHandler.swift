@@ -9,7 +9,7 @@
 import Foundation
 import CoreGraphics
 
-/// Class that contains information about the charts current viewport settings, including offsets, scale & translation levels, ...
+/// 当前视口设置的信息，如偏移、缩放和平移级别等
 @objc(ChartViewPortHandler)
 open class ViewPortHandler: NSObject
 {

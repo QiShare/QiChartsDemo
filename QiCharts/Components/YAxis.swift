@@ -37,12 +37,21 @@ open class YAxis: AxisBase
     
     /// indicates if the bottom y-label entry is drawn or not
     @objc open var drawBottomYLabelEntryEnabled = true
+    @objc open var isDrawBottomYLabelEntryEnabled: Bool {
+        return drawBottomYLabelEntryEnabled
+    }
     
     /// indicates if the top y-label entry is drawn or not
     @objc open var drawTopYLabelEntryEnabled = true
+    @objc open var isDrawTopYLabelEntryEnabled: Bool {
+        return drawTopYLabelEntryEnabled
+    }
     
     /// flag that indicates if the axis is inverted or not
     @objc open var inverted = false
+    @objc open var isInverted: Bool {
+        return inverted
+    }
     
     /// flag that indicates if the zero-line should be drawn regardless of other grid lines
     @objc open var drawZeroLineEnabled = false
@@ -133,8 +142,6 @@ open class YAxis: AxisBase
         }
     }
     
-    @objc open var isInverted: Bool { return inverted }
-    
     open override func calculate(min dataMin: Double, max dataMax: Double)
     {
         // if custom, use value as is, else use data value
@@ -169,8 +176,8 @@ open class YAxis: AxisBase
         axisRange = abs(_axisMaximum - _axisMinimum)
     }
     
-    @objc open var isDrawBottomYLabelEntryEnabled: Bool { return drawBottomYLabelEntryEnabled }
     
-    @objc open var isDrawTopYLabelEntryEnabled: Bool { return drawTopYLabelEntryEnabled }
+    
+    
 
 }
