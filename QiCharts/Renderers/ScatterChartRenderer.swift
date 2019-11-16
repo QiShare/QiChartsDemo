@@ -16,18 +16,18 @@ import CoreGraphics
 
 open class ScatterChartRenderer: LineScatterCandleRadarRenderer
 {
-    @objc open weak var dataProvider: ScatterChartView?
+    @objc open weak var chartView: ScatterChartView?
     
-    @objc public init(dataProvider: ScatterChartView, animator: Animator, viewPortHandler: ViewPortHandler)
+    @objc public init(chartView: ScatterChartView, animator: Animator, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
-        self.dataProvider = dataProvider
+        self.chartView = chartView
     }
     
     open override func drawData(context: CGContext)
     {
-        guard let scatterData = dataProvider?.scatterData else { return }
+        guard let scatterData = chartView?.scatterData else { return }
         
         for i in 0 ..< scatterData.dataSetCount
         {
@@ -49,9 +49,9 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
     
     @objc open func drawDataSet(context: CGContext, dataSet: ScatterChartDataSet)
     {
-        guard let dataProvider = dataProvider else { return }
+        guard let chartView = chartView else { return }
         
-        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+        let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
         
         let phaseY = animator.phaseY
         
@@ -98,12 +98,12 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
     open override func drawValues(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
-            let scatterData = dataProvider.scatterData
+            let chartView = chartView,
+            let scatterData = chartView.scatterData
             else { return }
         
         // if values are drawn
-        if isDrawingValuesAllowed(chartView: dataProvider)
+        if isDrawingValuesAllowed(chartView: chartView)
         {
             guard let dataSets = scatterData.dataSets as? [ScatterChartDataSet] else { return }
             
@@ -124,7 +124,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
                 
                 guard let formatter = dataSet.valueFormatter else { continue }
                 
-                let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+                let trans = chartView.getTransformer(forAxis: dataSet.axisDependency)
                 let valueToPixelMatrix = trans.valueToPixelMatrix
                 
                 let iconsOffset = dataSet.iconsOffset
@@ -132,7 +132,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
                 let shapeSize = dataSet.scatterShapeSize
                 let lineHeight = valueFont.lineHeight
                 
-                _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
+                _xBounds.set(chart: chartView, dataSet: dataSet, animator: animator)
                 
                 for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
                 {
@@ -194,8 +194,8 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
         guard
-            let dataProvider = dataProvider,
-            let scatterData = dataProvider.scatterData
+            let chartView = chartView,
+            let scatterData = chartView.scatterData
             else { return }
         
         context.saveGState()
@@ -225,7 +225,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
             let x = entry.x // get the x-position
             let y = entry.y * Double(animator.phaseY)
             
-            let trans = dataProvider.getTransformer(forAxis: set.axisDependency)
+            let trans = chartView.getTransformer(forAxis: set.axisDependency)
             
             let pt = trans.pixelForValues(x: x, y: y)
             

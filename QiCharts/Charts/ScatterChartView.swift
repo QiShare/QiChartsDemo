@@ -16,7 +16,7 @@ open class ScatterChartView: BarLineScatterCandleChartViewBase
     {
         super.initialize()
         
-        renderer = ScatterChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
+        renderer = ScatterChartRenderer(chartView: self, animator: _animator, viewPortHandler: _viewPortHandler)
 
         xAxis.spaceMin = 0.5
         xAxis.spaceMax = 0.5

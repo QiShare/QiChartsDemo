@@ -47,6 +47,7 @@ open class Transformer: NSObject
         _matrixValueToPx = _matrixValueToPx.translatedBy(x: CGFloat(-chartXMin), y: CGFloat(-chartYMin))
     }
     
+    /// 初始化
     @objc open func prepareMatrixOffset(inverted: Bool)
     {
         if !inverted
@@ -156,12 +157,13 @@ open class Transformer: NSObject
         return CGPoint(x: x, y: y).applying(pixelToValueMatrix)
     }
     
-    /// 将_viewPortHandler.touchMatrix与_matrixOffset两个transform叠加
+    /// 将 整个_viewPortHandler.transfer 与 绘制区域偏移量transform 叠加
     @objc open var valueToPixelMatrix: CGAffineTransform
     {
         return _matrixValueToPx.concatenating(_viewPortHandler.touchMatrix).concatenating(_matrixOffset)
     }
     
+    /// 矩阵反转
     @objc open var pixelToValueMatrix: CGAffineTransform
     {
         return valueToPixelMatrix.inverted()
