@@ -157,10 +157,6 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
             getTransformer(forAxis: .left).pointValueToPixel(&newPoint)
             viewPortHandler.centerViewPort(pt: newPoint, chart: self)
         }
-        else
-        {
-            viewPortHandler.refresh(newMatrix: viewPortHandler.touchMatrix, chart: self, invalidate: true)
-        }
     }
     
     open override func draw(_ rect: CGRect)
