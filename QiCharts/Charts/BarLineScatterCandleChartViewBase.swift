@@ -1004,18 +1004,13 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         setNeedsDisplay()
     }
 
-    /// Zooms in or out by the given scale factor. x and y are the coordinates
-    /// (in pixels) of the zoom center.
+    /// 按给定比例因子放大或缩小（x和y是缩放中心的坐标）
     ///
     /// - parameter scaleX: if < 1 --> zoom out, if > 1 --> zoom in
     /// - parameter scaleY: if < 1 --> zoom out, if > 1 --> zoom in
-    /// - parameter x:
-    /// - parameter y:
-    @objc open func zoom(
-        scaleX: CGFloat,
-               scaleY: CGFloat,
-               x: CGFloat,
-               y: CGFloat)
+    /// - parameter x:x和y是缩放中心的坐标（以像素为单位）
+    /// - parameter y:x和y是缩放中心的坐标（以像素为单位）
+    @objc open func zoom(scaleX: CGFloat, scaleY: CGFloat, x: CGFloat, y: CGFloat)
     {
         let matrix = _viewPortHandler.zoom(scaleX: scaleX, scaleY: scaleY, x: x, y: -y)
         _viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: false)

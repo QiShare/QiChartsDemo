@@ -9,14 +9,17 @@
 import Foundation
 import CoreGraphics
 
-/// 当前视口设置的信息，如偏移、缩放和平移级别等
+/// 当前chart整个区域的设置信息，如偏移、缩放和平移级别等
 @objc(ChartViewPortHandler)
 open class ViewPortHandler: NSObject
 {
-    /// matrix used for touch events
+    /// 当前chart的(用于手势事件)
     private var _touchMatrix = CGAffineTransform.identity
+    @objc open var touchMatrix: CGAffineTransform {
+        return _touchMatrix
+    }
     
-    /// this rectangle defines the area in which graph values can be drawn
+    /// 此矩形定义可在其中绘制图形值的区域
     private var _contentRect = CGRect()
     
     private var _chartWidth = CGFloat(0.0)
@@ -259,6 +262,7 @@ open class ViewPortHandler: NSObject
     /// 刷新给定的newMatrix
     @objc @discardableResult open func refresh(newMatrix: CGAffineTransform, chart: ChartViewBase, invalidate: Bool) -> CGAffineTransform
     {
+        // 主要是更新本类中的_touchMatrix
         _touchMatrix = newMatrix
         
         // make sure scale and translation are within their bounds
@@ -401,10 +405,6 @@ open class ViewPortHandler: NSObject
         limitTransAndScale(matrix: &_touchMatrix, content: _contentRect)
     }
 
-    @objc open var touchMatrix: CGAffineTransform
-    {
-        return _touchMatrix
-    }
     
     // MARK: - 检查边界相关
     

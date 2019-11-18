@@ -26,8 +26,11 @@ class RadarViewController: BaseViewController {
    
     
     func addRadarChart(){
-        radarChartView.backgroundColor = ZHFColor.white
-        radarChartView.frame.size = CGSize.init(width: ScreenWidth - 20, height: 300)
+        
+        let size:CGSize = self.view.frame.size
+        radarChartView.backgroundColor = UIColor.white
+        radarChartView.frame.size = CGSize.init(width: size.width - 20, height: size.height - 20)
+        radarChartView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         radarChartView.center = self.view.center
         radarChartView.delegate = self
         self.view.addSubview(radarChartView)

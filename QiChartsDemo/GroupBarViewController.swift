@@ -30,8 +30,11 @@ class GroupBarViewController: BaseViewController {
     }
     
     func addBarChartView(){
+        
+        let size:CGSize = self.view.frame.size
         barChartView.backgroundColor = UIColor.white
-        barChartView.frame.size = CGSize.init(width: ScreenWidth - 20, height: 300)
+        barChartView.frame.size = CGSize.init(width: size.width - 20, height: size.height - 20)
+        barChartView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         barChartView.center = self.view.center
         barChartView.delegate = self
         self.view.addSubview(barChartView)

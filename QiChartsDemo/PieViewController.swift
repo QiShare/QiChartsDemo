@@ -23,8 +23,11 @@ class PieViewController: BaseViewController {
     }
         
     func addPieChart(){
-        pieChartView.backgroundColor = ZHFColor.white
-        pieChartView.frame.size = CGSize.init(width: ScreenWidth - 20, height: 300)
+        
+        let size:CGSize = self.view.frame.size
+        pieChartView.backgroundColor = UIColor.white
+        pieChartView.frame.size = CGSize.init(width: size.width - 20, height: size.height - 20)
+        pieChartView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         pieChartView.center = self.view.center
         pieChartView.delegate = self
         self.view.addSubview(pieChartView)

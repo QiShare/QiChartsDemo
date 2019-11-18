@@ -26,8 +26,11 @@ class KLineViewController: BaseViewController {
 
     //添加K 线图（烛形图）
     func addCandleStickChart(){
-        candleStickChartView.backgroundColor = ZHFColor.white
-        candleStickChartView.frame.size = CGSize.init(width: ScreenWidth - 20, height: 300)
+        
+        let size:CGSize = self.view.frame.size
+        candleStickChartView.backgroundColor = UIColor.white
+        candleStickChartView.frame.size = CGSize.init(width: size.width - 20, height: size.height - 20)
+        candleStickChartView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         candleStickChartView.center = self.view.center
         candleStickChartView.delegate = self
         self.view.addSubview(candleStickChartView)

@@ -159,6 +159,7 @@ open class Transformer: NSObject
     }
     
     /// 将 整个_viewPortHandler.transfer 与 绘制区域偏移量transform 叠加
+    /// 注：_touchMatrix与_matrixOffset是实时可变的
     @objc open var valueToPixelMatrix: CGAffineTransform
     {
         return _matrixValueToPx.concatenating(_viewPortHandler.touchMatrix).concatenating(_matrixOffset)

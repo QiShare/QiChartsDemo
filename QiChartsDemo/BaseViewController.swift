@@ -16,6 +16,8 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.edgesForExtendedLayout = [.left, .right, .bottom]
+        
         
         self.setNavBar()
     }

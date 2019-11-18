@@ -28,8 +28,11 @@ class ScatterViewController: BaseViewController {
     }
     
     func addScatterChartView(){
+        
+        let size:CGSize = self.view.frame.size
         chartView.backgroundColor = UIColor.white
-        chartView.frame.size = CGSize.init(width: ScreenWidth - 20, height: 300)
+        chartView.frame.size = CGSize.init(width: size.width - 20, height: size.height - 20)
+        chartView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         chartView.center = self.view.center
         chartView.delegate = self
         self.view.addSubview(chartView)

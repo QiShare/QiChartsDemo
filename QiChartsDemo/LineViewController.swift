@@ -37,8 +37,11 @@ class LineViewController: BaseViewController {
     
     //添加折线
     func addLineChart(){
-        lineChartView.backgroundColor = ZHFColor.white
-        lineChartView.frame.size = CGSize.init(width: ScreenWidth - 20, height: 300)
+        
+        let size:CGSize = self.view.frame.size
+        lineChartView.backgroundColor = UIColor.white
+        lineChartView.frame.size = CGSize.init(width: size.width - 20, height: size.height - 20)
+        lineChartView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         lineChartView.center = self.view.center
         lineChartView.delegate = self
         self.view.addSubview(lineChartView)
