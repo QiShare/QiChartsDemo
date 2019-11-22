@@ -68,9 +68,6 @@ class LineViewController: BaseViewController {
     }
     //修改背景色和边框样式
     func setBackgroundBorder(){
-        //        lineChartView.drawGridBackgroundEnabled = true  //绘制图形区域背景
-        //        lineChartView.gridBackgroundColor = ZHFColor.yellow //背景改成黄色(默认为浅灰色)
-        lineChartView.drawBordersEnabled = true  //绘制图形区域边框
         lineChartView.borderColor = ZHFColor.red  //边框为红色
         lineChartView.borderLineWidth = 2  //边框线条大小为2
     }

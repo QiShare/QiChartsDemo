@@ -13,14 +13,13 @@ import CoreGraphics
     import UIKit
 #endif
 
-/// Base-class of LineChart, BarChart, ScatterChart and CandleStickChart.
 open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecognizerDelegate
 {
     /// the maximum number of entries to which values will be drawn
     /// (entry numbers greater than this value will cause value-labels to disappear)
     internal var _maxVisibleCount = 100
     
-    /// flag that indicates if auto scaling on the y axis is enabled
+    /// 是否允许y-axis自动z缩放
     private var _autoScaleMinMaxEnabled = false
     
     private var _pinchZoomEnabled = false
@@ -31,18 +30,10 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     private var _scaleXEnabled = true
     private var _scaleYEnabled = true
     
-    /// the color for the background of the chart-drawing area (everything behind the grid lines).
     @objc open var gridBackgroundColor = NSUIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
     
     @objc open var borderColor = NSUIColor.black
     @objc open var borderLineWidth: CGFloat = 1.0
-    
-    /// flag indicating if the grid background should be drawn or not
-    @objc open var drawGridBackgroundEnabled = false
-    
-    /// When enabled, the borders rectangle will be rendered.
-    /// If this is enabled, there is no point drawing the axis-lines of x- and y-axis.
-    @objc open var drawBordersEnabled = false
     
     /// When enabled, the values will be clipped to contentRect, otherwise they can bleed outside the content rect.
     @objc open var clipValuesToContentEnabled: Bool = false
@@ -169,9 +160,10 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         guard let context = optionalContext else { return }
 
         // execute all drawing commands
-        drawGridBackground(context: context)
+        context.saveGState()
+        context.setFillColor(gridBackgroundColor.cgColor)
+        context.fill(_viewPortHandler.contentRect)
         
-
         if _autoScaleMinMaxEnabled
         {
             autoScale()
@@ -466,34 +458,6 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         
         prepareOffsetMatrix()
         prepareValuePxMatrix()
-    }
-    
-    /// draws the grid background
-    internal func drawGridBackground(context: CGContext)
-    {
-        if drawGridBackgroundEnabled || drawBordersEnabled
-        {
-            context.saveGState()
-        }
-        
-        if drawGridBackgroundEnabled
-        {
-            // draw the grid background
-            context.setFillColor(gridBackgroundColor.cgColor)
-            context.fill(_viewPortHandler.contentRect)
-        }
-        
-        if drawBordersEnabled
-        {
-            context.setLineWidth(borderLineWidth)
-            context.setStrokeColor(borderColor.cgColor)
-            context.stroke(_viewPortHandler.contentRect)
-        }
-        
-        if drawGridBackgroundEnabled || drawBordersEnabled
-        {
-            context.restoreGState()
-        }
     }
     
     // MARK: - Gestures
@@ -1295,20 +1259,6 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return highlightPerDragEnabled
     }
     
-    /// **default**: true
-    /// - returns: `true` if drawing the grid background is enabled, `false` ifnot.
-    @objc open var isDrawGridBackgroundEnabled: Bool
-    {
-        return drawGridBackgroundEnabled
-    }
-    
-    /// **default**: false
-    /// - returns: `true` if drawing the borders rectangle is enabled, `false` ifnot.
-    @objc open var isDrawBordersEnabled: Bool
-    {
-        return drawBordersEnabled
-    }
-
     /// - returns: The x and y values in the chart at the given touch point
     /// (encapsulated in a `CGPoint`). This method transforms pixel coordinates to
     /// coordinates / values in the chart. This is the opposite method to
