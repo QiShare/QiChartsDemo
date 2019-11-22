@@ -212,7 +212,7 @@ open class HorizontalBarChartView: BarChartView
             x: viewPortHandler.contentLeft,
             y: viewPortHandler.contentBottom)
         
-        getTransformer(forAxis: .left).pixelToValues(&pt)
+        getTransformer(forAxis: .left).pixelToValue(&pt)
         
         return max(xAxis._axisMinimum, Double(pt.y))
     }
@@ -224,7 +224,7 @@ open class HorizontalBarChartView: BarChartView
             x: viewPortHandler.contentLeft,
             y: viewPortHandler.contentTop)
         
-        getTransformer(forAxis: .left).pixelToValues(&pt)
+        getTransformer(forAxis: .left).pixelToValue(&pt)
         
         return min(xAxis._axisMaximum, Double(pt.y))
     }

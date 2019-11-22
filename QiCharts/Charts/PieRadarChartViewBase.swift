@@ -13,22 +13,21 @@ import CoreGraphics
     import UIKit
 #endif
 
-/// Base class of PieChartView and RadarChartView.
 open class PieRadarChartViewBase: ChartViewBase
 {
-    /// holds the normalized version of the current rotation angle of the chart
+    /// chart的当前旋转角度
     private var _rotationAngle = CGFloat(270.0)
     
-    /// holds the raw version of the current rotation angle of the chart
+    /// chart的原始旋转角度
     private var _rawRotationAngle = CGFloat(270.0)
     
-    /// flag that indicates if rotation is enabled or not
+    /// 图表是否支持旋转
     @objc open var rotationEnabled = true
     
-    /// Sets the minimum offset (padding) around the chart, defaults to 0.0
+    /// 最小偏移量
     @objc open var minOffset = CGFloat(0.0)
 
-    /// iOS && OSX only: Enabled multi-touch rotation using two fingers.
+    /// 是否支持两指触控旋转（iOS && OSX）
     private var _rotationWithTwoFingers = false
     
     private var _tapGestureRecognizer: NSUITapGestureRecognizer!
@@ -241,8 +240,7 @@ open class PieRadarChartViewBase: ChartViewBase
         _viewPortHandler.restrainViewPort(offsetLeft: offsetLeft, offsetTop: offsetTop, offsetRight: offsetRight, offsetBottom: offsetBottom)
     }
 
-    /// - returns: The angle relative to the chart center for the given point on the chart in degrees.
-    /// The angle is always between 0 and 360°, 0° is NORTH, 90° is EAST, ...
+    /// 图表上给定点相对于图表中心的角度（0到360°之间，0°为北，90°为东）
     @objc open func angleForPoint(x: CGFloat, y: CGFloat) -> CGFloat
     {
         let c = centerOffsets
@@ -271,15 +269,14 @@ open class PieRadarChartViewBase: ChartViewBase
         return CGFloat(angle)
     }
     
-    /// Calculates the position around a center point, depending on the distance
-    /// from the center, and the angle of the position around the center.
+    /// 根据中心点、距离和角度，计算其周围点的位置
     @objc open func getPosition(center: CGPoint, dist: CGFloat, angle: CGFloat) -> CGPoint
     {
         return CGPoint(x: center.x + dist * cos(angle.DEG2RAD),
                 y: center.y + dist * sin(angle.DEG2RAD))
     }
 
-    /// - returns: The distance of a certain point on the chart to the center of the chart.
+    /// 计算某点与中心的距离
     @objc open func distanceToCenter(x: CGFloat, y: CGFloat) -> CGFloat
     {
         let c = self.centerOffsets
@@ -313,17 +310,13 @@ open class PieRadarChartViewBase: ChartViewBase
         return dist
     }
 
-    /// - returns: The xIndex for the given angle around the center of the chart.
-    /// -1 if not found / outofbounds.
+    /// 根据给定的angle计算xIndex
     @objc open func indexForAngle(_ angle: CGFloat) -> Int
     {
         fatalError("indexForAngle() cannot be called on PieRadarChartViewBase")
     }
 
-    /// current rotation angle of the pie chart
-    ///
-    /// **default**: 270 --> top (NORTH)
-    /// - returns: Will always return a normalized value, which will be between 0.0 < 360.0
+    /// chart当前的旋转角度
     @objc open var rotationAngle: CGFloat
     {
         get
@@ -338,14 +331,13 @@ open class PieRadarChartViewBase: ChartViewBase
         }
     }
     
-    /// gets the raw version of the current rotation angle of the pie chart the returned value could be any value, negative or positive, outside of the 360 degrees. 
-    /// this is used when working with rotation direction, mainly by gestures and animations.
+    /// 获取饼图当前旋转角度的原始值，在处理旋转方向时使用
     @objc open var rawRotationAngle: CGFloat
     {
         return _rawRotationAngle
     }
 
-    /// - returns: The diameter of the pie- or radar-chart
+    /// 图表直径
     @objc open var diameter: CGFloat
     {
         var content = _viewPortHandler.contentRect
@@ -356,20 +348,19 @@ open class PieRadarChartViewBase: ChartViewBase
         return min(content.width, content.height)
     }
 
-    /// - returns: The radius of the chart in pixels.
+    /// 以像素为单位的图表半径
     @objc open var radius: CGFloat
     {
         fatalError("radius cannot be called on PieRadarChartViewBase")
     }
 
-    /// - returns: The required offset for the chart legend.
+    /// 图例所需偏移量
     internal var requiredLegendOffset: CGFloat
     {
         fatalError("requiredLegendOffset cannot be called on PieRadarChartViewBase")
     }
 
-    /// - returns: The base offset needed for the chart without calculating the
-    /// legend size.
+    /// 不考虑图例尺寸时，图表的偏移量
     internal var requiredBaseOffset: CGFloat
     {
         fatalError("requiredBaseOffset cannot be called on PieRadarChartViewBase")
@@ -387,13 +378,9 @@ open class PieRadarChartViewBase: ChartViewBase
     
     @objc open var isRotationEnabled: Bool { return rotationEnabled }
     
-    /// flag that indicates if rotation is done with two fingers or one.
-    /// when the chart is inside a scrollview, you need a two-finger rotation because a one-finger rotation eats up all touch events.
-    ///
-    /// On iOS this will disable one-finger rotation.
-    /// On OSX this will keep two-finger multitouch rotation, and one-pointer mouse rotation.
-    /// 
-    /// **default**: false
+    /// 旋转是否为两个手指
+    /// 当图表位于scrollView中时，需两个手指旋转，一个手指旋转会吞噬所有触摸事件
+    /// 在iOS上，这将禁用一个手指旋转；在OSX上，这将保持两个手指多点触摸旋转和一个鼠标指针旋转
     @objc open var rotationWithTwoFingers: Bool
     {
         get
@@ -409,13 +396,6 @@ open class PieRadarChartViewBase: ChartViewBase
         }
     }
     
-    /// flag that indicates if rotation is done with two fingers or one.
-    /// when the chart is inside a scrollview, you need a two-finger rotation because a one-finger rotation eats up all touch events.
-    ///
-    /// On iOS this will disable one-finger rotation.
-    /// On OSX this will keep two-finger multitouch rotation, and one-pointer mouse rotation.
-    ///
-    /// **default**: false
     @objc open var isRotationWithTwoFingers: Bool
     {
         return _rotationWithTwoFingers
@@ -425,7 +405,7 @@ open class PieRadarChartViewBase: ChartViewBase
     
     private var _spinAnimator: Animator!
     
-    /// Applys a spin animation to the Chart.
+    /// 旋转
     @objc open func spin(duration: TimeInterval, fromAngle: CGFloat, toAngle: CGFloat, easing: ChartEasingFunctionBlock?)
     {
         if _spinAnimator != nil

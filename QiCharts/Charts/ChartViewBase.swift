@@ -638,16 +638,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         case png
     }
     
-    /// Saves the current chart state with the given name to the given path on
-    /// the sdcard leaving the path empty "" will put the saved file directly on
-    /// the SD card chart is saved as a PNG image, example:
-    /// saveToPath("myfilename", "foldername1/foldername2")
-    ///
-    /// - parameter to: path to the image to save
-    /// - parameter format: the format to save
-    /// - parameter compressionQuality: compression quality for lossless formats (JPEG)
-    ///
-    /// - returns: `true` if the image was saved successfully
+    /// 将图表保存为图片
     open func save(to path: String, format: ImageFormat, compressionQuality: Double) -> Bool
     {
         guard let image = getChartImage(transparent: format != .jpeg) else { return false }
@@ -685,8 +676,6 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
             {
                 _viewPortHandler.setChartDimens(width: bounds.size.width, height: bounds.size.height)
                 
-                // This may cause the chart view to mutate properties affecting the view port -- lets do this
-                // before we try to run any pending jobs on the view port itself
                 notifyDataSetChanged()
             }
         }
@@ -721,7 +710,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
     /// **default**: 500.0
     open var maxHighlightDistance: CGFloat = 500.0
     
-    /// the number of maximum visible drawn values on the chart only active when `drawValuesEnabled` is enabled
+    /// 可见entry的最大数母
     open var maxVisibleCount: Int
     {
         return Int(INT_MAX)

@@ -145,7 +145,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         if (keepPositionOnRotation && (keyPath == "frame" || keyPath == "bounds"))
         {
             oldPoint = viewPortHandler.contentRect.origin
-            getTransformer(forAxis: .left).pixelToValues(&oldPoint!)
+            getTransformer(forAxis: .left).pixelToValue(&oldPoint!)
         }
         
         // Superclass transforms chart.
@@ -1562,7 +1562,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
             x: viewPortHandler.contentLeft,
             y: viewPortHandler.contentBottom)
         
-        getTransformer(forAxis: .left).pixelToValues(&pt)
+        getTransformer(forAxis: .left).pixelToValue(&pt)
         
         return max(xAxis._axisMinimum, Double(pt.x))
     }
@@ -1574,7 +1574,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
             x: viewPortHandler.contentRight,
             y: viewPortHandler.contentBottom)
         
-        getTransformer(forAxis: .left).pixelToValues(&pt)
+        getTransformer(forAxis: .left).pixelToValue(&pt)
 
         return min(xAxis._axisMaximum, Double(pt.x))
     }

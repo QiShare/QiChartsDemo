@@ -21,7 +21,8 @@ open class ChartHighlighter : NSObject
     
     open func getHighlight(x: CGFloat, y: CGFloat) -> Highlight?
     {
-        let xVal = Double(getValsForTouch(x: x, y: y).x)
+        let point: CGPoint = getValsForTouch(x: x, y: y)
+        let xVal = Double(point.x)
         return getHighlight(xValue: xVal, x: x, y: y)
     }
     

@@ -62,6 +62,8 @@ open class Transformer: NSObject
         }
     }
     
+    // MARK: - 缩放平移之后的值（valueToPixelMatrix）
+    
     open func pointValuesToPixel(_ points: inout [CGPoint])
     {
         let trans = valueToPixelMatrix
@@ -129,6 +131,8 @@ open class Transformer: NSObject
         }
     }
     
+    // MARK: - 缩放平移之前的值（pixelToValueMatrix）
+    
     /// 在图表上transfer给定的接触点数组（像素数组）
     open func pixelsToValues(_ pixels: inout [CGPoint])
     {
@@ -141,7 +145,7 @@ open class Transformer: NSObject
     }
     
     /// 在图表上transfer给定的接触点
-    open func pixelToValues(_ pixel: inout CGPoint)
+    open func pixelToValue(_ pixel: inout CGPoint)
     {
         pixel = pixel.applying(pixelToValueMatrix)
     }
