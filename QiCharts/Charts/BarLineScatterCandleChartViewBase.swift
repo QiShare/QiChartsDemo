@@ -163,6 +163,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         context.saveGState()
         context.setFillColor(gridBackgroundColor.cgColor)
         context.fill(_viewPortHandler.contentRect)
+        context.restoreGState()
         
         if _autoScaleMinMaxEnabled
         {
