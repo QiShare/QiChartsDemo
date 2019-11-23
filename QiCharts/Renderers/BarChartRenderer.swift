@@ -580,7 +580,7 @@ open class BarChartRenderer: BarLineScatterCandleRenderer
                 
                 if isStack
                 {
-                    if chartView.isHighlightFullBarEnabled
+                    if chartView.highlightFullBarEnabled
                     {
                         y1 = e.positiveSum
                         y2 = -e.negativeSum

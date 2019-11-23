@@ -49,7 +49,7 @@ open class BarChartView: BarLineScatterCandleChartViewBase
             max: data.getYMax(axis: .right))
     }
     
-    /// - returns: The Highlight object (contains x-index and DataSet index) of the selected value at the given touch point inside the BarChart.
+    /// 根据点击的像素点获取对应的Highlight（x-index and DataSet index）
     open override func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight?
     {
         if _data === nil
@@ -61,9 +61,8 @@ open class BarChartView: BarLineScatterCandleChartViewBase
         guard let highlight = self.highlighter?.getHighlight(x: pt.x, y: pt.y)
             else { return nil }
         
-        if !isHighlightFullBarEnabled { return highlight }
+        if !highlightFullBarEnabled { return highlight }
         
-        // For isHighlightFullBarEnabled, remove stackIndex
         return Highlight(
             x: highlight.x, y: highlight.y,
             xPx: highlight.xPx, yPx: highlight.yPx,
@@ -73,7 +72,6 @@ open class BarChartView: BarLineScatterCandleChartViewBase
             axis: highlight.axis)
     }
         
-    /// - returns: The bounding box of the specified Entry in the specified DataSet. Returns null if the Entry could not be found in the charts data.
     @objc open func getBarBounds(entry e: BarChartDataEntry) -> CGRect
     {
         guard let
@@ -98,13 +96,11 @@ open class BarChartView: BarLineScatterCandleChartViewBase
         return bounds
     }
     
-    /// Groups all BarDataSet objects this data object holds together by modifying the x-value of their entries.
-    /// Previously set x-values of entries will be overwritten. Leaves space between bars and groups as specified by the parameters.
-    /// Calls `notifyDataSetChanged()` afterwards.
+    /// 对组柱状图数据进行分组
     ///
-    /// - parameter fromX: the starting point on the x-axis where the grouping should begin
-    /// - parameter groupSpace: the space between groups of bars in values (not pixels) e.g. 0.8f for bar width 1f
-    /// - parameter barSpace: the space between individual bars in values (not pixels) e.g. 0.1f for bar width 1f
+    /// - parameter fromX: x轴上的起点
+    /// - parameter groupSpace: 组间隙 0～0.99
+    /// - parameter barSpace: bar间隙 0～0.99
     @objc open func groupBars(fromX: Double, groupSpace: Double, barSpace: Double)
     {
         guard let barData = self.barData
@@ -120,16 +116,11 @@ open class BarChartView: BarLineScatterCandleChartViewBase
     
     // MARK: Accessors
     
-    /// Adds half of the bar width to each side of the x-axis range in order to allow the bars of the barchart to be fully displayed.
-    /// **default**: false
-    @objc open var fitBars = false
+    /// 将Bar宽度的一半添加到x轴的每一侧，以允许条形码的条带充分显示。
+    @objc open var fitBars = true
     
-    /// Set this to `true` to make the highlight operation full-bar oriented, `false` to make it highlight single values (relevant only for stacked).
-    /// If enabled, highlighting operations will highlight the whole bar, even if only a single stack entry was tapped.
+    /// bar堆叠时，选中时是否都高亮
     @objc open var highlightFullBarEnabled: Bool = false
-    
-    /// - returns: `true` the highlight is be full-bar oriented, `false` ifsingle-value
-    open var isHighlightFullBarEnabled: Bool { return highlightFullBarEnabled }
     
     // MARK: - BarChartDataProvider
     

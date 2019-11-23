@@ -291,12 +291,14 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         setNeedsDisplay()
     }
     
+    /// 计算各轴上 值的范围
+    /// 注：每次数据发生变化，重新初始化AxisRender之前都要调用
     internal override func calcMinMax()
     {
-        // calculate / set x-axis range
+        // 计算并设置x轴的范围
         _xAxis.calculate(min: _data?.xMin ?? 0.0, max: _data?.xMax ?? 0.0)
         
-        // calculate axis range (min / max) according to provided data
+        // 计算并设置y轴的范围
         leftAxis.calculate(min: _data?.getYMin(axis: .left) ?? 0.0, max: _data?.getYMax(axis: .left) ?? 0.0)
         rightAxis.calculate(min: _data?.getYMin(axis: .right) ?? 0.0, max: _data?.getYMax(axis: .right) ?? 0.0)
     }
