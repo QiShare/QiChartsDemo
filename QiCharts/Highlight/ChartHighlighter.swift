@@ -107,7 +107,7 @@ open class ChartHighlighter : NSObject
         
         for e in entries
         {
-            let px = chart.getTransformer(forAxis: set.axisDependency).pixelForValues(x: e.x, y: e.y)
+            let px = chart.getTransformer(forAxis: set.axisDependency).pixelForValue(x: e.x, y: e.y)
 
             let highlight = Highlight(x: e.x, y: e.y, xPx: px.x, yPx: px.y, dataSetIndex: dataSetIndex, axis: set.axisDependency)
             highlights.append(highlight)

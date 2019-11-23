@@ -227,7 +227,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
             
             let trans = chartView.getTransformer(forAxis: set.axisDependency)
             
-            let pt = trans.pixelForValues(x: x, y: y)
+            let pt = trans.pixelForValue(x: x, y: y)
             
             high.setDraw(pt: pt)
             

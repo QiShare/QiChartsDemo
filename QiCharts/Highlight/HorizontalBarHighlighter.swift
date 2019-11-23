@@ -50,7 +50,7 @@ open class HorizontalBarHighlighter: BarHighlighter
         
         for e in entries
         {
-            let px = chart.getTransformer(forAxis: set.axisDependency).pixelForValues(x: e.y, y: e.x)
+            let px = chart.getTransformer(forAxis: set.axisDependency).pixelForValue(x: e.y, y: e.x)
             
             highlights.append(Highlight(x: e.x, y: e.y, xPx: px.x, yPx: px.y, dataSetIndex: dataSetIndex, axis: set.axisDependency))
         }

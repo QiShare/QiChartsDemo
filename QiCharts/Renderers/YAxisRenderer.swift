@@ -257,7 +257,7 @@ open class YAxisRenderer: AxisRendererBase
         context.setStrokeColor(zeroLineColor.cgColor)
         context.setLineWidth(yAxis.zeroLineWidth)
         
-        let pos = transformer.pixelForValues(x: 0.0, y: 0.0)
+        let pos = transformer.pixelForValue(x: 0.0, y: 0.0)
     
         if yAxis.zeroLineDashLengths != nil
         {

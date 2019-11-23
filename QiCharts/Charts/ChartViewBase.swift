@@ -710,7 +710,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
     /// **default**: 500.0
     open var maxHighlightDistance: CGFloat = 500.0
     
-    /// 可见entry的最大数母
+    /// 可见entry的最大数目
     open var maxVisibleCount: Int
     {
         return Int(INT_MAX)

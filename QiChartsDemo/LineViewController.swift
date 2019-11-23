@@ -23,8 +23,6 @@ class LineViewController: BaseViewController {
         chartDescription()
         //设置交互样式
         interactionStyle()
-        //修改背景色和边框样式
-        setBackgroundBorder()
         //设置x轴的样式属性
         setXAxisStyle()
         //设置y轴的样式属性
@@ -49,7 +47,6 @@ class LineViewController: BaseViewController {
     //设置交互样式
     func interactionStyle(){
         lineChartView.scaleYEnabled = false //取消Y轴缩放
-        lineChartView.doubleTapToZoomEnabled = true //双击缩放
         lineChartView.dragEnabled = true //启用拖动手势
         lineChartView.dragDecelerationEnabled = true //拖拽后是否有惯性效果
         lineChartView.dragDecelerationFrictionCoef = 0.9 //拖拽后惯性效果摩擦系数(0~1)越小惯性越不明显
@@ -66,11 +63,7 @@ class LineViewController: BaseViewController {
         lineChartView.legend.form = Legend.Form.circle//图例头部样式
         //矩形：.square（默认值） 圆形：.circle   横线：.line  无：.none 空：.empty（与 .none 一样都不显示头部，但不同的是 empty 头部仍然会占一个位置)
     }
-    //修改背景色和边框样式
-    func setBackgroundBorder(){
-        lineChartView.borderColor = ZHFColor.red  //边框为红色
-        lineChartView.borderLineWidth = 2  //边框线条大小为2
-    }
+    
      //设置x轴的样式属性
     func setXAxisStyle(){
         //轴线宽、颜色、刻度、间隔

@@ -358,7 +358,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
             let highValue = e.high * Double(animator.phaseY)
             let y = (lowValue + highValue) / 2.0
             
-            let pt = trans.pixelForValues(x: e.x, y: y)
+            let pt = trans.pixelForValue(x: e.x, y: y)
             
             high.setDraw(pt: pt)
             

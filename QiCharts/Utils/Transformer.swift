@@ -78,7 +78,7 @@ open class Transformer: NSObject
         point = point.applying(valueToPixelMatrix)
     }
     
-    @objc open func pixelForValues(x: Double, y: Double) -> CGPoint
+    @objc open func pixelForValue(x: Double, y: Double) -> CGPoint
     {
         return CGPoint(x: x, y: y).applying(valueToPixelMatrix)
     }

@@ -75,7 +75,7 @@ open class BarHighlighter: ChartHighlighter
         let stackIndex = getClosestStackIndex(ranges: ranges, value: yValue)
         let pixel = chart
             .getTransformer(forAxis: set.axisDependency)
-            .pixelForValues(x: high.x, y: ranges[stackIndex].to)
+            .pixelForValue(x: high.x, y: ranges[stackIndex].to)
 
         return Highlight(x: entry.x,
                          y: entry.y,

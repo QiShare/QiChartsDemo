@@ -44,7 +44,6 @@ class ScatterViewController: BaseViewController {
         //交互设置
         //barChartView.scaleXEnabled = false//取消X轴缩放
         chartView.scaleYEnabled = false//取消Y轴缩放
-        chartView.doubleTapToZoomEnabled = false//取消双击是否缩放
         chartView.pinchZoomEnabled = false//取消XY轴是否同时缩放
         chartView.dragEnabled = true //启用拖拽图表
         chartView.dragDecelerationEnabled = true //拖拽后是否有惯性效果

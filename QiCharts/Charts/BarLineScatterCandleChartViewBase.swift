@@ -19,11 +19,10 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     /// (entry numbers greater than this value will cause value-labels to disappear)
     internal var _maxVisibleCount = 100
     
-    /// 是否允许y-axis自动z缩放
-    private var _autoScaleMinMaxEnabled = false
+    /// 根据当前窗口内显示出来的values，y轴是否自适应最小、最大值
+    @objc open var autoScaleMinMaxEnabled: Bool = true
     
     private var _pinchZoomEnabled = false
-    private var _doubleTapToZoomEnabled = true
     private var _dragXEnabled = true
     private var _dragYEnabled = true
     
@@ -32,55 +31,39 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     
     @objc open var gridBackgroundColor = NSUIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
     
-    @objc open var borderColor = NSUIColor.black
-    @objc open var borderLineWidth: CGFloat = 1.0
-    
-    /// When enabled, the values will be clipped to contentRect, otherwise they can bleed outside the content rect.
+    ///
     @objc open var clipValuesToContentEnabled: Bool = false
-
-    /// When disabled, the data and/or highlights will not be clipped to contentRect. Disabling this option can
-    /// be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
-    /// that there is unwanted clipping.
     @objc open var clipDataToContentEnabled: Bool = true
 
-    /// Sets the minimum offset (padding) around the chart, defaults to 10
+    /// 图表绘制区域距 chart边 的最小偏移量
     @objc open var minOffset = CGFloat(10.0)
     
-    /// Sets whether the chart should keep its position (zoom / scroll) after a rotation (orientation change)
-    /// **default**: false
-    @objc open var keepPositionOnRotation: Bool = false
-    
-    /// The left y-axis object. In the horizontal bar-chart, this is the
-    /// top axis.
+    /// The left y-axis object. In the horizontal bar-chart, this is the top axis.
     @objc open internal(set) var leftAxis = YAxis(position: .left)
-    
-    /// The right y-axis object. In the horizontal bar-chart, this is the
-    /// bottom axis.
+
+    /// The right y-axis object. In the horizontal bar-chart, this is the bottom axis.
     @objc open internal(set) var rightAxis = YAxis(position: .right)
 
-    /// The left Y axis renderer. This is a read-write property so you can set your own custom renderer here.
-    /// **default**: An instance of YAxisRenderer
+    /// xAxisRenderer，可自定义
+    @objc open lazy var xAxisRenderer = XAxisRenderer(viewPortHandler: _viewPortHandler, xAxis: _xAxis, transformer: _leftAxisTransformer)
+    
+    /// leftYAxisRenderer，可自定义
     @objc open lazy var leftYAxisRenderer = YAxisRenderer(viewPortHandler: _viewPortHandler, yAxis: leftAxis, transformer: _leftAxisTransformer)
-
-    /// The right Y axis renderer. This is a read-write property so you can set your own custom renderer here.
-    /// **default**: An instance of YAxisRenderer
+    /// rightYAxisRenderer，可自定义
     @objc open lazy var rightYAxisRenderer = YAxisRenderer(viewPortHandler: _viewPortHandler, yAxis: rightAxis, transformer: _rightAxisTransformer)
     
+    /// 变换类实例
     internal var _leftAxisTransformer: Transformer!
     internal var _rightAxisTransformer: Transformer!
     
-    /// The X axis renderer. This is a read-write property so you can set your own custom renderer here.
-    /// **default**: An instance of XAxisRenderer
-    @objc open lazy var xAxisRenderer = XAxisRenderer(viewPortHandler: _viewPortHandler, xAxis: _xAxis, transformer: _leftAxisTransformer)
-    
+    /// 手势实例
     internal var _tapGestureRecognizer: NSUITapGestureRecognizer!
-    internal var _doubleTapGestureRecognizer: NSUITapGestureRecognizer!
     #if !os(tvOS)
     internal var _pinchGestureRecognizer: NSUIPinchGestureRecognizer!
     #endif
     internal var _panGestureRecognizer: NSUIPanGestureRecognizer!
     
-    /// flag that indicates if a custom viewport offset has been set
+    /// 自定义viewPort偏移量是否生效
     private var _customViewPortEnabled = false
     
     public override init(frame: CGRect)
@@ -108,17 +91,13 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         self.highlighter = ChartHighlighter(chart: self)
         
         _tapGestureRecognizer = NSUITapGestureRecognizer(target: self, action: #selector(tapGestureRecognized(_:)))
-        _doubleTapGestureRecognizer = NSUITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognized(_:)))
-        _doubleTapGestureRecognizer.nsuiNumberOfTapsRequired = 2
         _panGestureRecognizer = NSUIPanGestureRecognizer(target: self, action: #selector(panGestureRecognized(_:)))
         
         _panGestureRecognizer.delegate = self
         
         self.addGestureRecognizer(_tapGestureRecognizer)
-        self.addGestureRecognizer(_doubleTapGestureRecognizer)
         self.addGestureRecognizer(_panGestureRecognizer)
         
-        _doubleTapGestureRecognizer.isEnabled = _doubleTapToZoomEnabled
         _panGestureRecognizer.isEnabled = _dragXEnabled || _dragYEnabled
 
         #if !os(tvOS)
@@ -127,27 +106,6 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
             self.addGestureRecognizer(_pinchGestureRecognizer)
             _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
         #endif
-    }
-    
-    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
-    {
-        // Saving current position of chart.
-        var oldPoint: CGPoint?
-        if (keepPositionOnRotation && (keyPath == "frame" || keyPath == "bounds"))
-        {
-            oldPoint = viewPortHandler.contentRect.origin
-            getTransformer(forAxis: .left).pixelToValue(&oldPoint!)
-        }
-        
-        // Superclass transforms chart.
-        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        
-        // Restoring old position of chart
-        if var newPoint = oldPoint , keepPositionOnRotation
-        {
-            getTransformer(forAxis: .left).pointValueToPixel(&newPoint)
-            viewPortHandler.centerViewPort(pt: newPoint, chart: self)
-        }
     }
     
     open override func draw(_ rect: CGRect)
@@ -165,7 +123,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         context.fill(_viewPortHandler.contentRect)
         context.restoreGState()
         
-        if _autoScaleMinMaxEnabled
+        if autoScaleMinMaxEnabled
         {
             autoScale()
         }
@@ -189,7 +147,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         leftYAxisRenderer.renderAxisLine(context: context)
         rightYAxisRenderer.renderAxisLine(context: context)
 
-        // The renderers are responsible for clipping, to account for line-width center etc.
+        // 渲染器负责剪裁，以确定线宽的中心
         xAxisRenderer.renderGridLines(context: context)
         leftYAxisRenderer.renderGridLines(context: context)
         rightYAxisRenderer.renderGridLines(context: context)
@@ -269,7 +227,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     private var _autoScaleLastLowestVisibleX: Double?
     private var _autoScaleLastHighestVisibleX: Double?
     
-    /// Performs auto scaling of the axis by recalculating the minimum and maximum y-values based on the entries currently in view.
+    /// 通过当前视图中的条目，重新计算y-values最小和最大值，来执行轴的自动缩放
     internal func autoScale()
     {
         guard let data = _data
@@ -461,7 +419,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         prepareValuePxMatrix()
     }
     
-    // MARK: - Gestures
+    // MARK: - 手势相关
     
     private enum GestureScaleAxis
     {
@@ -505,34 +463,6 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
             {
                 lastHighlighted = h
                 highlightValue(h, callDelegate: true)
-            }
-        }
-    }
-    
-    @objc private func doubleTapGestureRecognized(_ recognizer: NSUITapGestureRecognizer)
-    {
-        if _data === nil
-        {
-            return
-        }
-        
-        if recognizer.state == NSUIGestureRecognizerState.ended
-        {
-            if _data !== nil && _doubleTapToZoomEnabled && (data?.entryCount ?? 0) > 0
-            {
-                var location = recognizer.location(in: self)
-                location.x = location.x - _viewPortHandler.offsetLeft
-                
-                if isTouchInverted()
-                {
-                    location.y = -(location.y - _viewPortHandler.offsetTop)
-                }
-                else
-                {
-                    location.y = -(self.bounds.size.height - location.y - _viewPortHandler.offsetBottom)
-                }
-                
-                self.zoom(scaleX: isScaleXEnabled ? 1.4 : 1.0, scaleY: isScaleYEnabled ? 1.4 : 1.0, x: location.x, y: location.y)
             }
         }
     }
@@ -634,7 +564,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         {
             stopDeceleration()
             
-            if _data === nil || !self.isDragEnabled
+            if _data === nil || !self.dragEnabled
             { // If we have no data, we have nothing to pan and no data to highlight
                 return
             }
@@ -822,7 +752,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         {
             stopDeceleration()
             
-            // Range might have changed, which means that Y-axis labels could have changed in size, affecting Y-axis size. So we need to recalculate offsets.
+            // Y轴标签可能已经改变尺寸，并影响Y轴尺寸，所以需要重新计算偏移量
             calculateOffsets()
             setNeedsDisplay()
         }
@@ -833,7 +763,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         if gestureRecognizer == _panGestureRecognizer
         {
             let velocity = _panGestureRecognizer.velocity(in: self)
-            if _data === nil || !isDragEnabled ||
+            if _data === nil || !dragEnabled ||
                 (self.hasNoDragOffset && self.isFullyZoomedOut && !self.isHighlightPerDragEnabled) ||
                 (!_dragYEnabled && abs(velocity.y) > abs(velocity.x)) ||
                 (!_dragXEnabled && abs(velocity.y) < abs(velocity.x))
@@ -928,7 +858,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     
     /// MARK: Viewport modifiers
     
-    /// Zooms in by 1.4, into the charts center.
+    /// 以chart的中心，放大（1.4）
     @objc open func zoomIn()
     {
         let center = _viewPortHandler.contentCenter
@@ -941,7 +871,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         setNeedsDisplay()
     }
 
-    /// Zooms out by 0.7, from the charts center.
+    /// 以chart的中心，缩小（0.7）
     @objc open func zoomOut()
     {
         let center = _viewPortHandler.contentCenter
@@ -954,7 +884,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         setNeedsDisplay()
     }
     
-    /// Zooms out to original size.
+    /// 缩放至原来大小
     @objc open func resetZoom()
     {
         let matrix = _viewPortHandler.resetZoom()
@@ -981,7 +911,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         setNeedsDisplay()
     }
     
-    /// Resets all zooming and dragging and makes the chart fit exactly it's bounds.
+    /// 重置所有缩放和拖动，并使chart边界复原
     @objc open func fitScreen()
     {
         let matrix = _viewPortHandler.fitScreen()
@@ -991,7 +921,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         setNeedsDisplay()
     }
     
-    /// Sets the minimum scale value to which can be zoomed out. 1 = fitScreen
+    /// 设置可以缩放的最小比例
     @objc open func setScaleMinima(_ scaleX: CGFloat, scaleY: CGFloat)
     {
         _viewPortHandler.setMinimumScaleX(scaleX)
@@ -1003,35 +933,21 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return abs(highestVisibleX - lowestVisibleX)
     }
     
-    /// Sets the size of the area (range on the x-axis) that should be maximum visible at once (no further zooming out allowed).
-    ///
-    /// If this is e.g. set to 10, no more than a range of 10 values on the x-axis can be viewed at once without scrolling.
-    ///
-    /// If you call this method, chart must have data or it has no effect.
+    /// 设置x轴上的最大可见rang，最大可见数据组数（不允许进一步缩进）
     @objc open func setVisibleXRangeMaximum(_ maxXRange: Double)
     {
         let xScale = _xAxis.axisRange / maxXRange
         _viewPortHandler.setMinimumScaleX(CGFloat(xScale))
     }
     
-    /// Sets the size of the area (range on the x-axis) that should be minimum visible at once (no further zooming in allowed).
-    ///
-    /// If this is e.g. set to 10, no less than a range of 10 values on the x-axis can be viewed at once without scrolling.
-    ///
-    /// If you call this method, chart must have data or it has no effect.
+    /// 设置x轴的最小数据可见rang（不允许进一步缩放）
     @objc open func setVisibleXRangeMinimum(_ minXRange: Double)
     {
         let xScale = _xAxis.axisRange / minXRange
         _viewPortHandler.setMaximumScaleX(CGFloat(xScale))
     }
-
-    /// Limits the maximum and minimum value count that can be visible by pinching and zooming.
-    ///  设置图表缩放的跨度
-    ///
-    /// e.g. minRange=10, maxRange=100 no less than 10 values and no more that 100 values can be viewed
-    /// at once without scrolling.
-    ///
-    /// If you call this method, chart must have data or it has no effect.
+    
+    ///  设置x轴上图表缩放的最小、最大跨度
     @objc open func setVisibleXRange(minXRange: Double, maxXRange: Double)
     {
         let minScale = _xAxis.axisRange / maxXRange
@@ -1041,31 +957,21 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
             maxScaleX: CGFloat(maxScale))
     }
     
-    /// Sets the size of the area (range on the y-axis) that should be maximum visible at once.
-    ///
-    /// - parameter yRange:
-    /// - parameter axis: - the axis for which this limit should apply
+    /// 设置y轴上的最大可见rang，最大可见数据组数（不允许进一步缩进）
     @objc open func setVisibleYRangeMaximum(_ maxYRange: Double, axis: YAxis.AxisDependency)
     {
         let yScale = getAxisRange(axis: axis) / maxYRange
         _viewPortHandler.setMinimumScaleY(CGFloat(yScale))
     }
     
-    /// Sets the size of the area (range on the y-axis) that should be minimum visible at once, no further zooming in possible.
-    ///
-    /// - parameter yRange:
-    /// - parameter axis: - the axis for which this limit should apply
+    /// 设置y轴的最小数据可见rang（不允许进一步缩放）
     @objc open func setVisibleYRangeMinimum(_ minYRange: Double, axis: YAxis.AxisDependency)
     {
         let yScale = getAxisRange(axis: axis) / minYRange
         _viewPortHandler.setMaximumScaleY(CGFloat(yScale))
     }
 
-    /// Limits the maximum and minimum y range that can be visible by pinching and zooming.
-    ///
-    /// - parameter minYRange:
-    /// - parameter maxYRange:
-    /// - parameter axis:
+    ///  设置y轴上图表缩放的最小、最大跨度
     @objc open func setVisibleYRange(minYRange: Double, maxYRange: Double, axis: YAxis.AxisDependency)
     {
         let minScale = getAxisRange(axis: axis) / minYRange
@@ -1074,8 +980,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
     }
     
 
-    /// Sets custom offsets for the current `ChartViewPort` (the offsets on the sides of the actual chart window). Setting this will prevent the chart from automatically calculating it's offsets. Use `resetViewPortOffsets()` to undo this.
-    /// ONLY USE THIS WHEN YOU KNOW WHAT YOU ARE DOING, else use `setExtraOffsets(...)`.
+    /// 注意与setExtraOffsets方法的区别
     @objc open func setViewPortOffsets(left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat)
     {
         _customViewPortEnabled = true
@@ -1094,7 +999,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         }
     }
 
-    /// Resets all custom offsets set via `setViewPortOffsets(...)` method. Allows the chart to again calculate all offsets automatically.
+    /// 重置viewPort偏移量，偏移量均由chart自动计算
     @objc open func resetViewPortOffsets()
     {
         _customViewPortEnabled = false
@@ -1116,7 +1021,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         }
     }
 
-    /// - returns: The position (in pixels) the provided Entry has inside the chart view
+    /// 根据屏幕像素点（绘制时屏幕上的点），获取“真实值point”
     @objc open func getPosition(entry e: ChartDataEntry, axis: YAxis.AxisDependency) -> CGPoint
     {
         var vals = CGPoint(x: CGFloat(e.x), y: CGFloat(e.y))
@@ -1125,8 +1030,8 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
 
         return vals
     }
-
-    /// is dragging enabled? (moving the chart with the finger) for the chart (this does not affect scaling).
+    
+    /// 是否支持拖动
     @objc open var dragEnabled: Bool
     {
         get
@@ -1140,13 +1045,6 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         }
     }
     
-    /// is dragging enabled? (moving the chart with the finger) for the chart (this does not affect scaling).
-    @objc open var isDragEnabled: Bool
-    {
-        return dragEnabled
-    }
-    
-    /// is dragging on the X axis enabled?
     open var dragXEnabled: Bool 
     {
         get
@@ -1159,7 +1057,6 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         }
     }
     
-    /// is dragging on the Y axis enabled?
     open var dragYEnabled: Bool
     {
         get
@@ -1172,7 +1069,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         }
     }
     
-    /// is scaling enabled? (zooming in and out by gesture) for the chart (this does not affect dragging).
+    /// 是否支持缩放
     @objc open func setScaleEnabled(_ enabled: Bool)
     {
         if _scaleXEnabled != enabled || _scaleYEnabled != enabled
@@ -1221,62 +1118,28 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         }
     }
     
-    @objc open var isScaleXEnabled: Bool { return scaleXEnabled }
-    @objc open var isScaleYEnabled: Bool { return scaleYEnabled }
-    
-    /// flag that indicates if double tap zoom is enabled or not
-    @objc open var doubleTapToZoomEnabled: Bool
-    {
-        get
-        {
-            return _doubleTapToZoomEnabled
-        }
-        set
-        {
-            if _doubleTapToZoomEnabled != newValue
-            {
-                _doubleTapToZoomEnabled = newValue
-                _doubleTapGestureRecognizer.isEnabled = _doubleTapToZoomEnabled
-            }
-        }
-    }
-    
-    /// **default**: true
-    /// - returns: `true` if zooming via double-tap is enabled `false` ifnot.
-    @objc open var isDoubleTapToZoomEnabled: Bool
-    {
-        return doubleTapToZoomEnabled
-    }
-    
-    /// flag that indicates if highlighting per dragging over a fully zoomed out chart is enabled
+    /// 在缩小到最小时，拖拽是是否实时高亮
     @objc open var highlightPerDragEnabled = true
     
-    /// If set to true, highlighting per dragging over a fully zoomed out chart is enabled
-    /// You might want to disable this when using inside a `NSUIScrollView`
-    /// 
-    /// **default**: true
+    /// 在缩小到最小时，拖拽是是否实时高亮
     @objc open var isHighlightPerDragEnabled: Bool
     {
         return highlightPerDragEnabled
     }
     
-    /// - returns: The x and y values in the chart at the given touch point
-    /// (encapsulated in a `CGPoint`). This method transforms pixel coordinates to
-    /// coordinates / values in the chart. This is the opposite method to
-    /// `getPixelsForValues(...)`.
+    /// 将图表中屏幕展示之后的像素点，转换为实际value点
     @objc open func valueForTouchPoint(point pt: CGPoint, axis: YAxis.AxisDependency) -> CGPoint
     {
         return getTransformer(forAxis: axis).valueForTouchPoint(pt)
     }
 
-    /// Transforms the given chart values into pixels. This is the opposite
-    /// method to `valueForTouchPoint(...)`.
-    @objc open func pixelForValues(x: Double, y: Double, axis: YAxis.AxisDependency) -> CGPoint
+    /// 将图表中的实际value点，转换为屏幕展示之后的像素点
+    @objc open func pixelForValue(x: Double, y: Double, axis: YAxis.AxisDependency) -> CGPoint
     {
-        return getTransformer(forAxis: axis).pixelForValues(x: x, y: y)
+        return getTransformer(forAxis: axis).pixelForValue(x: x, y: y)
     }
     
-    /// - returns: The Entry object displayed at the touched position of the chart
+    /// 根据TouchPoint获取EntryObject
     @objc open func getEntryByTouchPoint(point pt: CGPoint) -> ChartDataEntry!
     {
         if let h = getHighlightByTouchPoint(pt)
@@ -1286,7 +1149,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return nil
     }
     
-    /// - returns: The DataSet object displayed at the touched position of the chart
+    /// 根据TouchPoint获取DataSet
     @objc open func getDataSetByTouchPoint(point pt: CGPoint) -> BarLineScatterCandleChartDataSet?
     {
         let h = getHighlightByTouchPoint(pt)
@@ -1297,7 +1160,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return nil
     }
 
-    /// - returns: The current x-scale factor
+    /// 当前的x轴缩放因子scaleX
     @objc open var scaleX: CGFloat
     {
         if _viewPortHandler === nil
@@ -1307,7 +1170,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return _viewPortHandler.scaleX
     }
 
-    /// - returns: The current y-scale factor
+    /// 当前的y轴缩放因子scaleY
     @objc open var scaleY: CGFloat
     {
         if _viewPortHandler === nil
@@ -1317,11 +1180,10 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return _viewPortHandler.scaleY
     }
 
-    /// if the chart is fully zoomed out, return true
+    /// 图表是否完全缩小
     @objc open var isFullyZoomedOut: Bool { return _viewPortHandler.isFullyZoomedOut }
 
-    /// - returns: The y-axis object to the corresponding AxisDependency. In the
-    /// horizontal bar-chart, LEFT == top, RIGHT == BOTTOM
+    /// 获取YAxis（horizontal bar-chart, LEFT == top, RIGHT == BOTTOM）
     @objc open func getAxis(_ axis: YAxis.AxisDependency) -> YAxis
     {
         if axis == .left
@@ -1334,7 +1196,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         }
     }
     
-    /// flag that indicates if pinch-zoom is enabled. if true, both x and y axis can be scaled simultaneously with 2 fingers, if false, x and y axis can be scaled separately
+    /// 是否 x、y 轴 同时支持缩放
     @objc open var pinchZoomEnabled: Bool
     {
         get
@@ -1353,25 +1215,18 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         }
     }
 
-    /// **default**: false
-    /// - returns: `true` if pinch-zoom is enabled, `false` ifnot
-    @objc open var isPinchZoomEnabled: Bool { return pinchZoomEnabled }
-
-    /// Set an offset in dp that allows the user to drag the chart over it's
-    /// bounds on the x-axis.
+    /// 设置x轴拖拽偏移量
     @objc open func setDragOffsetX(_ offset: CGFloat)
     {
         _viewPortHandler.setDragOffsetX(offset)
     }
 
-    /// Set an offset in dp that allows the user to drag the chart over it's
-    /// bounds on the y-axis.
+    /// 设置y轴拖拽偏移量
     @objc open func setDragOffsetY(_ offset: CGFloat)
     {
         _viewPortHandler.setDragOffsetY(offset)
     }
-
-    /// - returns: `true` if both drag offsets (x and y) are zero or smaller.
+    
     @objc open var hasNoDragOffset: Bool { return _viewPortHandler.hasNoDragOffset }
 
     open override var chartYMax: Double
@@ -1384,98 +1239,15 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return min(leftAxis._axisMinimum, rightAxis._axisMinimum)
     }
     
-    /// - returns: `true` if either the left or the right or both axes are inverted.
+    /// y轴 是否有反转
     @objc open var isAnyAxisInverted: Bool
     {
         return leftAxis.isInverted || rightAxis.isInverted
     }
     
-    /// flag that indicates if auto scaling on the y axis is enabled.
-    /// if yes, the y axis automatically adjusts to the min and max y values of the current x axis range whenever the viewport changes
-    @objc open var autoScaleMinMaxEnabled: Bool
-    {
-        get { return _autoScaleMinMaxEnabled }
-        set { _autoScaleMinMaxEnabled = newValue }
-    }
-    
-    /// **default**: false
-    /// - returns: `true` if auto scaling on the y axis is enabled.
-    @objc open var isAutoScaleMinMaxEnabled : Bool { return autoScaleMinMaxEnabled }
-    
-    /// Sets a minimum width to the specified y axis.
-    @objc open func setYAxisMinWidth(_ axis: YAxis.AxisDependency, width: CGFloat)
-    {
-        if axis == .left
-        {
-            leftAxis.minWidth = width
-        }
-        else
-        {
-            rightAxis.minWidth = width
-        }
-    }
-    
-    /// **default**: 0.0
-    /// - returns: The (custom) minimum width of the specified Y axis.
-    @objc open func getYAxisMinWidth(_ axis: YAxis.AxisDependency) -> CGFloat
-    {
-        if axis == .left
-        {
-            return leftAxis.minWidth
-        }
-        else
-        {
-            return rightAxis.minWidth
-        }
-    }
-    /// Sets a maximum width to the specified y axis.
-    /// Zero (0.0) means there's no maximum width
-    @objc open func setYAxisMaxWidth(_ axis: YAxis.AxisDependency, width: CGFloat)
-    {
-        if axis == .left
-        {
-            leftAxis.maxWidth = width
-        }
-        else
-        {
-            rightAxis.maxWidth = width
-        }
-    }
-    
-    /// Zero (0.0) means there's no maximum width
-    ///
-    /// **default**: 0.0 (no maximum specified)
-    /// - returns: The (custom) maximum width of the specified Y axis.
-    @objc open func getYAxisMaxWidth(_ axis: YAxis.AxisDependency) -> CGFloat
-    {
-        if axis == .left
-        {
-            return leftAxis.maxWidth
-        }
-        else
-        {
-            return rightAxis.maxWidth
-        }
-    }
-
-    /// - returns the width of the specified y axis.
-    @objc open func getYAxisWidth(_ axis: YAxis.AxisDependency) -> CGFloat
-    {
-        if axis == .left
-        {
-            return leftAxis.requiredSize().width
-        }
-        else
-        {
-            return rightAxis.requiredSize().width
-        }
-    }
     
     // MARK: - BarLineScatterCandleBubbleChartDataProvider
     
-    /// - returns: The Transformer class that contains all matrices and is
-    /// responsible for transforming values into pixels on the screen and
-    /// backwards.
     open func getTransformer(forAxis axis: YAxis.AxisDependency) -> Transformer
     {
         if axis == .left
@@ -1506,7 +1278,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return getAxis(axis).isInverted
     }
     
-    /// - returns: The lowest x-index (value on the x-axis) that is still visible on he chart.
+    /// 当前可见的 最小x值
     open var lowestVisibleX: Double
     {
         var pt = CGPoint(
@@ -1518,7 +1290,7 @@ open class BarLineScatterCandleChartViewBase: ChartViewBase, NSUIGestureRecogniz
         return max(xAxis._axisMinimum, Double(pt.x))
     }
     
-    /// - returns: The highest x-index (value on the x-axis) that is still visible on the chart.
+    /// 当前可见的 最大x值
     open var highestVisibleX: Double
     {
         var pt = CGPoint(
