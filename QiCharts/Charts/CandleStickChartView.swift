@@ -9,7 +9,6 @@
 import Foundation
 import CoreGraphics
 
-/// Financial chart type that draws candle-sticks.
 open class CandleStickChartView: BarLineScatterCandleChartViewBase
 {
     internal override func initialize()

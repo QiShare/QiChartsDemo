@@ -19,21 +19,14 @@ class LineViewController: BaseViewController {
         
         //添加折线
         addLineChart()
-        //折线图描述文字和样式
-        chartDescription()
         //设置交互样式
-        interactionStyle()
-        //设置x轴的样式属性
-        setXAxisStyle()
-        //设置y轴的样式属性
-        setYAxisStyle()
+        setLineChartStyle()
         //设置限制线（可设置多根）
         setlimitLine()
         //添加（刷新数据）
         updataData()
     }
     
-    //添加折线
     func addLineChart(){
         
         let size:CGSize = self.view.frame.size
@@ -44,15 +37,14 @@ class LineViewController: BaseViewController {
         lineChartView.delegate = self
         self.view.addSubview(lineChartView)
     }
-    //设置交互样式
-    func interactionStyle(){
+    
+    func setLineChartStyle(){
+        
         lineChartView.scaleYEnabled = false //取消Y轴缩放
         lineChartView.dragEnabled = true //启用拖动手势
         lineChartView.dragDecelerationEnabled = true //拖拽后是否有惯性效果
         lineChartView.dragDecelerationFrictionCoef = 0.9 //拖拽后惯性效果摩擦系数(0~1)越小惯性越不明显
-    }
-    //描述文字
-    func chartDescription(){
+        
         lineChartView.noDataText = "暂无数据" //如果没有数据会显示这个
         lineChartView.chartDescription?.text = "折线图描述"
         lineChartView.chartDescription?.position = CGPoint.init(x: lineChartView.frame.width - 30, y:lineChartView.frame.height - 20)//位置（及在lineChartView的中心点）
@@ -62,10 +54,7 @@ class LineViewController: BaseViewController {
         lineChartView.legend.formSize = 10 //（图例大小）默认是8
         lineChartView.legend.form = Legend.Form.circle//图例头部样式
         //矩形：.square（默认值） 圆形：.circle   横线：.line  无：.none 空：.empty（与 .none 一样都不显示头部，但不同的是 empty 头部仍然会占一个位置)
-    }
-    
-     //设置x轴的样式属性
-    func setXAxisStyle(){
+        
         //轴线宽、颜色、刻度、间隔
         lineChartView.xAxis.axisLineWidth = 2 //x轴宽度
         lineChartView.xAxis.axisLineColor = .black //x轴颜色
@@ -92,9 +81,7 @@ class LineViewController: BaseViewController {
         lineChartView.xAxis.gridColor = .orange //x轴对应网格线的颜色
         lineChartView.xAxis.gridLineWidth = 2 //x轴对应网格线的大小
         lineChartView.xAxis.gridLineDashLengths = [4,2]  //虚线各段长度
-    }
-    //设置y轴的样式属性(分左、右侧)
-    func setYAxisStyle(){
+        
         //右侧(默认显示)
         //lineChartView.rightAxis.drawLabelsEnabled = false //不绘制右侧Y轴文字
         //lineChartView.rightAxis.drawAxisLineEnabled = false //不显示右侧Y轴
@@ -109,6 +96,7 @@ class LineViewController: BaseViewController {
         lineChartView.leftAxis.zeroLineDashLengths = [4, 2] //0刻度线使用虚线样式
         //（1.轴线宽、颜色、刻度、间隔 2.文字属性 3.文字格式、4.网格线）和 func setXAxisStyle()方法一样
     }
+    
     //设置限制线（可设置多根）
     func setlimitLine(){
         //界限1
