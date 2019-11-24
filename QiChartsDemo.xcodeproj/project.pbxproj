@@ -367,15 +367,15 @@
 			isa = PBXGroup;
 			children = (
 				1492821223604EC300C58EF4 /* ChartViewBase.swift */,
-				1492821423604EC300C58EF4 /* PieRadarChartViewBase.swift */,
 				1492820E23604EC300C58EF4 /* BarLineScatterCandleChartViewBase.swift */,
 				1492821523604EC300C58EF4 /* BarChartView.swift */,
-				1492821723604EC300C58EF4 /* PieChartView.swift */,
-				1492820D23604EC300C58EF4 /* RadarChartView.swift */,
 				1492820C23604EC300C58EF4 /* CandleStickChartView.swift */,
 				1492820F23604EC300C58EF4 /* LineChartView.swift */,
 				1492821123604EC300C58EF4 /* HorizontalBarChartView.swift */,
 				1492821623604EC300C58EF4 /* ScatterChartView.swift */,
+				1492821423604EC300C58EF4 /* PieRadarChartViewBase.swift */,
+				1492821723604EC300C58EF4 /* PieChartView.swift */,
+				1492820D23604EC300C58EF4 /* RadarChartView.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";

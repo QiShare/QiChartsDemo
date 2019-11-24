@@ -13,7 +13,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-/// BarChart with horizontal bar orientation. In this implementation, x- and y-axis are switched.
+/// 横版barChartView（横版时，leftAxis在上 rightAxis在下）
 open class HorizontalBarChartView: BarChartView
 {
     internal override func initialize()

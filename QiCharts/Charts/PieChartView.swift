@@ -13,34 +13,31 @@ import CoreGraphics
     import UIKit
 #endif
 
-/// View that represents a pie chart. Draws cake like slices.
 open class PieChartView: PieRadarChartViewBase
 {
-    /// rect object that represents the bounds of the piechart, needed for drawing the circle
+    /// 饼图绘制区域的rect
     private var _circleBox = CGRect()
     
-    /// flag indicating if entry labels should be drawn or not
-    private var _drawEntryLabelsEnabled = true
-    
-    /// array that holds the width of each pie-slice in degrees
+    /// 保存每个“扇形”角度的数组
     private var _drawAngles = [CGFloat]()
     
-    /// array that holds the absolute angle in degrees of each slice
+    /// 相应entry的“扇形”末尾所对应的角度数组
     private var _absoluteAngles = [CGFloat]()
     
-    /// if true, the hole inside the chart will be drawn
+    /// 是否绘制空心区域，即饼图是否为圆环型
     private var _drawHoleEnabled = true
     
+    /// 空心区域的颜色
     private var _holeColor: NSUIColor? = NSUIColor.white
     
-    /// Sets the color the entry labels are drawn with.
+    /// 是否绘制Entry的value标签
+    private var _drawEntryLabelsEnabled = true
+    
+    /// 绘制Entry的value标签的颜色
     private var _entryLabelColor: NSUIColor? = NSUIColor.white
     
-    /// Sets the font the entry labels are drawn with.
+    /// 绘制Entry的value标签的font
     private var _entryLabelFont: NSUIFont? = NSUIFont(name: "HelveticaNeue", size: 13.0)
-    
-    /// if true, the hole will see-through to the inner tips of the slices
-    private var _drawSlicesUnderHoleEnabled = false
     
     /// if true, the values inside the piechart are drawn as percent values
     private var _usePercentValuesEnabled = false
@@ -132,6 +129,7 @@ open class PieChartView: PieRadarChartViewBase
             return
         }
         
+        // diameter为图表直径（在基类中定义）
         let radius = diameter / 2.0
         
         let c = self.centerOffsets
@@ -321,28 +319,6 @@ open class PieChartView: PieRadarChartViewBase
             _holeColor = newValue
             setNeedsDisplay()
         }
-    }
-    
-    /// if true, the hole will see-through to the inner tips of the slices
-    ///
-    /// **default**: `false`
-    @objc open var drawSlicesUnderHoleEnabled: Bool
-    {
-        get
-        {
-            return _drawSlicesUnderHoleEnabled
-        }
-        set
-        {
-            _drawSlicesUnderHoleEnabled = newValue
-            setNeedsDisplay()
-        }
-    }
-    
-    /// - returns: `true` if the inner tips of the slices are visible behind the hole, `false` if not.
-    @objc open var isDrawSlicesUnderHoleEnabled: Bool
-    {
-        return drawSlicesUnderHoleEnabled
     }
     
     /// `true` if the hole in the center of the pie-chart is set to be visible, `false` ifnot

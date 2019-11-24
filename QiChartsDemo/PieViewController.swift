@@ -39,10 +39,9 @@ class PieViewController: BaseViewController {
         pieChartView.setExtraOffsets(left: 30, top: 30, right: 30, bottom: 0)//饼状图距离边缘的间隙
         pieChartView.usePercentValuesEnabled = true//是否根据所提供的数据, 将显示数据转换为百分比格式
         pieChartView.dragDecelerationEnabled = true//拖拽饼状图后是否有惯性效果
-        pieChartView.drawSlicesUnderHoleEnabled = true//是否显示区块文本
 
         //空（实）心饼状图样式
-        pieChartView.drawHoleEnabled = true//饼状图是否是空心 true为空心 false为实心
+        pieChartView.drawHoleEnabled = true//饼状图是否是空心
         pieChartView.holeRadiusPercent = 0.5//空心半径占比
         pieChartView.holeColor = ZHFColor.white//空心颜色 这个不能设置成clear
         pieChartView.transparentCircleRadiusPercent = 0.54//半透明空心半径占比
