@@ -9,31 +9,25 @@
 import Foundation
 import CoreGraphics
 
-
-/// Implementation of the RadarChart, a "spidernet"-like chart. It works best
-/// when displaying 5-10 entries per DataSet.
 open class RadarChartView: PieRadarChartViewBase
 {
-    /// width of the web lines that come from the center.
+    /// 从中心向外轴线 的宽度
     @objc open var webLineWidth = CGFloat(1.5)
     
-    /// width of the web lines that are in between the lines coming from the center
+    /// 从中心向外轴线之间线 的宽度
     @objc open var innerWebLineWidth = CGFloat(0.75)
     
-    /// color for the web lines that come from the center
+    /// “轴线”的颜色
     @objc open var webColor = NSUIColor(red: 122/255.0, green: 122/255.0, blue: 122.0/255.0, alpha: 1.0)
     
-    /// color for the web lines in between the lines that come from the center.
+    /// “轴线”之间线的颜色
     @objc open var innerWebColor = NSUIColor(red: 122/255.0, green: 122/255.0, blue: 122.0/255.0, alpha: 1.0)
     
-    /// transparency the grid is drawn with (0.0 - 1.0)
+    /// 整个网格线的透明度
     @objc open var webAlpha: CGFloat = 150.0 / 255.0
     
-    /// flag indicating if the web lines should be drawn or not
+    /// 是否绘制网格
     @objc open var drawWeb = true
-    
-    /// modulus that determines how many labels and web-lines are skipped before the next is drawn
-    private var _skipWebLineCount = 0
     
     /// the object reprsenting the y-axis labels
     private var _yAxis: YAxis!
@@ -188,20 +182,6 @@ open class RadarChartView: PieRadarChartViewBase
         return _yAxis
     }
 
-    /// Sets the number of web-lines that should be skipped on chart web before the next one is drawn. This targets the lines that come from the center of the RadarChart.
-    /// if count = 1 -> 1 line is skipped in between
-    @objc open var skipWebLineCount: Int
-    {
-        get
-        {
-            return _skipWebLineCount
-        }
-        set
-        {
-            _skipWebLineCount = max(0, newValue)
-        }
-    }
-    
     internal override var requiredLegendOffset: CGFloat
     {
         return _legend.font.pointSize * 4.0

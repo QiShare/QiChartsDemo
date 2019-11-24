@@ -234,10 +234,9 @@ open class RadarChartRenderer: LineRadarRenderer
         context.setStrokeColor(chart.webColor.cgColor)
         context.setAlpha(chart.webAlpha)
         
-        let xIncrements = 1 + chart.skipWebLineCount
         let maxEntryCount = chart.data?.maxEntryCountSet?.entryCount ?? 0
 
-        for i in stride(from: 0, to: maxEntryCount, by: xIncrements)
+        for i in stride(from: 0, to: maxEntryCount, by: 1)
         {
             let p = center.moving(distance: CGFloat(chart.yRange) * factor,
                                   atAngle: sliceangle * CGFloat(i) + rotationangle)

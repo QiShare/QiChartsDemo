@@ -45,7 +45,6 @@ class RadarViewController: BaseViewController {
         radarChartView.webColor = ZHFColor.black
         radarChartView.innerWebLineWidth = 0.375 //边线线宽
         radarChartView.innerWebColor = ZHFColor.black
-        radarChartView.webAlpha = 1 //透明度
         //设置 xAx
         let xAxis: XAxis = radarChartView.xAxis
         xAxis.delegate = self //重写代理方法  设置y轴数据
