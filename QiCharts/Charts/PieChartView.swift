@@ -39,31 +39,30 @@ open class PieChartView: PieRadarChartViewBase
     /// 绘制Entry的value标签的font
     private var _entryLabelFont: NSUIFont? = NSUIFont(name: "HelveticaNeue", size: 13.0)
     
-    /// if true, the values inside the piechart are drawn as percent values
+    /// 绘制的Entry的value是否以百分比显示（需要配合data中的formattor使用！）
     private var _usePercentValuesEnabled = false
     
-    /// variable for the text that is drawn in the center of the pie-chart
-    private var _centerAttributedText: NSAttributedString?
-    
-    /// the offset on the x- and y-axis the center text has in dp.
-    private var _centerTextOffset: CGPoint = CGPoint()
-    
-    /// indicates the size of the hole in the center of the piechart
-    ///
-    /// **default**: `0.5`
-    private var _holeRadiusPercent = CGFloat(0.5)
-    
-    private var _transparentCircleColor: NSUIColor? = NSUIColor(white: 1.0, alpha: 105.0/255.0)
-    
-    /// the radius of the transparent circle next to the chart-hole in the center
-    private var _transparentCircleRadiusPercent = CGFloat(0.55)
-    
-    /// if enabled, centertext is drawn
+    /// 是否在hole中心绘制描述文字
     private var _drawCenterTextEnabled = true
     
-    private var _centerTextRadiusPercent: CGFloat = 1.0
+    /// 有hole时，在hole中心绘制描述文字的内容
+    private var _centerAttributedText: NSAttributedString?
     
-    /// maximum angle for this pie
+    /// hole中心绘制文字的偏移量（常在半圆饼图时有需要）
+    private var _centerTextOffset: CGPoint = CGPoint()
+    
+    /// 空心半径对于pie半径的占比
+    private var _holeRadiusPercent = CGFloat(0.5)
+    
+    /// 半透明圆的对于pie半径的占比
+    private var _transparentCircleRadiusPercent = CGFloat(0.55)
+    
+    /// /// 半透明圆的颜色
+    private var _transparentCircleColor: NSUIColor? = NSUIColor(white: 1.0, alpha: 105.0/255.0)
+    
+    private var _centerTextRadiusPercent: CGFloat = 0.75
+    
+    /// 饼图的最大角度
     private var _maxAngle: CGFloat = 360.0
 
     public override init(frame: CGRect)

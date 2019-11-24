@@ -37,7 +37,7 @@ class PieViewController: BaseViewController {
         
         //基本样式
         pieChartView.setExtraOffsets(left: 30, top: 30, right: 30, bottom: 0)//饼状图距离边缘的间隙
-        pieChartView.usePercentValuesEnabled = true//是否根据所提供的数据, 将显示数据转换为百分比格式
+        pieChartView.usePercentValuesEnabled = true
         pieChartView.dragDecelerationEnabled = true//拖拽饼状图后是否有惯性效果
 
         //空（实）心饼状图样式
@@ -57,12 +57,11 @@ class PieViewController: BaseViewController {
             pieChartView.drawCenterTextEnabled = true
             pieChartView.centerText = "饼状图"
             //富文本
-            //let centerText : NSMutableAttributedString = NSMutableAttributedString.init(string: "饼状图")
-            //centerText.setAttributes([NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 15),NSAttributedStringKey.foregroundColor: ZHFColor.green], range: NSRange.init(location: 0, length: centerText.length))
-            //pieChartView.centerAttributedText = centerText
-        } else{
-            
+            let centerText : NSMutableAttributedString = NSMutableAttributedString.init(string: "饼图")
+            centerText.setAttributes([NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: ZHFColor.zhf66_contentTextColor], range: NSRange.init(location: 0, length: centerText.length))
+            pieChartView.centerAttributedText = centerText
         }
+        
         //饼状图描述
         pieChartView.chartDescription?.text = "饼状图示例"
         pieChartView.chartDescription?.font = UIFont.systemFont(ofSize: 10)
