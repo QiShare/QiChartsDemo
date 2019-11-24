@@ -38,7 +38,7 @@ class PieViewController: BaseViewController {
         //基本样式
         pieChartView.setExtraOffsets(left: 30, top: 30, right: 30, bottom: 0)//饼状图距离边缘的间隙
         pieChartView.usePercentValuesEnabled = true
-        pieChartView.dragDecelerationEnabled = true//拖拽饼状图后是否有惯性效果
+        pieChartView.dragDecelerationEnabled = true
 
         //空（实）心饼状图样式
         pieChartView.drawHoleEnabled = true//饼状图是否是空心

@@ -550,7 +550,6 @@ open class PieChartView: PieRadarChartViewBase
         }
     }
     
-    /// If this is enabled, values inside the PieChart are drawn in percent and not with their original value. Values provided for the ValueFormatter to format are then provided in percent.
     @objc open var usePercentValuesEnabled: Bool
     {
         get
