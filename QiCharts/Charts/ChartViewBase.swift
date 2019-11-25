@@ -43,7 +43,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         set { _highlightPerTapEnabled = newValue }
     }
     
-    /// 是否支持触碰后延时动画
+    /// 是否支持触碰后延时动画（拖拽后是否有惯性效果）
     @objc open var dragDecelerationEnabled = true
     @objc open var isDragDecelerationEnabled: Bool {
         return dragDecelerationEnabled
@@ -681,7 +681,7 @@ open class ChartViewBase: NSUIView, AnimatorDelegate
         }
     }
     
-    /// 摩擦系数，范围[0, 1)
+    /// 拖拽后惯性效果摩擦系数，越小惯性越不明显摩擦系数，范围[0, 1)
     private var _dragDecelerationFrictionCoef: CGFloat = 0.9
     
     @objc open var dragDecelerationFrictionCoef: CGFloat
