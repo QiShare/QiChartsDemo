@@ -58,7 +58,7 @@ class BarViewController: BaseViewController {
         xAxis.axisLineWidth = 1.0
         xAxis.labelPosition = XAxis.LabelPosition.bottom
         xAxis.drawGridLinesEnabled = false
-        //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
+        xAxis.granularity = 1
         xAxis.labelWidth = 1
         xAxis.labelFont = UIFont.systemFont(ofSize: 10)
         xAxis.labelTextColor = UIColor.black
