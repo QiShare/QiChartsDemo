@@ -39,60 +39,58 @@ class GroupBarViewController: BaseViewController {
         barChartView.delegate = self
         self.view.addSubview(barChartView)
         
-        barChartView.layer.borderWidth = 1.0
-        barChartView.layer.borderColor = UIColor.red.cgColor
-        
         //基本样式
-        barChartView.noDataText = "暂无数据"//没有数据时的显示
-        //barChartView.drawValueAboveBarEnabled = true//数值显示是否在条柱上面
+        barChartView.noDataText = "暂无数据"
+        //barChartView.drawValueAboveBarEnabled = true
         
         //交互设置
-        //barChartView.scaleXEnabled = false//取消X轴缩放
-        barChartView.scaleYEnabled = false//取消Y轴缩放
-        //barChartView.pinchZoomEnabled = false//取消XY轴是否同时缩放
-        barChartView.dragEnabled = true //启用拖拽图表
-        barChartView.dragDecelerationEnabled = true //拖拽后是否有惯性效果
-        barChartView.dragDecelerationFrictionCoef = 0.9 //拖拽后惯性效果的摩擦系数(0~1)，数值越小，惯性越不明显
+        //barChartView.scaleXEnabled = false
+        barChartView.scaleYEnabled = false
+        //barChartView.pinchZoomEnabled = false
+        barChartView.dragEnabled = true
+        barChartView.dragDecelerationEnabled = true
+        barChartView.dragDecelerationFrictionCoef = 0.9
     }
     
     func setBarChartViewXY(){
-        //1.X轴样式设置（对应界面显示的--->0月到7月）
-        xAxis = barChartView.xAxis
-        xAxis.delegate = self//重写代理方法  设置x轴数据
-        xAxis.axisLineWidth = 1 //设置X轴线宽
-        xAxis.labelPosition = XAxis.LabelPosition.bottom //X轴（5种位置显示，根据需求进行设置）
-        xAxis.drawGridLinesEnabled = false//不绘制网格
         
-        xAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
-        xAxis.labelTextColor = UIColor.brown//数值字体颜色
-        xAxis.centerAxisLabelsEnabled = true//标签局中
-        xAxis.granularity = 1//x轴标签间距
-    
-        //2.Y轴左样式设置（对应界面显示的--->0 到 100）
+        xAxis = barChartView.xAxis
+        xAxis.delegate = self
+        xAxis.axisLineWidth = 1
+        xAxis.labelPosition = XAxis.LabelPosition.bottom
+        xAxis.drawGridLinesEnabled = false
+        
+        xAxis.labelFont = UIFont.systemFont(ofSize: 10)
+        xAxis.labelTextColor = UIColor.black
+        xAxis.centerAxisLabelsEnabled = true
+        xAxis.granularity = 1
+        
+        barChartView.rightAxis.enabled = false //不绘制右边轴线
+        
+        // leftAxis的设置（label内容可以用ChartAxisValueFormatter来设置）
         let leftAxisFormatter = NumberFormatter()
         leftAxisFormatter.minimumFractionDigits = 0
         leftAxisFormatter.maximumFractionDigits = 1
         leftAxisFormatter.positivePrefix = "$"  //数字前缀positivePrefix、 后缀positiveSuffix
         leftAxis = barChartView.leftAxis
         leftAxis.valueFormatter = ChartAxisValueFormatter.init(formatter: leftAxisFormatter)
-        leftAxis.axisMinimum = 0     //最小值
-        leftAxis.axisMaximum = axisMaximum   //最大值
-        leftAxis.forceLabelsEnabled = true //不强制绘制制定数量的label
-        leftAxis.labelCount = 6    //Y轴label数量，数值不一定，如果forceLabelsEnabled等于true, 则强制绘制制定数量的label, 但是可能不平均
-        leftAxis.inverted = false   //是否将Y轴进行上下翻转
-        leftAxis.axisLineWidth = 0.5   //Y轴线宽
-        leftAxis.axisLineColor = UIColor.black   //Y轴颜色
-        leftAxis.labelPosition = YAxis.LabelPosition.outsideChart//坐标数值的位置
-        leftAxis.labelTextColor = UIColor.brown//坐标数值字体颜色
-        leftAxis.labelFont = UIFont.systemFont(ofSize: 10) //y轴字体大小
-        //设置虚线样式的网格线(对应的是每条横着的虚线[10.0, 3.0]对应实线和虚线的长度)
+        leftAxis.axisMinimum = 0
+        leftAxis.axisMaximum = axisMaximum
+        leftAxis.forceLabelsEnabled = true
+        leftAxis.labelCount = 6
+        leftAxis.inverted = false
+        leftAxis.axisLineWidth = 0.5
+        leftAxis.axisLineColor = UIColor.black
+        leftAxis.labelPosition = YAxis.LabelPosition.outsideChart
+        leftAxis.labelTextColor = UIColor.black
+        leftAxis.labelFont = UIFont.systemFont(ofSize: 10)
         leftAxis.drawGridLinesEnabled = true //是否绘制网格线(默认为true)
-        leftAxis.gridLineDashLengths = [5.0, 3.0]
-        leftAxis.gridColor = UIColor.gray //网格线颜色
-        leftAxis.gridAntialiasEnabled = true//开启抗锯齿
-        leftAxis.spaceTop = 0.15//最大值到顶部的范围比
+        leftAxis.gridLineDashLengths = [4.0, 2.0]
+        leftAxis.gridColor = UIColor.gray
+        leftAxis.gridAntialiasEnabled = true
+        leftAxis.spaceTop = 0.15
         //设置限制线
-        let limitLine : ChartLimitLine = ChartLimitLine.init(limit: Double(axisMaximum * 0.85), label: "限制线")
+        let limitLine : ChartLimitLine = ChartLimitLine.init(limit: Double(axisMaximum * 0.75), label: "限制线")
         limitLine.lineWidth = 1.0
         limitLine.lineColor = UIColor.red
         limitLine.lineDashLengths = [5.0, 2.0]
@@ -100,18 +98,13 @@ class GroupBarViewController: BaseViewController {
         limitLine.valueTextColor = UIColor.darkText
         limitLine.valueFont = UIFont.systemFont(ofSize: 10)
         leftAxis.addLimitLine(limitLine)
-        leftAxis.drawLimitLinesBehindDataEnabled = true //设置限制线在柱线图后面（默认在前）
+        leftAxis.drawLimitLinesBehindDataEnabled = true
         
-        //3.Y轴右样式设置（如若设置可参考左样式）
-        barChartView.rightAxis.enabled = false //不绘制右边轴线
-        
-        //4.描述文字设置
-        barChartView.chartDescription?.text = "柱形图"//右下角的description文字样式 不设置的话会有默认数据
-        barChartView.chartDescription?.position = CGPoint.init(x: 80, y: 5)//位置（及在barChartView的中心点）
-        barChartView.chartDescription?.font = UIFont.systemFont(ofSize: 12)//大小
+        barChartView.chartDescription?.text = "组柱状图"
+        barChartView.chartDescription?.position = CGPoint.init(x: 80, y: 5)
+        barChartView.chartDescription?.font = UIFont.systemFont(ofSize: 12)
         barChartView.chartDescription?.textColor = UIColor.orange
         
-        //5.设置类型试图的对齐方式，右上角 (默认左下角)
         let legend = barChartView.legend
         legend.enabled = true
         legend.horizontalAlignment = .right

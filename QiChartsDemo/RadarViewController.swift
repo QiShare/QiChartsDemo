@@ -13,7 +13,7 @@ class RadarViewController: BaseViewController {
 
     var radarChartView: RadarChartView  = RadarChartView()
     var data: RadarChartData = RadarChartData()
-    let axisMaximum :Double = 150
+    let axisMaximum :Double = 100
     lazy var xVals: NSMutableArray = NSMutableArray.init()
     
     override func viewDidLoad() {
@@ -40,26 +40,24 @@ class RadarViewController: BaseViewController {
         //雷达图描述
         radarChartView.rotationEnabled = true //是否允许转动
         radarChartView.highlightPerTapEnabled = true //是否能被选中
-        //雷达图线条样式
-        radarChartView.webLineWidth = 0.5 //主干线线宽
+        radarChartView.webLineWidth = 0.75
         radarChartView.webColor = ZHFColor.black
-        radarChartView.innerWebLineWidth = 0.375 //边线线宽
+        radarChartView.innerWebLineWidth = 0.375
         radarChartView.innerWebColor = ZHFColor.black
-        //设置 xAx
-        let xAxis: XAxis = radarChartView.xAxis
-        xAxis.delegate = self //重写代理方法  设置y轴数据
-        xAxis.labelPosition = XAxis.LabelPosition.topInside //X轴（5种位置显示，根据需求进行设置）
-        xAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
-        xAxis.labelTextColor = ZHFColor.brown//数值字体颜色
         
-        //设置 yAxis
+        let xAxis: XAxis = radarChartView.xAxis
+        xAxis.labelPosition = XAxis.LabelPosition.topInside
+        // xAxis.delegate = self
+        xAxis.labelFont = UIFont.systemFont(ofSize: 10)
+        xAxis.labelTextColor = ZHFColor.black
+        
         let yAxis: YAxis = radarChartView.yAxis
-        yAxis.axisMinimum = 0
-        yAxis.axisMaximum = axisMaximum
         yAxis.drawLabelsEnabled = false
+        yAxis.axisMaximum = axisMaximum
+        yAxis.axisMinimum = 0
         yAxis.labelCount = 8
-        yAxis.labelFont = UIFont.systemFont(ofSize: 10)//x轴数值字体大小
-        xAxis.labelTextColor = ZHFColor.brown//数值字体颜色
+        yAxis.labelFont = UIFont.systemFont(ofSize: 10)
+        yAxis.labelTextColor = ZHFColor.brown
        
         //雷达图图例
         radarChartView.chartDescription?.text = "雷达图示例"
@@ -70,51 +68,42 @@ class RadarViewController: BaseViewController {
         radarChartView.legend.horizontalAlignment = Legend.HorizontalAlignment.right
         radarChartView.legend.verticalAlignment = Legend.VerticalAlignment.top
         radarChartView.legend.orientation = Legend.Orientation.horizontal
-        radarChartView.legend.formSize = 10;//图示大小
-        radarChartView.legend.maxSizePercent = 1 //图例在饼状图中的大小占比, 这会影响图例的宽高
-        radarChartView.legend.formToTextSpace = 5 //文本间隔
-        radarChartView.legend.font = UIFont.systemFont(ofSize: 10)//字体大小
-        radarChartView.legend.textColor = ZHFColor.gray//字体颜色
-        radarChartView.legend.form = Legend.Form.circle//图示样式: 方形、线条、圆形
-        
-        
+        radarChartView.legend.formSize = 10;
+        radarChartView.legend.maxSizePercent = 1
+        radarChartView.legend.formToTextSpace = 5
+        radarChartView.legend.font = UIFont.systemFont(ofSize: 10)
+        radarChartView.legend.textColor = ZHFColor.gray
+        radarChartView.legend.form = Legend.Form.circle
     }
+    
     func updataData() {
+        
         let count = 12
-        //对应x轴上面需要显示的数据
-        let x1Vals: NSMutableArray  = NSMutableArray.init()
-        for i in 0 ..< count {
-            //x轴字体展示
-            x1Vals.add("\(i + 1)月")
-            self.xVals = x1Vals
-        }
         //对应Y轴上面需要显示的数据
         let yVals: NSMutableArray  = NSMutableArray.init()
         for _ in 0 ..< count {
-            let val: Double = Double(arc4random_uniform(UInt32(axisMaximum - 50)) + 50)
+            let val: Double = Double(arc4random() % 80 + 20)
             let entry:RadarChartDataEntry = RadarChartDataEntry.init(value: val)
             yVals.add(entry)
         }
         //创建RadarChartDataSet对象，其中包含有Y轴数据信息
-        let set1: RadarChartDataSet = RadarChartDataSet.init(values: yVals as? [ChartDataEntry], label: "雷达星座运势图")
-        set1.lineWidth = 0.5 //数据折线线宽
-        set1.setColor(ZHFColor.gray)//颜色
-        set1.drawFilledEnabled = true ////是否填充颜色
-        set1.fillColor = ZHFColor.green
+        let set1: RadarChartDataSet = RadarChartDataSet.init(values: yVals as? [ChartDataEntry], label: "各月份收入示意图")
+        set1.lineWidth = 1.5
+        set1.setColor(ZHFColor.orange)
+        set1.drawFilledEnabled = true
+        set1.fillColor = ZHFColor.orange
         set1.fillAlpha = 0.3
-        set1.drawValuesEnabled = true //是否绘制显示数据
-        set1.highlightEnabled = true //点击选饼状图是否有高亮效果，（单击空白处取消选中）
+        set1.drawValuesEnabled = true
+        set1.highlightEnabled = true
         set1.valueFont = UIFont.systemFont(ofSize: 10)
-        set1.valueTextColor = ZHFColor.gray
+        set1.valueTextColor = ZHFColor.darkGray
         let dataSets: NSMutableArray  = NSMutableArray.init()
         dataSets.add(set1)
-        //创建RadarChartData对象, 此对象就是radarChartView需要最终数据对象
-        let data:  RadarChartData = RadarChartData.init(dataSets: dataSets as? [ChartDataSet])
         
+        let data:  RadarChartData = RadarChartData.init(dataSets: dataSets as? [ChartDataSet])
         radarChartView.data = data
         
-        //设置动画效果
-        radarChartView.animate(yAxisDuration: 1)//展示方式xAxisDuration 和 yAxisDuration两种
+        radarChartView.animate(yAxisDuration: 1)
     }
     
     override func rightBarBtnClicked() {

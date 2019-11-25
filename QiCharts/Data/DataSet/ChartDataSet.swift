@@ -238,6 +238,8 @@ open class ChartDataSet: NSObject
         colors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
         valueColors.append(NSUIColor.black)
         self.calcMinMax()
+        
+        self.label = label
     }
     
     @objc public convenience init(values: [ChartDataEntry]?)

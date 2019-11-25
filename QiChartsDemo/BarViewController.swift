@@ -55,14 +55,14 @@ class BarViewController: BaseViewController {
         /// 设置x轴左样式
         xAxis = barChartView.xAxis
         xAxis.delegate = self
-        xAxis.axisLineWidth = 0.5
+        xAxis.axisLineWidth = 1.0
         xAxis.labelPosition = XAxis.LabelPosition.bottom
         xAxis.drawGridLinesEnabled = false
         //设置label间隔，若设置为1，则如果能全部显示，则每个柱形下面都会显示label
         xAxis.labelWidth = 1
         xAxis.labelFont = UIFont.systemFont(ofSize: 10)
-        xAxis.labelTextColor = UIColor.brown
-        xAxis.axisLineColor = .red
+        xAxis.labelTextColor = UIColor.black
+        xAxis.axisLineColor = .black
     
         /// 设置y轴左样式
         let leftAxisFormatter = NumberFormatter()
@@ -82,7 +82,7 @@ class BarViewController: BaseViewController {
         leftAxis.axisLineWidth = 0.5
         leftAxis.axisLineColor = UIColor.black
         leftAxis.labelPosition = YAxis.LabelPosition.outsideChart
-        leftAxis.labelTextColor = UIColor.brown
+        leftAxis.labelTextColor = UIColor.black
         leftAxis.labelFont = UIFont.systemFont(ofSize: 10)
         ///设置虚线样式的网格线(对应的是每条横着的虚线[10.0, 3.0]对应实线和虚线的长度)
         leftAxis.drawGridLinesEnabled = true

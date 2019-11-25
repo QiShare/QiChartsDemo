@@ -90,7 +90,7 @@ open class AxisBase: ComponentBase
     /// 粒度属性，为true时可以避免轴上值的重复
     @objc open var granularityEnabled = false
     
-    /// 粒度的值（可以避免缩放时，值的重复）
+    /// 粒度的值，即标签最小间距（可以避免缩放时，值的重复）
     private var _granularity = Double(1.0)
     @objc open var granularity: Double {
         get { return _granularity }

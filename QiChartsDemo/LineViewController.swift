@@ -77,6 +77,7 @@ class LineViewController: BaseViewController {
         chartView.leftAxis.enabled = true
         chartView.leftAxis.axisLineWidth = 1.0
         chartView.leftAxis.labelPosition = .outsideChart
+        chartView.leftAxis.axisMinimum = 0;
     }
     
     func setlimitLine(){
