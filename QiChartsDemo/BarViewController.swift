@@ -24,7 +24,7 @@ class BarViewController: BaseViewController {
         
         addBarChartView()
         setBarChartViewXY()
-        updataData()
+        updateData()
     }
     
     func addBarChartView(){
@@ -123,7 +123,7 @@ class BarViewController: BaseViewController {
         legend.font = UIFont.systemFont(ofSize: 11.0)
     }
     
-    @objc func updataData(){
+    @objc func updateData(){
         
         /// 对应x轴上面需要显示的数据
         let count = 8
@@ -177,7 +177,7 @@ class BarViewController: BaseViewController {
     
     override func rightBarBtnClicked() {
         
-        self.updataData()
+        self.updateData()
     }
 }
 

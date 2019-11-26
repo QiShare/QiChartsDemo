@@ -21,7 +21,7 @@ class RadarViewController: BaseViewController {
         
         addRadarChart()
         setRadarChartViewStyle()
-        updataData()
+        updateData()
     }
    
     
@@ -76,7 +76,7 @@ class RadarViewController: BaseViewController {
         radarChartView.legend.form = Legend.Form.circle
     }
     
-    func updataData() {
+    func updateData() {
         
         let count = 12
         //对应Y轴上面需要显示的数据
@@ -107,7 +107,7 @@ class RadarViewController: BaseViewController {
     }
     
     override func rightBarBtnClicked() {
-        self.updataData()
+        self.updateData()
     }
 }
 //MARK:-   <ChartViewDelegate代理方法实现>

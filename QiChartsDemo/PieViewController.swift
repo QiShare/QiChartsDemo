@@ -19,7 +19,7 @@ class PieViewController: BaseViewController {
         
         addPieChart()
         setPieChartViewStyle()
-        updataData()
+        updateData()
     }
         
     func addPieChart(){
@@ -80,7 +80,7 @@ class PieViewController: BaseViewController {
         l.formSize = 12;//图示大小
     }
         
-    @objc func updataData(){
+    @objc func updateData(){
         //对应x轴上面需要显示的数据
         let count = 5
         //对应Y轴上面需要显示的数据
@@ -128,12 +128,13 @@ class PieViewController: BaseViewController {
         data.setValueFormatter(forma)
         data.setValueFont(UIFont.systemFont(ofSize: 10))
         data.setValueTextColor(ZHFColor.orange)
+        
         pieChartView.data = data
         pieChartView.animate(xAxisDuration: 1, easingOption: ChartEasingOption.easeOutExpo)
     }
     
     override func rightBarBtnClicked() {
-        self.updataData()
+        self.updateData()
     }
 }
     //MARK:-   <ChartViewDelegate代理方法实现>

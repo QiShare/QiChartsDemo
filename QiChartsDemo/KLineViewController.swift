@@ -15,13 +15,10 @@ class KLineViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //1.添加K 线图（烛形图)
+        
         addCandleStickChart()
-        //2. 基本样式
-        setCandleStickChartViewStyle()
-        //3.添加（刷新数据）
-        updataData()
+        setCandleStickChartStyle()
+        updateData()
     }
 
     //添加K 线图（烛形图）
@@ -36,47 +33,45 @@ class KLineViewController: BaseViewController {
         self.view.addSubview(chartView)
     }
     
-    func setCandleStickChartViewStyle(){
+    func setCandleStickChartStyle(){
         
-        //K 线图（烛形图）描述
-        chartView.chartDescription?.text = "K 线图（烛形图）描述"
-        chartView.chartDescription?.position = CGPoint.init(x: chartView.frame.width - 30, y:chartView.frame.height - 20)//位置（及在bubbleChartView的中心点）
-        chartView.chartDescription?.font = UIFont.systemFont(ofSize: 12)//大小
+        // K线图描述
+        chartView.chartDescription?.text = "K线图"
+        chartView.chartDescription?.font = UIFont.systemFont(ofSize: 12)
         chartView.chartDescription?.textColor = UIColor.red
         
-        //图例
-        let l = chartView.legend
-        l.wordWrapEnabled = false //显示图例
-        l.horizontalAlignment = .left //居左
-        l.verticalAlignment = .bottom //放在底部
-        l.orientation = .horizontal //水平排布
-        l.drawInside = false // 图例在外
-        l.formSize = 10 //（图例大小）默认是8
-        l.form = Legend.Form.circle//图例头部样式
-        //矩形：.square（默认值） 圆形：.circle   横线：.line  无：.none 空：.empty（与 .none 一样都不显示头部，但不同的是 empty 头部仍然会占一个位置)
-        //Y轴右侧线
+        let legend = chartView.legend
+        legend.wordWrapEnabled = true
+        legend.horizontalAlignment = .left
+        legend.verticalAlignment = .bottom
+        legend.orientation = .horizontal
+        legend.drawInside = false
+        legend.formSize = 10
+        legend.form = Legend.Form.line
+        
         let rightAxis = chartView.rightAxis
         rightAxis.axisMinimum = 0
-        //Y轴左侧线
+        
         let leftAxis = chartView.leftAxis
         leftAxis.axisMinimum = 0
-        //X轴
+        
         let xAxis = chartView.xAxis
-        xAxis.labelPosition = .bothSided //分布在两边外部
-        xAxis.axisMinimum = 0 //最小刻度值
-        xAxis.granularity = 1 //最小间隔
+        xAxis.labelPosition = .bothSided
+        xAxis.axisMinimum = 0
+        xAxis.granularity = 1
     }
     
-    @objc func updataData(){
-        //第一组烛形图的10条随机数据
-        let entries = (0..<10).map { (i) -> CandleChartDataEntry in
-            let val = Double(arc4random_uniform(40) + 10)
+    @objc func updateData(){
+        
+        let entries = (1..<20).map { (i) -> CandleChartDataEntry in
+            let range = UInt32(30)
+            let val = Double(arc4random_uniform(40) + range)
             let high = Double(arc4random_uniform(9) + 8)
             let low = Double(arc4random_uniform(9) + 8)
             let open = Double(arc4random_uniform(6) + 1)
             let close = Double(arc4random_uniform(6) + 1)
-            let even = arc4random_uniform(2) % 2 == 0 //true表示开盘价高于收盘价
-            
+            //true表示开盘价高于收盘价
+            let even = arc4random_uniform(2) % 2 == 0
             return CandleChartDataEntry(x: Double(i),
                                         shadowH: val + high,
                                         shadowL: val - low,
@@ -85,24 +80,22 @@ class KLineViewController: BaseViewController {
         }
         
         let chartDataSet1 = CandleChartDataSet(values: entries, label: "图例1")
-        chartDataSet1.shadowWidth = 2 //柱线（烛心线）颜色
-        chartDataSet1.decreasingFilled = false //开盘高于收盘则使用空心矩形
-        chartDataSet1.increasingFilled = true //开盘低于收盘则使用实心矩形
-        chartDataSet1.setColor(.gray) //整体设置颜色
-        chartDataSet1.shadowColor = .darkGray //柱线（烛心线）颜色
-        chartDataSet1.decreasingColor = ZHFColor.red //实心颜色
-        chartDataSet1.increasingColor = ZHFColor.gray //空心颜色
-        chartDataSet1.shadowColorSameAsCandle = true//竖线的颜色与方框颜色一样
-        //chartDataSet1.showCandleBar = false //不显示方块
-        //目前烛形图包括1组数据
-        let chartData = CandleChartData(dataSets: [chartDataSet1])
+        chartDataSet1.shadowWidth = 1.5
+        chartDataSet1.decreasingFilled = true
+        chartDataSet1.increasingFilled = true
+        chartDataSet1.setColor(.gray)
+        chartDataSet1.shadowColor = .darkGray
+        chartDataSet1.decreasingColor = ZHFColor.red
+        chartDataSet1.increasingColor = ZHFColor.gray
+        chartDataSet1.shadowColorSameAsCandle = true
+        //chartDataSet1.showCandleBar = false
         
-        //设置烛形图数据
+        let chartData = CandleChartData(dataSets: [chartDataSet1])
         chartView.data = chartData
     }
     
     override func rightBarBtnClicked() {
-        self.updataData()
+        self.updateData()
     }
 }
 

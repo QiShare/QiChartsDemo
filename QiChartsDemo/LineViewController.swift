@@ -24,7 +24,7 @@ class LineViewController: BaseViewController {
         //设置限制线（可设置多根）
         setlimitLine()
         //添加（刷新数据）
-        updataData()
+        updateData()
     }
     
     func addLineChart(){
@@ -98,7 +98,7 @@ class LineViewController: BaseViewController {
     }
     
     
-    @objc func updataData(){
+    @objc func updateData(){
         
         // 第一条
         var dataEntries1 = [ChartDataEntry]()
@@ -150,7 +150,7 @@ class LineViewController: BaseViewController {
     }
     
     override func rightBarBtnClicked() {
-        self.updataData()
+        self.updateData()
     }
 }
 

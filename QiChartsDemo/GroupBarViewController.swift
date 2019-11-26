@@ -26,7 +26,7 @@ class GroupBarViewController: BaseViewController {
         
         addBarChartView()
         setBarChartViewXY()
-        updataData()
+        updateData()
     }
     
     func addBarChartView(){
@@ -114,7 +114,7 @@ class GroupBarViewController: BaseViewController {
         legend.font = UIFont.systemFont(ofSize: 11.0)
     }
     
-    @objc func updataData(){
+    @objc func updateData(){
         
         years = ["2015", "2016" , "2017" , "2018" , "2019"]
         let groups = 3
@@ -160,7 +160,7 @@ class GroupBarViewController: BaseViewController {
     
     override func rightBarBtnClicked() {
         
-        self.updataData()
+        self.updateData()
     }
 }
 

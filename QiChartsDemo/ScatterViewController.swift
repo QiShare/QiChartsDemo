@@ -24,7 +24,7 @@ class ScatterViewController: BaseViewController {
         
         addScatterChartView()
         setBarChartViewXY()
-        updataData()
+        updateData()
     }
     
     func addScatterChartView(){
@@ -111,7 +111,7 @@ class ScatterViewController: BaseViewController {
         legend.font = UIFont.systemFont(ofSize: 11.0)
     }
     
-    func updataData(){
+    func updateData(){
         
         let count: Int = 9
         
@@ -144,7 +144,7 @@ class ScatterViewController: BaseViewController {
     
     override func rightBarBtnClicked() {
         
-        self.updataData()
+        self.updateData()
     }
 }
 
