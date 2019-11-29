@@ -23,11 +23,11 @@ class BarViewController: BaseViewController {
         super.viewDidLoad()
         
         addBarChartView()
-        setBarChartViewXY()
+        setBarChartStyle()
         updateData()
     }
     
-    func addBarChartView(){
+    func addBarChartView() {
         
         let size:CGSize = self.view.frame.size
         barChartView.backgroundColor = UIColor.white
@@ -36,23 +36,17 @@ class BarViewController: BaseViewController {
         barChartView.center = self.view.center
         barChartView.delegate = self
         self.view.addSubview(barChartView)
-        
-        //基本样式
-        barChartView.noDataText = "暂无数据"//没有数据时的显示
-        //barChartView.drawValueAboveBarEnabled = true//数值显示是否在条柱上面
-        
-        //交互设置
-        //barChartView.scaleXEnabled = false//取消X轴缩放
-        barChartView.scaleYEnabled = false//取消Y轴缩放
-        barChartView.pinchZoomEnabled = false//取消XY轴是否同时缩放
-        barChartView.dragEnabled = true //启用拖拽图表
-        barChartView.dragDecelerationEnabled = true //拖拽后是否有惯性效果
-        barChartView.dragDecelerationFrictionCoef = 0.9 //拖拽后惯性效果的摩擦系数(0~1)，数值越小，惯性越不明显
     }
     
-    func setBarChartViewXY(){
+    func setBarChartStyle() {
         
-        /// 设置x轴左样式
+        barChartView.noDataText = "暂无数据"
+        barChartView.scaleYEnabled = false
+        barChartView.pinchZoomEnabled = false
+        barChartView.dragEnabled = true
+        barChartView.dragDecelerationEnabled = true
+        barChartView.dragDecelerationFrictionCoef = 0.9
+        
         xAxis = barChartView.xAxis
         xAxis.delegate = self
         xAxis.axisLineWidth = 1.0
@@ -63,8 +57,7 @@ class BarViewController: BaseViewController {
         xAxis.labelFont = UIFont.systemFont(ofSize: 10)
         xAxis.labelTextColor = UIColor.black
         xAxis.axisLineColor = .black
-    
-        /// 设置y轴左样式
+        
         let leftAxisFormatter = NumberFormatter()
         leftAxisFormatter.minimumFractionDigits = 0
         leftAxisFormatter.maximumFractionDigits = 1
@@ -73,36 +66,33 @@ class BarViewController: BaseViewController {
         leftAxis.valueFormatter = ChartAxisValueFormatter.init(formatter: leftAxisFormatter)
         leftAxis.axisMinimum = 0
         leftAxis.axisMaximum = axisMaximum
-        /// 不强制绘制制定数量的label
+        // 强制绘制leftAxisn标签数量
         leftAxis.forceLabelsEnabled = true
-        /// y轴label数量，数值不一定，如果forceLabelsEnabled等于true, 则强制绘制制定数量的label, 但是可能不平均
         leftAxis.labelCount = 6
-        ///是否将Y轴进行上下翻转
-        leftAxis.inverted = false
         leftAxis.axisLineWidth = 0.5
         leftAxis.axisLineColor = UIColor.black
-        leftAxis.labelPosition = YAxis.LabelPosition.outsideChart
+        leftAxis.labelPosition = .outsideChart
         leftAxis.labelTextColor = UIColor.black
         leftAxis.labelFont = UIFont.systemFont(ofSize: 10)
-        ///设置虚线样式的网格线(对应的是每条横着的虚线[10.0, 3.0]对应实线和虚线的长度)
+        // 虚线设置
         leftAxis.drawGridLinesEnabled = true
         leftAxis.gridLineDashLengths = [5.0, 3.0]
         leftAxis.gridColor = UIColor.gray
-        ///开启抗锯齿
         leftAxis.gridAntialiasEnabled = true
-        ///最大值到顶部的范围比
+        // 最大值到顶部的范围比
         leftAxis.spaceTop = 0.15
         
         /// 设置限制线
-        let limitLine : ChartLimitLine = ChartLimitLine.init(limit: Double(axisMaximum * 0.85), label: "限制线")
+        let limitLine : ChartLimitLine = ChartLimitLine.init(limit: Double(axisMaximum * 0.7), label: "限制线")
         limitLine.lineWidth = 1.0
         limitLine.lineColor = UIColor.red
         limitLine.lineDashLengths = [5.0, 2.0]
         limitLine.labelPosition = ChartLimitLine.LabelPosition.rightTop//位置
         limitLine.valueTextColor = UIColor.darkText
         limitLine.valueFont = UIFont.systemFont(ofSize: 10)
+        
         leftAxis.addLimitLine(limitLine)
-        leftAxis.drawLimitLinesBehindDataEnabled = true //设置限制线在柱线图后面（默认在前）
+        leftAxis.drawLimitLinesBehindDataEnabled = true
         
         /// y轴右样式设置（如若设置可参考左样式）
         barChartView.rightAxis.enabled = false //不绘制右边轴线
